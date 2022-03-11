@@ -12,6 +12,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool obscurePassword = true;
+  bool failedLogin = false;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -65,6 +66,25 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
+                  failedLogin
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.cancel_outlined,
+                              size: 14,
+                              color: Colors.red,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 6),
+                              child: Text(
+                                "Os dados informados estão incorretos!",
+                                style: TextStyle(color: Colors.red),
+                              ),
+                            )
+                          ],
+                        )
+                      : Container(),
                   Container(
                     margin: EdgeInsets.symmetric(vertical: 30),
                     child: MaterialButton(
