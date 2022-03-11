@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -9,6 +11,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool obscurePassword = true;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -35,14 +38,29 @@ class _LoginPageState extends State<LoginPage> {
                         border: OutlineInputBorder(),
                         labelText: 'Usuário',
                       ),
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [
+                        LengthLimitingTextInputFormatter(14),
+                        MaskTextInputFormatter(mask: "###.###.###-##")
+                      ],
                     ),
                   ),
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                     child: TextField(
-                      obscureText: true,
+                      obscureText: obscurePassword,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
+                        suffixIcon: IconButton(
+                          icon: Icon(Icons.remove_red_eye_outlined),
+                          onPressed: () {
+                            setState(() {
+                              obscurePassword = !obscurePassword;
+                            });
+                          },
+                          highlightColor: Colors.transparent,
+                          splashColor: Colors.blue.withOpacity(0.2),
+                        ),
                         labelText: 'Senha',
                       ),
                     ),

@@ -24,6 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_svg: ^1.0.3
+  mask_text_input_formatter: ^2.1.0
   
 
 
