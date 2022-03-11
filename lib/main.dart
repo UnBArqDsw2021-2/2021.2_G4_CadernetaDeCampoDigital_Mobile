@@ -2,7 +2,11 @@
 import 'package:caderneta_campo_digital/pages/login/login_page.dart';
 =======
 import 'package:caderneta_campo_digital/pages/ProducerRegister/main.dart';
+<<<<<<< HEAD
 >>>>>>> (#110) Criando página de cadastro de produtor
+=======
+import 'package:caderneta_campo_digital/pages/TechnicianRegister/main.dart';
+>>>>>>> (#110) Criando pagina de cadastro de tecnico
 import 'package:flutter/material.dart';
 
 void main() {
