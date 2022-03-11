@@ -36,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: TextField(
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
-                        labelText: 'Usuário',
+                        labelText: 'CPF',
                       ),
                       keyboardType: TextInputType.number,
                       inputFormatters: [
