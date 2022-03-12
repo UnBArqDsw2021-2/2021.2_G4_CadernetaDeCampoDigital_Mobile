@@ -38,23 +38,60 @@ class _TechnicianRegisterPageState extends State<TechnicianRegisterPage> {
           child: Form(
             child: Column(
               children: [
-                TextFieldBC(label: "CPF"),
+                TextFieldBC(
+                  label: "CPF",
+                  keyboardType: TextInputType.number,
+                  notEmpty: true,
+                  minLength: 11,
+                  maxLength: 11,
+                ),
                 SizedBox(height: 20),
-                TextFieldBC(label: "Data de Nascimento"),
+                TextFieldDateBC(
+                  label: "Data de Nascimento",
+                  notEmpty: true,
+                  maxYear: DateTime.now().year,
+                ),
                 SizedBox(height: 20),
-                TextFieldBC(label: "Telefone"),
+                TextFieldBC(
+                  label: "Telefone",
+                  keyboardType: TextInputType.number,
+                  notEmpty: true,
+                  minLength: 11,
+                  maxLength: 11,
+                ),
                 SizedBox(height: 20),
-                TextFieldBC(label: "Nome"),
+                TextFieldBC(
+                  label: "Nome",
+                  notEmpty: true,
+                  minLength: 3,
+                ),
                 SizedBox(height: 20),
-                TextFieldBC(label: "N° do CREA"),
+                TextFieldBC(
+                  label: "N° do CREA",
+                  notEmpty: true,
+                ),
                 SizedBox(height: 20),
-                TextFieldBC(label: "Formação"),
+                TextFieldBC(
+                  label: "Formação",
+                  notEmpty: true,
+                ),
                 SizedBox(height: 20),
-                TextFieldBC(label: "E-mail"),
+                TextFieldBC(
+                  label: "E-mail",
+                  notEmpty: true,
+                ),
                 SizedBox(height: 20),
-                TextFieldBC(label: "Senha"),
+                TextFieldBC(
+                  label: "Senha",
+                  notEmpty: true,
+                  obscureText: true,
+                ),
                 SizedBox(height: 20),
-                TextFieldBC(label: "Confirmar Senha"),
+                TextFieldBC(
+                  label: "Confirmar Senha",
+                  notEmpty: true,
+                  obscureText: true,
+                ),
                 TextBlueButton(
                     label: "Cadastrar",
                     margin: EdgeInsets.fromLTRB(0, 60, 0, 20)),

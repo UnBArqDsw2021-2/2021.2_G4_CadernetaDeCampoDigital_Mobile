@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:caderneta_campo_digital/pages/ProducerRegister/main.dart';
 import 'package:caderneta_campo_digital/pages/TechnicianRegister/main.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,6 +14,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
+      localizationsDelegates: GlobalMaterialLocalizations.delegates,
+      supportedLocales: [
+        Locale('pt', 'BR'),
+      ],
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -25,7 +30,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      // home: ProducerRegisterPage(),
+      // home: TechnicianRegisterPage(),
       home: ProducerRegisterPage(),
     );
   }
