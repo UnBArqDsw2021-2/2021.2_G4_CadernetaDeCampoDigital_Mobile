@@ -2,6 +2,12 @@
 
 A new Flutter project.
 
+<p align="center">
+  <a href="https://codecov.io/gh/UnBArqDsw2021-2/2021.2_G4_CadernetaDeCampoDigital_Mobile">
+    <img src="https://codecov.io/gh/UnBArqDsw2021-2/2021.2_G4_CadernetaDeCampoDigital_Mobile/branch/114-ci/graph/badge.svg?token=PQQ8JR2FU5"/>
+  </a>
+</p>
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
