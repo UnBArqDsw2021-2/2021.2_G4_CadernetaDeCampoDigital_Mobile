@@ -1,4 +1,5 @@
 import 'package:caderneta_campo_digital/components/EstateCard/estate_card.dart';
+import 'package:caderneta_campo_digital/components/PendencyCard/pendency_card.dart';
 import 'package:caderneta_campo_digital/components/Topbar/topbar.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +13,7 @@ class HomeProdutor extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
+            PendencyCard(),
             EstateCard(
                 estateName: "Propriedade 1",
                 estateAddress: "ENDERECO",

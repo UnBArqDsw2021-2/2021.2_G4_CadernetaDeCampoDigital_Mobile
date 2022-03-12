@@ -58,11 +58,6 @@ class _EstateCardState extends State<EstateCard> {
                   children: <Widget>[
                     Column(
                       mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[],
-                    ),
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         EstateText(
