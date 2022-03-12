@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(MyApp());
 }
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -11,10 +12,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Caderneta de Campo Digital',
       theme: ThemeData(
-        primaryColor: Color(0xFF00B4D8),
-        visualDensity: VisualDensity.adaptivePlatformDensity),
+          primaryColor: Color(0xFF00B4D8),
+          visualDensity: VisualDensity.adaptivePlatformDensity),
       home: HomeProdutor(),
     );
   }
 }
-
