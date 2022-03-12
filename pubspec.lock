@@ -43,6 +43,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.15.0"
+  cpf_cnpj_validator:
+    dependency: "direct main"
+    description:
+      name: cpf_cnpj_validator
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -74,6 +81,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  mask_text_input_formatter:
+    dependency: "direct main"
+    description:
+      name: mask_text_input_formatter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.0"
   matcher:
     dependency: transitive
     description:
