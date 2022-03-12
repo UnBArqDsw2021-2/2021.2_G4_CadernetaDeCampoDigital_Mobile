@@ -26,9 +26,13 @@ jobs:
     - name: Getting the dependencies for the Flutter project
       run: flutter pub get
       working-directory: ./
-    
+
     - name: Run tests for Flutter
-      run: flutter test
+      run: flutter test --coverage
+      working-directory: ./
+
+    - name: Sending the results to codecov
+      run: bash <(curl -s https://codecov.io/bash) -t ${{secrets.CODECOV_TOKEN}}
       working-directory: ./
 
     - name: Running lint
