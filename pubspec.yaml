@@ -26,7 +26,9 @@ dependencies:
   flutter_svg: ^1.0.3
   mask_text_input_formatter: ^2.1.0
   dio: ^4.0.4
-  
+  intl: ^0.17.0
+  flutter_localizations:
+    sdk: flutter
 
 
   # The following adds the Cupertino Icons font to your application.
