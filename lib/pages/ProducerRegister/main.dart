@@ -1,5 +1,6 @@
 import 'package:caderneta_campo_digital/components/TextBlueButton/main.dart';
 import 'package:caderneta_campo_digital/components/UnderlineButton/main.dart';
+import 'package:caderneta_campo_digital/services/dio.dart';
 import 'package:caderneta_campo_digital/utils/main.dart';
 import 'package:cpf_cnpj_validator/cpf_validator.dart';
 import 'package:flutter/material.dart';
@@ -15,11 +16,34 @@ class _ProducerRegisterState extends State<ProducerRegisterPage> {
   String? _dataNascimento;
   String? _cpf;
   String? _telefone;
-  String? _password;
-  String? _confirmPassword;
+  String? _senha;
   String? _dap;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  void submit() async {
+    if (!_formKey.currentState!.validate()) {
+      return null;
+    }
+    // print('entrei');
+
+    _formKey.currentState!.save();
+
+    try {
+      final response = await DioClient().post('api/produtor/', {
+        'usuario': {
+          'nome': this._nome,
+          'dataNascimento': Utils().clearData(this._dataNascimento),
+          'telefone': this._telefone,
+          'senha': this._senha,
+          'cpf': Utils().clearMask(this._cpf)
+        },
+        'dap': this._dap!.toUpperCase()
+      });
+    } catch (error) {
+      print(error);
+    }
+  }
 
   Widget _buildName() {
     return Container(
@@ -72,7 +96,7 @@ class _ProducerRegisterState extends State<ProducerRegisterPage> {
       child: TextFormField(
         decoration: InputDecoration(
           border: OutlineInputBorder(),
-          labelText: "CPF",
+          labelText: "CPF (somente números)",
         ),
         validator: (String? value) {
           if (value != null && value.isEmpty) {
@@ -147,7 +171,7 @@ class _ProducerRegisterState extends State<ProducerRegisterPage> {
     );
   }
 
-  Widget _buildPassword() {
+  Widget _buildSenha() {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 10),
       child: TextFormField(
@@ -169,19 +193,14 @@ class _ProducerRegisterState extends State<ProducerRegisterPage> {
         },
         onChanged: (value) {
           if (value != '') {
-            this._password = value;
-          }
-        },
-        onSaved: (String? value) {
-          if (value != null) {
-            this._password = value;
+            this._senha = value;
           }
         },
       ),
     );
   }
 
-  Widget _buildConfirmPassword() {
+  Widget _buildConfirmarSenha() {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 10),
       child: TextFormField(
@@ -195,7 +214,7 @@ class _ProducerRegisterState extends State<ProducerRegisterPage> {
             if (value.isEmpty) {
               return "É necessário confirmar a senha";
             } else {
-              if (this._password != value) {
+              if (this._senha != value) {
                 return "Senhas não coincidem";
               }
             }
@@ -203,7 +222,7 @@ class _ProducerRegisterState extends State<ProducerRegisterPage> {
         },
         onSaved: (String? value) {
           if (value != null) {
-            this._confirmPassword = value;
+            this._senha = value;
           }
         },
       ),
@@ -270,21 +289,15 @@ class _ProducerRegisterState extends State<ProducerRegisterPage> {
                       _buildCpf(),
                       _buildTelefone(),
                       _buildDap(),
-                      _buildPassword(),
-                      _buildConfirmPassword(),
+                      _buildSenha(),
+                      _buildConfirmarSenha(),
                       Padding(
                         padding: EdgeInsets.symmetric(vertical: 20),
                         child: Column(
                           children: [
                             TextBlueButton(
                               label: "Cadastrar",
-                              onPressed: () {
-                                if (!_formKey.currentState!.validate()) {
-                                  return;
-                                }
-
-                                _formKey.currentState!.save();
-                              },
+                              onPressed: submit,
                               margin: EdgeInsets.symmetric(vertical: 10),
                             ),
                             UnderlineButton(

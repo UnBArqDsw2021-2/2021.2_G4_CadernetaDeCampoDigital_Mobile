@@ -37,6 +37,7 @@ dependencies:
   flutter_svg: ^1.0.3
   mask_text_input_formatter: ^2.1.0
   cpf_cnpj_validator: ^2.0.0
+  dio: ^4.0.4
 
 dev_dependencies:
   dart_code_metrics: ^4.12.0
