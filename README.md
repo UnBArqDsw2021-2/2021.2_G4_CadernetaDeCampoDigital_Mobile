@@ -17,7 +17,7 @@
 	<a href="https://github.com/UnBArqDsw2021-2/2021.2_G4_CadernetaDeCampoDigital_Backend"><strong>Acesse a API</strong></a>
 </p>
 <p align="center">
-	<a href="https://github.com/UnBArqDsw2021-2/2021.2_G4_CadernetaDeCampoDigital_docs"><strong>Acesse a nossa Wiki</strong></a>
+	<a href="https://unbarqdsw2021-2.github.io/2021.2_G4_CadernetaDeCampoDigital_docs/"><strong>Acesse a nossa Wiki</strong></a>
 </p>
 
 <!-- Descrição sobre o Projeto -->

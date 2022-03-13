@@ -6,7 +6,7 @@ on:
       - main
   push:
     branches:
-      - 114-ci
+      - main
 
 jobs:
   build:
