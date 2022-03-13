@@ -1,11 +1,9 @@
 import 'dart:convert';
 
+import 'package:caderneta_campo_digital/utils/utils.dart';
 import 'package:dio/dio.dart';
 
 class LoginService {
-  // Adicionar ipLocal para teste e depois remover - Trocar "$ipLocal" pelo seu ip
-  Dio dio = Dio(BaseOptions(baseUrl: "http://$ipLocal:8000/api/"));
-
   Future login(String cpf, String password) async {
     Map<String, dynamic> header = {"Content-Type": "application/json"};
 
@@ -14,7 +12,7 @@ class LoginService {
     String bodyRequest = jsonEncode(requestParams);
     Response? loginResponse;
     try {
-      loginResponse = await dio.post(
+      loginResponse = await Utils.dio.post(
         "login/",
         data: bodyRequest,
         options: Options(
