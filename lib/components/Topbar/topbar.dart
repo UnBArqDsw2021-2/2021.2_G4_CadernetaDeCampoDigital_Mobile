@@ -37,6 +37,7 @@ class Topbar extends StatelessWidget implements PreferredSizeWidget {
         IconButton(
           icon: const Icon(Icons.person),
           iconSize: 50,
+          color: Colors.white,
           padding: EdgeInsets.all(30),
           onPressed: () {},
         ),
