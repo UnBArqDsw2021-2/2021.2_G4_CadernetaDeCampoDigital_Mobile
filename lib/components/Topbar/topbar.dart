@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:caderneta_campo_digital/global/global.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class Topbar extends StatelessWidget implements PreferredSizeWidget {
   final Size topbarHeight;
@@ -10,14 +12,18 @@ class Topbar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
+    var maskFormatter = MaskTextInputFormatter(mask: "###.###.###-##");
+    String name = SharedInfo.actualUser.name;
+    String cpf = maskFormatter.maskText(SharedInfo.actualUser.cpf);
+   
     return AppBar(
+      automaticallyImplyLeading: false,
       toolbarHeight: size.height * 0.14,
       title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const <Widget>[
+          children: <Widget>[
             Text(
-              'Olá, José',
+              'Olá, $name',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
@@ -25,7 +31,7 @@ class Topbar extends StatelessWidget implements PreferredSizeWidget {
               ),
             ),
             Text(
-              'CPF: 55555555555',
+              'CPF: $cpf',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
