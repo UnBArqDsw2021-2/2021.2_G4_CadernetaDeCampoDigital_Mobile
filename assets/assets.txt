@@ -1,3 +1,0 @@
-Excluir arquivo após adicionar imagem na pasta;
-
-Futuramente duas pastas serão criadas: fonts e images
