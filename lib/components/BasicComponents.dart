@@ -129,6 +129,7 @@ class _TextFieldDateBCState extends State<TextFieldDateBC> {
 
         DateTime? pickedDate = await showDatePicker(
             context: context,
+            initialEntryMode: DatePickerEntryMode.input,
             initialDate: DateTime.now(),
             firstDate: DateTime(widget.minYear),
             lastDate: widget.maxYear != DateTime.now().year
