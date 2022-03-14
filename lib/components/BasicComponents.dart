@@ -3,24 +3,28 @@ import 'package:intl/intl.dart';
 
 class TextFieldBC extends StatefulWidget {
   final label;
-  final onChanged;
   final validator;
   final keyboardType;
   final maxLength;
+  final format;
   final obscureText;
   final bool notEmpty;
   final int minLength;
+  final inputFormatters;
+  final onSave;
 
   const TextFieldBC({
     Key? key,
     this.label,
-    this.onChanged,
     this.validator,
     this.keyboardType,
     this.maxLength,
+    this.format,
     this.obscureText = false,
     this.notEmpty = false,
-    this.minLength = 0,
+    this.minLength = 1,
+    this.inputFormatters,
+    this.onSave,
   }) : super(key: key);
 
   @override
@@ -29,20 +33,6 @@ class TextFieldBC extends StatefulWidget {
 
 class _TextFieldBCState extends State<TextFieldBC> {
   final _controller = TextEditingController();
-
-  String? get _errorText {
-    final text = _controller.value.text;
-
-    if (widget.notEmpty && text.isEmpty) {
-      return "Campo deve ser preenchido";
-    }
-
-    if (widget.minLength != 0 && text.length < widget.minLength) {
-      return "Tamanho mínimo de ${widget.minLength} caracteres";
-    }
-
-    return null;
-  }
 
   @override
   void dispose() {
@@ -56,14 +46,36 @@ class _TextFieldBCState extends State<TextFieldBC> {
       keyboardType: widget.keyboardType,
       maxLength: widget.maxLength,
       obscureText: widget.obscureText,
+      inputFormatters: widget.inputFormatters,
       decoration: InputDecoration(
         border: OutlineInputBorder(),
         labelText: widget.label,
-        errorText: _errorText,
       ),
-      validator: widget.validator,
-      onChanged: widget.onChanged ? widget.onChanged : (_) => setState(() {}),
+      validator: widget.validator != null
+          ? widget.validator
+          : (String? value) {
+              if (widget.notEmpty && value != null && value.isEmpty) {
+                return "Campo \"${widget.label}\" deve ser preenchido";
+              }
+
+              if (widget.minLength != 1 &&
+                  value != null &&
+                  value.length < widget.minLength) {
+                return "Tamanho mínimo de ${widget.minLength} caracteres";
+              }
+
+              if (value != null && widget.format != null) {
+                RegExp regexp = new RegExp(widget.format);
+                bool itMatches = regexp.hasMatch(value);
+
+                if (!itMatches) {
+                  return "Preencha o campo ${widget.label} corretamente";
+                }
+              }
+            },
+      onChanged: (_) => setState(() {}),
       controller: _controller,
+      onSaved: widget.onSave,
     );
   }
 }
@@ -73,6 +85,7 @@ class TextFieldDateBC extends StatefulWidget {
   final bool notEmpty;
   final minYear;
   final maxYear;
+  final onSave;
 
   const TextFieldDateBC({
     Key? key,
@@ -80,6 +93,7 @@ class TextFieldDateBC extends StatefulWidget {
     this.notEmpty = false,
     this.minYear = 1900,
     this.maxYear = 2100,
+    this.onSave,
   }) : super(key: key);
 
   @override
@@ -89,16 +103,6 @@ class TextFieldDateBC extends StatefulWidget {
 class _TextFieldDateBCState extends State<TextFieldDateBC> {
   final _controller = TextEditingController();
 
-  String? get _errorText {
-    final text = _controller.value.text;
-
-    if (widget.notEmpty && text.isEmpty) {
-      return "Campo deve ser preenchido";
-    }
-
-    return null;
-  }
-
   @override
   void dispose() {
     _controller.dispose();
@@ -107,14 +111,19 @@ class _TextFieldDateBCState extends State<TextFieldDateBC> {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       decoration: InputDecoration(
         border: OutlineInputBorder(),
         labelText: widget.label,
-        errorText: _errorText,
       ),
       readOnly: true,
       controller: _controller,
+      onSaved: widget.onSave,
+      validator: (String? value) {
+        if (widget.notEmpty && value != null && value.isEmpty) {
+          return "Campo \"${widget.label}\" deve ser preenchido";
+        }
+      },
       onTap: () async {
         String formattedDate = "";
 
