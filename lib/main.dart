@@ -30,8 +30,8 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      // home: TechnicianRegisterPage(),
-      home: ProducerRegisterPage(),
+      home: TechnicianRegisterPage(),
+      // home: ProducerRegisterPage(),
     );
   }
 }
