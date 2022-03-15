@@ -16,6 +16,8 @@ class DioClient {
   Future post(String url, object) async {
     Map<String, dynamic> header = {"Content-Type": "application/json"};
     String bodyRequest = jsonEncode(object);
+
+    print(bodyRequest);
     try {
       response = await http.post(
         url,

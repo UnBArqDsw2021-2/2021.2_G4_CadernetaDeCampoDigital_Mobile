@@ -30,9 +30,9 @@ class _TechnicianRegisterPageState extends State<TechnicianRegisterPage> {
   final _formKey = GlobalKey<FormState>();
 
   void submit() async {
-    // setState(() {
-    //   isLoading = true;
-    // });
+    setState(() {
+      isLoading = true;
+    });
 
     _formKey.currentState!.save();
     if (!_formKey.currentState!.validate()) {
@@ -52,9 +52,9 @@ class _TechnicianRegisterPageState extends State<TechnicianRegisterPage> {
       'email': this._email,
     });
 
-    // setState(() {
-    //   isLoading = false;
-    // });
+    setState(() {
+      isLoading = false;
+    });
 
     if (response != null) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -91,24 +91,25 @@ class _TechnicianRegisterPageState extends State<TechnicianRegisterPage> {
                   "assets/white_stack_background_upper.svg",
                   width: size.width,
                 ),
-                Center(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 90),
-                    child: Text(
-                      "CADASTRO",
-                      style: TextStyle(
-                        fontSize: 36,
-                        color: MyColors().white,
-                        fontFamily: 'Roboto',
+                isLoading
+                    ? Container()
+                    : Center(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(vertical: 90),
+                          child: Text(
+                            "CADASTRO",
+                            style: TextStyle(
+                              fontSize: 36,
+                              color: MyColors().white,
+                              fontFamily: 'Roboto',
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
               ],
             ),
-            SvgPicture.asset("assets/logo.svg"),
             isLoading
-                ? (Loading())
+                ? (Container(height: size.height * 0.65, child: Loading()))
                 : Container(
                     padding: EdgeInsets.symmetric(
                       horizontal: 10,
@@ -118,6 +119,7 @@ class _TechnicianRegisterPageState extends State<TechnicianRegisterPage> {
                       key: _formKey,
                       child: Column(
                         children: [
+                          SvgPicture.asset("assets/logo.svg"),
                           TextFieldBC(
                             label: "Nome Completo",
                             notEmpty: true,
@@ -250,14 +252,10 @@ class _TechnicianRegisterPageState extends State<TechnicianRegisterPage> {
                       ),
                     ),
                   ),
-            Stack(
-              children: [
-                Align(
-                  alignment: Alignment.bottomLeft,
-                  child: SvgPicture.asset(
-                      "assets/white_stack_background_lower.svg"),
-                ),
-              ],
+            Align(
+              alignment: Alignment.bottomLeft,
+              child:
+                  SvgPicture.asset("assets/white_stack_background_lower.svg"),
             ),
           ],
         ),

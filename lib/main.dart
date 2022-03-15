@@ -1,4 +1,5 @@
 import 'package:caderneta_campo_digital/pages/login/login_page.dart';
+import 'package:caderneta_campo_digital/pages/TechnicianRegister/main.dart';
 import 'package:flutter/material.dart';
 import 'package:caderneta_campo_digital/pages/ProducerRegister/main.dart';
 import 'package:caderneta_campo_digital/pages/TechnicianRegister/main.dart';
