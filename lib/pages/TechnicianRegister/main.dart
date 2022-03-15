@@ -1,4 +1,4 @@
-import 'package:caderneta_campo_digital/components/Loading.dart';
+import 'package:caderneta_campo_digital/components/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:caderneta_campo_digital/global/colors.dart';
@@ -30,14 +30,15 @@ class _TechnicianRegisterPageState extends State<TechnicianRegisterPage> {
   final _formKey = GlobalKey<FormState>();
 
   void submit() async {
-    setState(() {
-      isLoading = true;
-    });
-
     _formKey.currentState!.save();
+
     if (!_formKey.currentState!.validate()) {
       return null;
     }
+
+    setState(() {
+      isLoading = true;
+    });
 
     final response = await DioClient().post('api/tecnico/', {
       'usuario': {
@@ -95,7 +96,7 @@ class _TechnicianRegisterPageState extends State<TechnicianRegisterPage> {
                     ? Container()
                     : Center(
                         child: Padding(
-                          padding: EdgeInsets.symmetric(vertical: 90),
+                          padding: EdgeInsets.symmetric(vertical: 80),
                           child: Text(
                             "CADASTRO",
                             style: TextStyle(

@@ -27,15 +27,15 @@ class _ProducerRegisterState extends State<ProducerRegisterPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   void submit() async {
-    setState(() {
-      isLoading = true;
-    });
-
     _formKey.currentState!.save();
 
     if (!_formKey.currentState!.validate()) {
       return null;
     }
+
+    setState(() {
+      isLoading = true;
+    });
 
     final response = await DioClient().post('api/produtor/', {
       'usuario': {
@@ -91,7 +91,7 @@ class _ProducerRegisterState extends State<ProducerRegisterPage> {
                     ? Container()
                     : Center(
                         child: Padding(
-                          padding: EdgeInsets.symmetric(vertical: 90),
+                          padding: EdgeInsets.symmetric(vertical: 80),
                           child: Text(
                             "CADASTRO",
                             style: TextStyle(
