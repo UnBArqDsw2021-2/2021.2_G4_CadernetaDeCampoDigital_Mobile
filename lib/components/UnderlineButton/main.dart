@@ -1,5 +1,4 @@
 import 'package:caderneta_campo_digital/global/colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class UnderlineButton extends StatelessWidget {
