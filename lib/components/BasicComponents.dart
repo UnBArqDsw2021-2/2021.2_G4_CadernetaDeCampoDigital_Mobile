@@ -54,22 +54,23 @@ class _TextFieldBCState extends State<TextFieldBC> {
       validator: widget.validator != null
           ? widget.validator
           : (String? value) {
-              if (widget.notEmpty && value != null && value.isEmpty) {
-                return "Campo \"${widget.label}\" deve ser preenchido";
-              }
+              if (value != null) {
+                if (widget.notEmpty && value.isEmpty) {
+                  return "Campo \"${widget.label}\" deve ser preenchido";
+                }
 
-              if (widget.minLength != 1 &&
-                  value != null &&
-                  value.length < widget.minLength) {
-                return "Tamanho mínimo de ${widget.minLength} caracteres";
-              }
+                if (widget.minLength != 1 &&
+                    value.characters.length < widget.minLength) {
+                  return "Tamanho do campo ${widget.label} inválido";
+                }
 
-              if (value != null && widget.format != null) {
-                RegExp regexp = new RegExp(widget.format);
-                bool itMatches = regexp.hasMatch(value);
+                if (widget.format != null) {
+                  RegExp regexp = new RegExp(widget.format);
+                  bool itMatches = regexp.hasMatch(value);
 
-                if (!itMatches) {
-                  return "Preencha o campo ${widget.label} corretamente";
+                  if (!itMatches) {
+                    return "Preencha o campo ${widget.label} corretamente";
+                  }
                 }
               }
             },

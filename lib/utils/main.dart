@@ -11,8 +11,8 @@ class Utils {
       mask: "#########-#", filter: {"#": RegExp(r'[0-9]')});
 
   String? clearMask(String? string) {
-    string!.replaceAll(new RegExp(r'[^\w\s]+'), '');
-    return string;
+    String newString = string!.replaceAll(new RegExp(r'[\s\.\-\(\)]+'), '');
+    return newString;
   }
 
   String? clearData(String? data) {
