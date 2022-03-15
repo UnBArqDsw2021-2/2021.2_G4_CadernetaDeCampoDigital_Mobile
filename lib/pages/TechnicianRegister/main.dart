@@ -42,15 +42,15 @@ class _TechnicianRegisterPageState extends State<TechnicianRegisterPage> {
 
     final response = await DioClient().post('api/tecnico/', {
       'usuario': {
-        'cpf': Utils().clearMask(this._cpf),
-        'dataNascimento': Utils().clearData(this._dataNascimento),
-        'telefone': Utils().clearMask(this._telefone),
-        'nome': this._nome,
-        'senha': this._senha,
+        'cpf': Utils().clearMask(_cpf),
+        'dataNascimento': Utils().clearData(_dataNascimento),
+        'telefone': Utils().clearMask(_telefone),
+        'nome': _nome,
+        'senha': _senha,
       },
-      'crea': Utils().clearMask(this._crea),
-      'formacao': this._formacao,
-      'email': this._email,
+      'crea': Utils().clearMask(_crea),
+      'formacao': _formacao,
+      'email': _email,
     });
 
     setState(() {
@@ -62,7 +62,10 @@ class _TechnicianRegisterPageState extends State<TechnicianRegisterPage> {
         content: Text(
           'Cadastro feito com sucesso',
           style: TextStyle(
-              fontSize: 12, fontFamily: 'Roboto', fontWeight: FontWeight.w400),
+            fontSize: 12,
+            fontFamily: 'Roboto',
+            fontWeight: FontWeight.w400,
+          ),
         ),
         backgroundColor: Colors.greenAccent,
       ));
@@ -71,7 +74,10 @@ class _TechnicianRegisterPageState extends State<TechnicianRegisterPage> {
         content: Text(
           'Ocorreu um erro ao completar o cadastro',
           style: TextStyle(
-              fontSize: 12, fontFamily: 'Roboto', fontWeight: FontWeight.w400),
+            fontSize: 12,
+            fontFamily: 'Roboto',
+            fontWeight: FontWeight.w400,
+          ),
         ),
         backgroundColor: Colors.redAccent,
       ));
@@ -110,7 +116,7 @@ class _TechnicianRegisterPageState extends State<TechnicianRegisterPage> {
               ],
             ),
             isLoading
-                ? (Container(height: size.height * 0.65, child: Loading()))
+                ? (SizedBox(height: size.height * 0.65, child: Loading()))
                 : Container(
                     padding: EdgeInsets.symmetric(
                       horizontal: 10,
@@ -127,7 +133,7 @@ class _TechnicianRegisterPageState extends State<TechnicianRegisterPage> {
                             minLength: 3,
                             onSave: (String? value) {
                               if (value != null) {
-                                this._nome = value;
+                                _nome = value;
                               }
                             },
                           ),
@@ -138,7 +144,7 @@ class _TechnicianRegisterPageState extends State<TechnicianRegisterPage> {
                             maxYear: DateTime.now().year,
                             onSave: (String? value) {
                               if (value != null) {
-                                this._dataNascimento = value;
+                                _dataNascimento = value;
                               }
                             },
                           ),
@@ -160,7 +166,7 @@ class _TechnicianRegisterPageState extends State<TechnicianRegisterPage> {
                             },
                             onSave: (String? value) {
                               if (value != null) {
-                                this._cpf = value;
+                                _cpf = value;
                               }
                             },
                           ),
@@ -173,7 +179,7 @@ class _TechnicianRegisterPageState extends State<TechnicianRegisterPage> {
                             inputFormatters: [Utils().maskTelefone],
                             onSave: (String? value) {
                               if (value != null) {
-                                this._telefone = value;
+                                _telefone = value;
                               }
                             },
                           ),
@@ -186,7 +192,7 @@ class _TechnicianRegisterPageState extends State<TechnicianRegisterPage> {
                             inputFormatters: [Utils().maskCrea],
                             onSave: (String? value) {
                               if (value != null) {
-                                this._crea = value;
+                                _crea = value;
                               }
                             },
                           ),
@@ -196,7 +202,7 @@ class _TechnicianRegisterPageState extends State<TechnicianRegisterPage> {
                             notEmpty: true,
                             onSave: (String? value) {
                               if (value != null) {
-                                this._formacao = value;
+                                _formacao = value;
                               }
                             },
                           ),
@@ -207,7 +213,7 @@ class _TechnicianRegisterPageState extends State<TechnicianRegisterPage> {
                             format: r'^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?',
                             onSave: (String? value) {
                               if (value != null) {
-                                this._email = value;
+                                _email = value;
                               }
                             },
                           ),
@@ -219,7 +225,7 @@ class _TechnicianRegisterPageState extends State<TechnicianRegisterPage> {
                             minLength: 8,
                             onSave: (String? value) {
                               if (value != null) {
-                                this._senha = value;
+                                _senha = value;
                               }
                             },
                           ),

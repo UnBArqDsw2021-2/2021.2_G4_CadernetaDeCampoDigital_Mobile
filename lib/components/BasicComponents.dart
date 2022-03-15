@@ -51,29 +51,31 @@ class _TextFieldBCState extends State<TextFieldBC> {
         border: OutlineInputBorder(),
         labelText: widget.label,
       ),
-      validator: widget.validator != null
-          ? widget.validator
-          : (String? value) {
-              if (value != null) {
-                if (widget.notEmpty && value.isEmpty) {
-                  return "Campo \"${widget.label}\" deve ser preenchido";
-                }
+      validator: widget.validator ??
+          (String? value) {
+            if (value != null) {
+              if (widget.notEmpty && value.isEmpty) {
+                return "Campo \"${widget.label}\" deve ser preenchido";
+              }
 
-                if (widget.minLength != 1 &&
-                    value.characters.length < widget.minLength) {
-                  return "Tamanho do campo ${widget.label} inválido";
-                }
+              if (widget.minLength != 1 &&
+                  value.characters.length < widget.minLength) {
+                return "Tamanho do campo ${widget.label} inválido";
+              }
 
-                if (widget.format != null) {
-                  RegExp regexp = new RegExp(widget.format);
-                  bool itMatches = regexp.hasMatch(value);
+              if (widget.format != null) {
+                RegExp regexp = RegExp(widget.format);
+                bool itMatches = regexp.hasMatch(value);
 
-                  if (!itMatches) {
-                    return "Preencha o campo ${widget.label} corretamente";
-                  }
+                if (!itMatches) {
+                  return "Preencha o campo ${widget.label} corretamente";
                 }
               }
-            },
+            }
+
+            return null;
+          },
+      // ignore: no-empty-block
       onChanged: (_) => setState(() {}),
       controller: _controller,
       onSaved: widget.onSave,
@@ -124,18 +126,21 @@ class _TextFieldDateBCState extends State<TextFieldDateBC> {
         if (widget.notEmpty && value != null && value.isEmpty) {
           return "Campo \"${widget.label}\" deve ser preenchido";
         }
+
+        return null;
       },
       onTap: () async {
         String formattedDate = "";
 
         DateTime? pickedDate = await showDatePicker(
-            context: context,
-            initialEntryMode: DatePickerEntryMode.input,
-            initialDate: DateTime.now(),
-            firstDate: DateTime(widget.minYear),
-            lastDate: widget.maxYear != DateTime.now().year
-                ? DateTime(widget.maxYear)
-                : DateTime.now());
+          context: context,
+          initialEntryMode: DatePickerEntryMode.input,
+          initialDate: DateTime.now(),
+          firstDate: DateTime(widget.minYear),
+          lastDate: widget.maxYear != DateTime.now().year
+              ? DateTime(widget.maxYear)
+              : DateTime.now(),
+        );
 
         if (pickedDate != null) {
           formattedDate = DateFormat('dd/MM/yyyy').format(pickedDate);

@@ -23,19 +23,16 @@ class DioClient {
         url,
         data: bodyRequest,
         options: Options(
-            headers: header,
-            validateStatus: (status) {
-              return status! <= 500;
-            }),
+          headers: header,
+          validateStatus: (status) {
+            return status! <= 500;
+          },
+        ),
       );
 
       print(response!.data);
 
-      if (response!.statusCode! > 400) {
-        return response;
-      } else {
-        return null;
-      }
+      return response!.statusCode! > 400 ? response : null;
     } on DioError catch (error) {
       if (error.response != null) {
         print(error.response!.data);
@@ -46,6 +43,7 @@ class DioClient {
         print(error.requestOptions);
         print(error.message);
       }
+
       return null;
     }
   }

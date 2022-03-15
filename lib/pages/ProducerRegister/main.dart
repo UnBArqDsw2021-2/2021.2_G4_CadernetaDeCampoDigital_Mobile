@@ -11,6 +11,7 @@ import '../../components/BasicComponents.dart';
 import '../../global/colors.dart';
 
 class ProducerRegisterPage extends StatefulWidget {
+  const ProducerRegisterPage({Key? key}) : super(key: key);
   @override
   State<StatefulWidget> createState() => _ProducerRegisterState();
 }
@@ -39,13 +40,13 @@ class _ProducerRegisterState extends State<ProducerRegisterPage> {
 
     final response = await DioClient().post('api/produtor/', {
       'usuario': {
-        'nome': this._nome,
-        'dataNascimento': Utils().clearData(this._dataNascimento),
-        'telefone': Utils().clearMask(this._telefone),
-        'senha': this._senha,
-        'cpf': Utils().clearMask(this._cpf)
+        'nome': _nome,
+        'dataNascimento': Utils().clearData(_dataNascimento),
+        'telefone': Utils().clearMask(_telefone),
+        'senha': _senha,
+        'cpf': Utils().clearMask(_cpf),
       },
-      'dap': this._dap!.toUpperCase()
+      'dap': _dap!.toUpperCase(),
     });
 
     setState(() {
@@ -57,7 +58,10 @@ class _ProducerRegisterState extends State<ProducerRegisterPage> {
         content: Text(
           'Cadastro feito com sucesso',
           style: TextStyle(
-              fontSize: 12, fontFamily: 'Roboto', fontWeight: FontWeight.w400),
+            fontSize: 12,
+            fontFamily: 'Roboto',
+            fontWeight: FontWeight.w400,
+          ),
         ),
         backgroundColor: Colors.greenAccent,
       ));
@@ -66,7 +70,10 @@ class _ProducerRegisterState extends State<ProducerRegisterPage> {
         content: Text(
           'Ocorreu um erro ao completar o cadastro',
           style: TextStyle(
-              fontSize: 12, fontFamily: 'Roboto', fontWeight: FontWeight.w400),
+            fontSize: 12,
+            fontFamily: 'Roboto',
+            fontWeight: FontWeight.w400,
+          ),
         ),
         backgroundColor: Colors.redAccent,
       ));
@@ -76,6 +83,7 @@ class _ProducerRegisterState extends State<ProducerRegisterPage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -105,7 +113,7 @@ class _ProducerRegisterState extends State<ProducerRegisterPage> {
               ],
             ),
             isLoading
-                ? (Container(height: size.height * 0.65, child: Loading()))
+                ? (SizedBox(height: size.height * 0.65, child: Loading()))
                 : Container(
                     padding: EdgeInsets.symmetric(
                       horizontal: 10,
@@ -126,7 +134,7 @@ class _ProducerRegisterState extends State<ProducerRegisterPage> {
                             minLength: 3,
                             onSave: (String? value) {
                               if (value != null) {
-                                this._nome = value;
+                                _nome = value;
                               }
                             },
                           ),
@@ -137,7 +145,7 @@ class _ProducerRegisterState extends State<ProducerRegisterPage> {
                             maxYear: DateTime.now().year,
                             onSave: (String? value) {
                               if (value != null) {
-                                this._dataNascimento = value;
+                                _dataNascimento = value;
                               }
                             },
                           ),
@@ -159,7 +167,7 @@ class _ProducerRegisterState extends State<ProducerRegisterPage> {
                             },
                             onSave: (String? value) {
                               if (value != null) {
-                                this._cpf = value;
+                                _cpf = value;
                               }
                             },
                           ),
@@ -172,7 +180,7 @@ class _ProducerRegisterState extends State<ProducerRegisterPage> {
                             inputFormatters: [Utils().maskTelefone],
                             onSave: (String? value) {
                               if (value != null) {
-                                this._telefone = value;
+                                _telefone = value;
                               }
                             },
                           ),
@@ -187,8 +195,7 @@ class _ProducerRegisterState extends State<ProducerRegisterPage> {
                                 if (value.isEmpty) {
                                   return "Campo \"DAP\" deve ser preenchido";
                                 } else {
-                                  RegExp regexp =
-                                      new RegExp(r'[a-zA-Z]{3}\d{22}');
+                                  RegExp regexp = RegExp(r'[a-zA-Z]{3}\d{22}');
                                   bool itMatches = regexp.hasMatch(value);
 
                                   if (!itMatches) {
@@ -199,7 +206,7 @@ class _ProducerRegisterState extends State<ProducerRegisterPage> {
                             },
                             onSave: (String? value) {
                               if (value != null) {
-                                this._dap = value;
+                                _dap = value;
                               }
                             },
                           ),
@@ -211,7 +218,7 @@ class _ProducerRegisterState extends State<ProducerRegisterPage> {
                             minLength: 8,
                             onSave: (String? value) {
                               if (value != null) {
-                                this._senha = value;
+                                _senha = value;
                               }
                             },
                           ),
@@ -225,7 +232,7 @@ class _ProducerRegisterState extends State<ProducerRegisterPage> {
                                   return "Campo \"Confirmar Senha\" deve ser preenchido";
                                 }
 
-                                if (value != this._senha) {
+                                if (value != _senha) {
                                   return "Senhas não coincidem";
                                 }
                               }

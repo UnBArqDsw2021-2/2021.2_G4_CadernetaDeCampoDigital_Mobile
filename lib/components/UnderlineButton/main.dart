@@ -11,15 +11,16 @@ class UnderlineButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: this.onPressed,
+      onPressed: onPressed,
       child: Text(
         label,
         style: TextStyle(
-            fontWeight: FontWeight.w400,
-            fontFamily: 'Roboto',
-            fontSize: 20,
-            color: MyColors().blueButton,
-            decoration: TextDecoration.underline),
+          fontWeight: FontWeight.w400,
+          fontFamily: 'Roboto',
+          fontSize: 20,
+          color: MyColors().blueButton,
+          decoration: TextDecoration.underline,
+        ),
       ),
     );
   }
