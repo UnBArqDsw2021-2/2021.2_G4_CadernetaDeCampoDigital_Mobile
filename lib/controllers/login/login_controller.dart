@@ -42,4 +42,16 @@ class LoginController {
         accessToken: data["access"],
         refreshToken: data["refresh"]);
   }
+
+  String? validateCpf(String? value) {
+    if (value == null || value.isEmpty)
+      return "Insira o seu CPF";
+    else if (value.length != 14) "CPF inválido";
+    return null;
+  }
+
+  String? validatePassword(String? value) {
+    if (value == null || value.isEmpty) return "Insira a sua senha";
+    return null;
+  }
 }

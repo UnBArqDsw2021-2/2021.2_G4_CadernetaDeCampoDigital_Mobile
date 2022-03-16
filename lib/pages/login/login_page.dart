@@ -17,6 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   bool obscurePassword = true;
   bool failedLogin = false;
   LoginController loginController = LoginController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -39,42 +40,53 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     Image.asset("assets/logo.png"),
-                    Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'CPF',
-                        ),
-                        controller: loginController.controllerCpf,
-                        keyboardType: TextInputType.number,
-                        inputFormatters: [
-                          LengthLimitingTextInputFormatter(14),
-                          MaskTextInputFormatter(mask: "###.###.###-##")
-                        ],
-                      ),
-                    ),
-                    Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      child: TextField(
-                        obscureText: obscurePassword,
-                        controller: loginController.controllerPassword,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          suffixIcon: IconButton(
-                            icon: Icon(Icons.remove_red_eye_outlined),
-                            onPressed: () {
-                              setState(() {
-                                obscurePassword = !obscurePassword;
-                              });
-                            },
-                            highlightColor: Colors.transparent,
-                            splashColor: Colors.blue.withOpacity(0.2),
+                    Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 10),
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelText: 'CPF',
+                              ),
+                              validator: (value) =>
+                                  loginController.validateCpf(value),
+                              controller: loginController.controllerCpf,
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                LengthLimitingTextInputFormatter(14),
+                                MaskTextInputFormatter(mask: "###.###.###-##")
+                              ],
+                            ),
                           ),
-                          labelText: 'Senha',
-                        ),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 10),
+                            child: TextFormField(
+                              obscureText: obscurePassword,
+                              validator: (value) =>
+                                  loginController.validatePassword(value),
+                              controller: loginController.controllerPassword,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                suffixIcon: IconButton(
+                                  icon: Icon(Icons.remove_red_eye_outlined),
+                                  onPressed: () {
+                                    setState(() {
+                                      obscurePassword = !obscurePassword;
+                                    });
+                                  },
+                                  highlightColor: Colors.transparent,
+                                  splashColor: Colors.blue.withOpacity(0.2),
+                                ),
+                                labelText: 'Senha',
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     failedLogin
@@ -97,14 +109,18 @@ class _LoginPageState extends State<LoginPage> {
                           )
                         : Container(),
                     Container(
-                      margin: EdgeInsets.symmetric(vertical: 30),
+                      margin:
+                          EdgeInsets.symmetric(vertical: size.height * 0.02),
                       child: MaterialButton(
                         onPressed: () async {
-                          loginController.loading = true;
-                          setState(() {});
-                          failedLogin = await loginController.loginPressed();
-                          setState(() {});
-                          if (!failedLogin) if (!failedLogin) navigateToHome();
+                          if (_formKey.currentState!.validate()) {
+                            loginController.loading = true;
+                            setState(() {});
+                            failedLogin = await loginController.loginPressed();
+                            setState(() {});
+                            if (!failedLogin) if (!failedLogin)
+                              navigateToHome();
+                          }
                         },
                         highlightColor: Colors.transparent,
                         splashColor: Colors.transparent,
