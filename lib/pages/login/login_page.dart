@@ -112,16 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                       margin:
                           EdgeInsets.symmetric(vertical: size.height * 0.02),
                       child: MaterialButton(
-                        onPressed: () async {
-                          if (_formKey.currentState!.validate()) {
-                            loginController.loading = true;
-                            setState(() {});
-                            failedLogin = await loginController.loginPressed();
-                            setState(() {});
-                            if (!failedLogin) if (!failedLogin)
-                              navigateToHome();
-                          }
-                        },
+                        onPressed: buttonPressed,
                         highlightColor: Colors.transparent,
                         splashColor: Colors.transparent,
                         child: Container(
@@ -193,5 +184,18 @@ class _LoginPageState extends State<LoginPage> {
       else
         return Home();
     }));
+  }
+
+  void buttonPressed() async {
+    if (_formKey.currentState!.validate()) {
+      loginController.loading = true;
+      setState(() {});
+      failedLogin = await loginController.loginPressed();
+      setState(() {});
+      if (!failedLogin) if (!failedLogin) navigateToHome();
+    } else {
+      failedLogin = false;
+      setState(() {});
+    }
   }
 }
