@@ -9,15 +9,11 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String texto;
-    if (SharedInfo.actualUser.isProductor)
-      texto = "PRODUTOR";
-    else
-      texto = "TÉCNICO";
+    SharedInfo.actualUser.isProductor ? texto = "PRODUTOR" : texto = "TÉCNICO";
+
     return Scaffold(
       body: Center(
-        child: Container(
-          child: Text("HOME $texto"),
-        ),
+        child: Text("HOME $texto"),
       ),
     );
   }

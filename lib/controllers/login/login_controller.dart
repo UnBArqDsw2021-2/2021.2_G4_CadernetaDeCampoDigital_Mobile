@@ -14,44 +14,45 @@ class LoginController {
   Future<bool> loginPressed() async {
     String cpf = controllerCpf.text.replaceAll(".", "").replaceAll("-", "");
     Response? response = await loginService.login(cpf, controllerPassword.text);
-    print("Recebido!");
-    this.loading = false;
+    loading = false;
     if (response == null) {
       errorText = "Problemas com o servidor!";
+
       return true;
     } else if (response.statusCode != 200)
       errorText = "Os dados informados estão incorretos!";
 
     if (response.statusCode == 200) setActualUser(response.data);
+
     return response.statusCode != 200;
   }
 
   void setActualUser(dynamic data) {
     bool isProductor;
 
-    if (data['tipo'] == "produtor")
-      isProductor = true;
-    else
-      isProductor = false;
+    data['tipo'] == "produtor" ? isProductor = true : isProductor = false;
 
     SharedInfo.actualUser = UserModel(
-        name: data["nome"],
-        cpf: data["cpf"],
-        isProductor: isProductor,
-        idUsuario: data["idUsuario"],
-        accessToken: data["access"],
-        refreshToken: data["refresh"]);
+      name: data["nome"],
+      cpf: data["cpf"],
+      isProductor: isProductor,
+      idUsuario: data["idUsuario"],
+      accessToken: data["access"],
+      refreshToken: data["refresh"],
+    );
   }
 
   String? validateCpf(String? value) {
     if (value == null || value.isEmpty)
       return "Insira o seu CPF";
     else if (value.length != 14) "CPF inválido";
+
     return null;
   }
 
   String? validatePassword(String? value) {
     if (value == null || value.isEmpty) return "Insira a sua senha";
+
     return null;
   }
 }

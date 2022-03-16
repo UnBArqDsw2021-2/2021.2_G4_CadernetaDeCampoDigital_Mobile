@@ -1,3 +1,5 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:caderneta_campo_digital/controllers/login/login_controller.dart';
 import 'package:caderneta_campo_digital/global/global.dart';
 import 'package:caderneta_campo_digital/pages/home/home_page.dart';
@@ -22,6 +24,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -46,8 +49,11 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           Container(
                             padding: EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 10),
+                              horizontal: 20,
+                              vertical: 10,
+                            ),
                             child: TextFormField(
+                              key: Key("cpfField"),
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(),
                                 labelText: 'CPF',
@@ -58,13 +64,15 @@ class _LoginPageState extends State<LoginPage> {
                               keyboardType: TextInputType.number,
                               inputFormatters: [
                                 LengthLimitingTextInputFormatter(14),
-                                MaskTextInputFormatter(mask: "###.###.###-##")
+                                MaskTextInputFormatter(mask: "###.###.###-##"),
                               ],
                             ),
                           ),
                           Container(
                             padding: EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 10),
+                              horizontal: 20,
+                              vertical: 10,
+                            ),
                             child: TextFormField(
                               obscureText: obscurePassword,
                               validator: (value) =>
@@ -104,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                                   loginController.errorText,
                                   style: TextStyle(color: Colors.red),
                                 ),
-                              )
+                              ),
                             ],
                           )
                         : Container(),
@@ -123,10 +131,12 @@ class _LoginPageState extends State<LoginPage> {
                             color: Color(0XFF00B4D8),
                           ),
                           child: Center(
-                              child: Text(
-                            "Entrar",
-                            style: TextStyle(color: Colors.white, fontSize: 20),
-                          )),
+                            child: Text(
+                              "Entrar",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -134,6 +144,7 @@ class _LoginPageState extends State<LoginPage> {
                       margin:
                           EdgeInsets.symmetric(vertical: size.height * 0.01),
                       child: MaterialButton(
+                        // ignore: no-empty-block
                         onPressed: () {},
                         splashColor: Color(0XFF00B4D8).withOpacity(0.2),
                         highlightColor: Colors.transparent,
@@ -145,13 +156,15 @@ class _LoginPageState extends State<LoginPage> {
                             color: Colors.transparent,
                           ),
                           child: Center(
-                              child: Text(
-                            "Cadastro",
-                            style: TextStyle(
+                            child: Text(
+                              "Cadastro",
+                              style: TextStyle(
                                 color: Color(0XFF00B4D8),
                                 fontSize: 20,
-                                decoration: TextDecoration.underline),
-                          )),
+                                decoration: TextDecoration.underline,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -169,7 +182,7 @@ class _LoginPageState extends State<LoginPage> {
                       child:
                           CircularProgressIndicator(color: Color(0XFF00B4D8)),
                     )
-                  : Container()
+                  : Container(),
             ],
           ),
         ),
@@ -179,23 +192,23 @@ class _LoginPageState extends State<LoginPage> {
 
   void navigateToHome() {
     Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
-      if (SharedInfo.actualUser.isProductor)
-        return Home();
-      else
-        return Home();
+      return SharedInfo.actualUser.isProductor ? Home() : LoginPage();
     }));
   }
 
   void buttonPressed() async {
     if (_formKey.currentState!.validate()) {
-      loginController.loading = true;
-      setState(() {});
+      setState(() {
+        loginController.loading = true;
+      });
       failedLogin = await loginController.loginPressed();
+      // ignore: no-empty-block
       setState(() {});
       if (!failedLogin) if (!failedLogin) navigateToHome();
     } else {
-      failedLogin = false;
-      setState(() {});
+      setState(() {
+        failedLogin = false;
+      });
     }
   }
 }
