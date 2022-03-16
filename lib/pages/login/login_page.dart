@@ -35,8 +35,9 @@ class _LoginPageState extends State<LoginPage> {
               Center(
                 child: Column(
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 85),
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(vertical: size.height * 0.12),
                       child: Text(
                         "LOGIN",
                         style: TextStyle(color: Colors.white, fontSize: 36),
@@ -49,8 +50,8 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           Container(
                             padding: EdgeInsets.symmetric(
-                              horizontal: 20,
-                              vertical: 10,
+                              horizontal: size.height * 0.025,
+                              vertical: size.width * 0.01,
                             ),
                             child: TextFormField(
                               key: Key("cpfField"),
@@ -70,10 +71,11 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           Container(
                             padding: EdgeInsets.symmetric(
-                              horizontal: 20,
-                              vertical: 10,
+                              horizontal: size.height * 0.025,
+                              vertical: size.width * 0.01,
                             ),
                             child: TextFormField(
+                              key: Key("passwordField"),
                               obscureText: obscurePassword,
                               validator: (value) =>
                                   loginController.validatePassword(value),
@@ -118,7 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                         : Container(),
                     Container(
                       margin:
-                          EdgeInsets.symmetric(vertical: size.height * 0.02),
+                          EdgeInsets.symmetric(vertical: size.height * 0.025),
                       child: MaterialButton(
                         onPressed: buttonPressed,
                         highlightColor: Colors.transparent,

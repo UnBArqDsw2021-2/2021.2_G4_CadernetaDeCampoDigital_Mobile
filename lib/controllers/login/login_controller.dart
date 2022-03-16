@@ -45,7 +45,7 @@ class LoginController {
   String? validateCpf(String? value) {
     if (value == null || value.isEmpty)
       return "Insira o seu CPF";
-    else if (value.length != 14) "CPF inválido";
+    else if (value.length != 14) return "CPF inválido";
 
     return null;
   }
