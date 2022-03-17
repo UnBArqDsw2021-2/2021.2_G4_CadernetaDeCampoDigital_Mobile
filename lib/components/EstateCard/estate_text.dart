@@ -16,6 +16,6 @@ class _EstateTextState extends State<EstateText> {
           color: Colors.black,
           fontSize: 20,
           fontFamily: 'Roboto-Regular',
-        ));
+        ),);
   }
 }

@@ -10,7 +10,7 @@ class EstateCard extends StatefulWidget {
       {Key? key,
       required this.estateName,
       required this.estateAddress,
-      required this.qtdPlot})
+      required this.qtdPlot,})
       : super(key: key);
 
   @override
@@ -49,7 +49,7 @@ class _EstateCardState extends State<EstateCard> {
                                 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
                                 fit: BoxFit.fill,
                                 height: size.width * 0.17,
-                                width: size.width * 0.17)),
+                                width: size.width * 0.17,),),
                       ),
                     ),
                   ],
@@ -72,7 +72,7 @@ class _EstateCardState extends State<EstateCard> {
                       ],
                     ),
                   ],
-                )
+                ),
               ],
             ),
           ),

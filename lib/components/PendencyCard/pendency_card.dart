@@ -41,7 +41,7 @@ class _PendencyCardState extends State<PendencyCard> {
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(15),
                         topRight: Radius.circular(15),
-                      )),
+                      ),),
                   child: Text(
                     "Pendências",
                     style: TextStyle(

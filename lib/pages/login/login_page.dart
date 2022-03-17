@@ -1,3 +1,5 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:caderneta_campo_digital/controllers/login/login_controller.dart';
 import 'package:caderneta_campo_digital/global/global.dart';
 import 'package:caderneta_campo_digital/pages/home_produtor/home_produtor.dart';
@@ -18,10 +20,12 @@ class _LoginPageState extends State<LoginPage> {
   bool obscurePassword = true;
   bool failedLogin = false;
   LoginController loginController = LoginController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -32,50 +36,68 @@ class _LoginPageState extends State<LoginPage> {
               Center(
                 child: Column(
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 85),
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(vertical: size.height * 0.12),
                       child: Text(
                         "LOGIN",
                         style: TextStyle(color: Colors.white, fontSize: 36),
                       ),
                     ),
                     Image.asset("assets/logo.png"),
-                    Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'CPF',
-                        ),
-                        controller: loginController.controllerCpf,
-                        keyboardType: TextInputType.number,
-                        inputFormatters: [
-                          LengthLimitingTextInputFormatter(14),
-                          MaskTextInputFormatter(mask: "###.###.###-##")
-                        ],
-                      ),
-                    ),
-                    Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      child: TextField(
-                        obscureText: obscurePassword,
-                        controller: loginController.controllerPassword,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          suffixIcon: IconButton(
-                            icon: Icon(Icons.remove_red_eye_outlined),
-                            onPressed: () {
-                              setState(() {
-                                obscurePassword = !obscurePassword;
-                              });
-                            },
-                            highlightColor: Colors.transparent,
-                            splashColor: Colors.blue.withOpacity(0.2),
+                    Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: size.height * 0.025,
+                              vertical: size.width * 0.01,
+                            ),
+                            child: TextFormField(
+                              key: Key("cpfField"),
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelText: 'CPF',
+                              ),
+                              validator: (value) =>
+                                  loginController.validateCpf(value),
+                              controller: loginController.controllerCpf,
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                LengthLimitingTextInputFormatter(14),
+                                MaskTextInputFormatter(mask: "###.###.###-##"),
+                              ],
+                            ),
                           ),
-                          labelText: 'Senha',
-                        ),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: size.height * 0.025,
+                              vertical: size.width * 0.01,
+                            ),
+                            child: TextFormField(
+                              key: Key("passwordField"),
+                              obscureText: obscurePassword,
+                              validator: (value) =>
+                                  loginController.validatePassword(value),
+                              controller: loginController.controllerPassword,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                suffixIcon: IconButton(
+                                  icon: Icon(Icons.remove_red_eye_outlined),
+                                  onPressed: () {
+                                    setState(() {
+                                      obscurePassword = !obscurePassword;
+                                    });
+                                  },
+                                  highlightColor: Colors.transparent,
+                                  splashColor: Colors.blue.withOpacity(0.2),
+                                ),
+                                labelText: 'Senha',
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     failedLogin
@@ -93,20 +115,15 @@ class _LoginPageState extends State<LoginPage> {
                                   loginController.errorText,
                                   style: TextStyle(color: Colors.red),
                                 ),
-                              )
+                              ),
                             ],
                           )
                         : Container(),
                     Container(
-                      margin: EdgeInsets.symmetric(vertical: 30),
+                      margin:
+                          EdgeInsets.symmetric(vertical: size.height * 0.025),
                       child: MaterialButton(
-                        onPressed: () async {
-                          loginController.loading = true;
-                          setState(() {});
-                          failedLogin = await loginController.loginPressed();
-                          setState(() {});
-                          if (!failedLogin) if (!failedLogin) navigateToHome();
-                        },
+                        onPressed: buttonPressed,
                         highlightColor: Colors.transparent,
                         splashColor: Colors.transparent,
                         child: Container(
@@ -117,10 +134,12 @@ class _LoginPageState extends State<LoginPage> {
                             color: Color(0XFF00B4D8),
                           ),
                           child: Center(
-                              child: Text(
-                            "Entrar",
-                            style: TextStyle(color: Colors.white, fontSize: 20),
-                          )),
+                            child: Text(
+                              "Entrar",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -128,6 +147,7 @@ class _LoginPageState extends State<LoginPage> {
                       margin:
                           EdgeInsets.symmetric(vertical: size.height * 0.01),
                       child: MaterialButton(
+                        // ignore: no-empty-block
                         onPressed: () {},
                         splashColor: Color(0XFF00B4D8).withOpacity(0.2),
                         highlightColor: Colors.transparent,
@@ -139,13 +159,15 @@ class _LoginPageState extends State<LoginPage> {
                             color: Colors.transparent,
                           ),
                           child: Center(
-                              child: Text(
-                            "Cadastro",
-                            style: TextStyle(
+                            child: Text(
+                              "Cadastro",
+                              style: TextStyle(
                                 color: Color(0XFF00B4D8),
                                 fontSize: 20,
-                                decoration: TextDecoration.underline),
-                          )),
+                                decoration: TextDecoration.underline,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -163,7 +185,7 @@ class _LoginPageState extends State<LoginPage> {
                       child:
                           CircularProgressIndicator(color: Color(0XFF00B4D8)),
                     )
-                  : Container()
+                  : Container(),
             ],
           ),
         ),
@@ -173,10 +195,23 @@ class _LoginPageState extends State<LoginPage> {
 
   void navigateToHome() {
     Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
-      if (SharedInfo.actualUser.isProductor)
-        return HomeProdutor();
-      else
-        return HomeTecnico();
+      return SharedInfo.actualUser.isProductor ? HomeProdutor() : HomeTecnico();
     }));
+  }
+
+  void buttonPressed() async {
+    if (_formKey.currentState!.validate()) {
+      setState(() {
+        loginController.loading = true;
+      });
+      failedLogin = await loginController.loginPressed();
+      // ignore: no-empty-block
+      setState(() {});
+      if (!failedLogin) if (!failedLogin) navigateToHome();
+    } else {
+      setState(() {
+        failedLogin = false;
+      });
+    }
   }
 }

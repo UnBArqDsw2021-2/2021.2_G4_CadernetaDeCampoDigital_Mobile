@@ -38,24 +38,25 @@ class Topbar extends StatelessWidget implements PreferredSizeWidget {
                 fontFamily: 'Roboto-Regular',
               ),
             ),
-          ]),
+          ],),
       actions: <Widget>[
         IconButton(
           icon: const Icon(Icons.person),
           iconSize: 50,
           color: Colors.white,
           padding: EdgeInsets.all(30),
+          // ignore: no-empty-block
           onPressed: () {},
         ),
       ],
       flexibleSpace: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-              colors: [Color(0xFF0077B6), Color(0xFF90E0EF)],
+              colors: const [Color(0xFF0077B6), Color(0xFF90E0EF)],
               begin: const FractionalOffset(0.0, 0.0),
               end: const FractionalOffset(1.0, 0.0),
-              stops: [0.0, 1.0],
-              tileMode: TileMode.clamp),
+              stops: const [0.0, 1.0],
+              tileMode: TileMode.clamp,),
         ),
       ),
     );
