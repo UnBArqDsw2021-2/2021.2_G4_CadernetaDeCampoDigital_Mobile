@@ -27,6 +27,7 @@ dependencies:
   mask_text_input_formatter: ^2.1.0
   dio: ^4.0.4
   intl: ^0.17.0
+  cpf_cnpj_validator: ^2.0.0
   flutter_localizations:
     sdk: flutter
 
@@ -34,10 +35,6 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  flutter_svg: ^1.0.3
-  mask_text_input_formatter: ^2.1.0
-  cpf_cnpj_validator: ^2.0.0
-  dio: ^4.0.4
 
 dev_dependencies:
   dart_code_metrics: ^4.12.0
