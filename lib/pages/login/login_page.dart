@@ -207,7 +207,7 @@ class _LoginPageState extends State<LoginPage> {
       failedLogin = await loginController.loginPressed();
       // ignore: no-empty-block
       setState(() {});
-      if (!failedLogin) if (!failedLogin) navigateToHome();
+      if (!failedLogin) navigateToHome();
     } else {
       setState(() {
         failedLogin = false;
