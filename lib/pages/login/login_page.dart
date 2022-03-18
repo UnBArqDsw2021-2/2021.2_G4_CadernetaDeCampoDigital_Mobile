@@ -195,7 +195,9 @@ class _LoginPageState extends State<LoginPage> {
 
   void navigateToHome() {
     Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
-      return SharedInfo.actualUser.isProductor ? HomeProdutor() : HomeTecnico();
+      return SharedInfo.actualUser.isProductor
+          ? HomeProdutorPage()
+          : HomeTecnicoPage();
     }));
   }
 

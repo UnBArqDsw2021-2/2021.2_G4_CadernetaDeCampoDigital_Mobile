@@ -1,9 +1,9 @@
-import 'package:caderneta_campo_digital/components/EstateCard/estate_card.dart';
-import 'package:caderneta_campo_digital/components/Topbar/topbar.dart';
+import 'package:caderneta_campo_digital/components/estate_card.dart';
+import 'package:caderneta_campo_digital/components/topbar.dart';
 import 'package:flutter/material.dart';
 
-class HomeProdutor extends StatelessWidget {
-  const HomeProdutor({Key? key}) : super(key: key);
+class HomeProdutorPage extends StatelessWidget {
+  const HomeProdutorPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,21 +15,25 @@ class HomeProdutor extends StatelessWidget {
         child: Column(
           children: const <Widget>[
             EstateCard(
-                estateName: "Propriedade 1",
-                estateAddress: "ENDERECO",
-                qtdPlot: 5,),
+              estateName: "Propriedade 1",
+              estateAddress: "ENDERECO",
+              qtdPlot: 5,
+            ),
             EstateCard(
-                estateName: "Propriedade 1",
-                estateAddress: "ENDERECO",
-                qtdPlot: 5,),
+              estateName: "Propriedade 1",
+              estateAddress: "ENDERECO",
+              qtdPlot: 5,
+            ),
             EstateCard(
-                estateName: "Propriedade 1",
-                estateAddress: "ENDERECO",
-                qtdPlot: 5,),
+              estateName: "Propriedade 1",
+              estateAddress: "ENDERECO",
+              qtdPlot: 5,
+            ),
             EstateCard(
-                estateName: "Propriedade 1",
-                estateAddress: "ENDERECO",
-                qtdPlot: 5,),
+              estateName: "Propriedade 1",
+              estateAddress: "ENDERECO",
+              qtdPlot: 5,
+            ),
           ],
         ),
       ),
