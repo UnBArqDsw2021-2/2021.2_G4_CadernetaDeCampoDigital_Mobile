@@ -11,20 +11,40 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:caderneta_campo_digital/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp());
+  testWidgets(
+    'Testando campos inválidos no Login',
+    (WidgetTester tester) async {
+      await tester.pumpWidget(MyApp());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+      await tester.tap(find.widgetWithText(MaterialButton, "Entrar"));
+      await tester.pump(Duration(milliseconds: 500));
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+      expect(find.text("Insira o seu CPF"), findsOneWidget);
+      expect(find.text("Insira a sua senha"), findsOneWidget);
+    },
+  );
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
-  });
+  testWidgets(
+    'Renderiza página',
+    (WidgetTester tester) async {
+      await tester.pumpWidget(MyApp());
+
+      expect(find.text('LOGIN'), findsOneWidget);
+    },
+  );
+
+  testWidgets(
+    'Testando CPF inválido no Login',
+    (WidgetTester tester) async {
+      await tester.pumpWidget(MyApp());
+
+      await tester.enterText(find.byKey(Key("cpfField")), "067056");
+      await tester.enterText(find.byKey(Key("passwordField")), "Teste123");
+      await tester.pump(Duration(milliseconds: 500));
+      await tester.tap(find.widgetWithText(MaterialButton, "Entrar"));
+      await tester.pump(Duration(milliseconds: 500));
+
+      expect(find.text("CPF inválido"), findsOneWidget);
+    },
+  );
 }
