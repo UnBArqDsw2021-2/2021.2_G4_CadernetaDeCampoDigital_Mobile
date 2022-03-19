@@ -25,7 +25,7 @@ class LoginService {
       );
     } on DioError catch (exception) {
       if (kDebugMode) {
-        print(exception);
+        return exception;
       }
     }
 

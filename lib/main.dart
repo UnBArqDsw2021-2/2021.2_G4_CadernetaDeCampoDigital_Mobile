@@ -1,8 +1,4 @@
 import 'package:caderneta_campo_digital/pages/login/login_page.dart';
-import 'package:caderneta_campo_digital/pages/TechnicianRegister/main.dart';
-import 'package:flutter/material.dart';
-import 'package:caderneta_campo_digital/pages/ProducerRegister/main.dart';
-import 'package:caderneta_campo_digital/pages/TechnicianRegister/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -19,7 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'Caderneta de Campo Digital',
       debugShowCheckedModeBanner: false,
       localizationsDelegates: GlobalMaterialLocalizations.delegates,
-      supportedLocales: [
+      supportedLocales: const [
         Locale('pt', 'BR'),
       ],
       theme: ThemeData(

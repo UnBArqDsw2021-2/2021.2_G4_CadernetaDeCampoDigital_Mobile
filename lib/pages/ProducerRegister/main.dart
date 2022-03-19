@@ -1,14 +1,11 @@
+import 'package:caderneta_campo_digital/components/BaseAuthentication/main.dart';
 import 'package:caderneta_campo_digital/components/TextBlueButton/main.dart';
 import 'package:caderneta_campo_digital/components/UnderlineButton/main.dart';
-import 'package:caderneta_campo_digital/components/loading.dart';
 import 'package:caderneta_campo_digital/services/dio.dart';
 import 'package:caderneta_campo_digital/utils/main.dart';
 import 'package:cpf_cnpj_validator/cpf_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
 import '../../components/BasicComponents.dart';
-import '../../global/colors.dart';
 
 class ProducerRegisterPage extends StatefulWidget {
   const ProducerRegisterPage({Key? key}) : super(key: key);
@@ -26,6 +23,149 @@ class _ProducerRegisterState extends State<ProducerRegisterPage> {
   bool isLoading = false;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return BaseAuthentication(
+      label: "CADASTRO",
+      isLoading: isLoading,
+      child: Form(
+        key: _formKey,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextFieldBC(
+              label: "Nome Completo",
+              notEmpty: true,
+              minLength: 3,
+              onSave: (String? value) {
+                if (value != null) {
+                  _nome = value;
+                }
+              },
+            ),
+            SizedBox(height: 20),
+            TextFieldDateBC(
+              label: "Data de Nascimento",
+              notEmpty: true,
+              maxYear: DateTime.now().year,
+              onSave: (String? value) {
+                if (value != null) {
+                  _dataNascimento = value;
+                }
+              },
+            ),
+            SizedBox(height: 20),
+            TextFieldBC(
+              label: "CPF",
+              keyboardType: TextInputType.number,
+              inputFormatters: [Utils().maskCpf],
+              validator: (String? value) {
+                if (value != null) {
+                  if (value.isEmpty) {
+                    return "Campo \"CPF\" deve ser preenchido";
+                  }
+
+                  if (!CPFValidator.isValid(value)) {
+                    return "CPF é inválido";
+                  }
+                }
+              },
+              onSave: (String? value) {
+                if (value != null) {
+                  _cpf = value;
+                }
+              },
+            ),
+            SizedBox(height: 20),
+            TextFieldBC(
+              label: "Telefone",
+              keyboardType: TextInputType.number,
+              notEmpty: true,
+              minLength: 16,
+              inputFormatters: [Utils().maskTelefone],
+              onSave: (String? value) {
+                if (value != null) {
+                  _telefone = value;
+                }
+              },
+            ),
+            SizedBox(height: 20),
+            TextFieldBC(
+              label: "DAP",
+              notEmpty: true,
+              minLength: 25,
+              maxLength: 25,
+              validator: (String? value) {
+                if (value != null) {
+                  if (value.isEmpty) {
+                    return "Campo \"DAP\" deve ser preenchido";
+                  } else {
+                    RegExp regexp = RegExp(r'[a-zA-Z]{3}\d{22}');
+                    bool itMatches = regexp.hasMatch(value);
+
+                    if (!itMatches) {
+                      return "DAP está com formato incorreto";
+                    }
+                  }
+                }
+              },
+              onSave: (String? value) {
+                if (value != null) {
+                  _dap = value;
+                }
+              },
+            ),
+            SizedBox(height: 20),
+            TextFieldBC(
+              label: "Senha",
+              notEmpty: true,
+              obscureText: true,
+              minLength: 8,
+              onSave: (String? value) {
+                if (value != null) {
+                  _senha = value;
+                }
+              },
+            ),
+            SizedBox(height: 20),
+            TextFieldBC(
+              label: "Confirmar Senha",
+              obscureText: true,
+              validator: (String? value) {
+                if (value != null) {
+                  if (value.isEmpty) {
+                    return "Campo \"Confirmar Senha\" deve ser preenchido";
+                  }
+
+                  if (value != _senha) {
+                    return "Senhas não coincidem";
+                  }
+                }
+              },
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 20),
+              child: Column(
+                children: [
+                  TextBlueButton(
+                    label: "Cadastrar",
+                    margin: EdgeInsets.fromLTRB(0, 40, 0, 20),
+                    onPressed: submit,
+                  ),
+                  Center(
+                    child: UnderlineButton(
+                      label: "Cancelar",
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
   void submit() async {
     _formKey.currentState!.save();
@@ -78,203 +218,5 @@ class _ProducerRegisterState extends State<ProducerRegisterPage> {
         backgroundColor: Colors.redAccent,
       ));
     }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Stack(
-              children: [
-                SvgPicture.asset(
-                  "assets/white_stack_background_upper.svg",
-                  width: size.width,
-                ),
-                isLoading
-                    ? Container()
-                    : Center(
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(vertical: 80),
-                          child: Text(
-                            "CADASTRO",
-                            style: TextStyle(
-                              fontSize: 36,
-                              color: MyColors().white,
-                              fontFamily: 'Roboto',
-                            ),
-                          ),
-                        ),
-                      ),
-              ],
-            ),
-            isLoading
-                ? (SizedBox(height: size.height * 0.65, child: Loading()))
-                : Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 10,
-                    ),
-                    child: Form(
-                      key: _formKey,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(bottom: 20),
-                            child: SvgPicture.asset("assets/logo.svg"),
-                          ),
-                          TextFieldBC(
-                            label: "Nome Completo",
-                            notEmpty: true,
-                            minLength: 3,
-                            onSave: (String? value) {
-                              if (value != null) {
-                                _nome = value;
-                              }
-                            },
-                          ),
-                          SizedBox(height: 20),
-                          TextFieldDateBC(
-                            label: "Data de Nascimento",
-                            notEmpty: true,
-                            maxYear: DateTime.now().year,
-                            onSave: (String? value) {
-                              if (value != null) {
-                                _dataNascimento = value;
-                              }
-                            },
-                          ),
-                          SizedBox(height: 20),
-                          TextFieldBC(
-                            label: "CPF",
-                            keyboardType: TextInputType.number,
-                            inputFormatters: [Utils().maskCpf],
-                            validator: (String? value) {
-                              if (value != null) {
-                                if (value.isEmpty) {
-                                  return "Campo \"CPF\" deve ser preenchido";
-                                }
-
-                                if (!CPFValidator.isValid(value)) {
-                                  return "CPF é inválido";
-                                }
-                              }
-                            },
-                            onSave: (String? value) {
-                              if (value != null) {
-                                _cpf = value;
-                              }
-                            },
-                          ),
-                          SizedBox(height: 20),
-                          TextFieldBC(
-                            label: "Telefone",
-                            keyboardType: TextInputType.number,
-                            notEmpty: true,
-                            minLength: 16,
-                            inputFormatters: [Utils().maskTelefone],
-                            onSave: (String? value) {
-                              if (value != null) {
-                                _telefone = value;
-                              }
-                            },
-                          ),
-                          SizedBox(height: 20),
-                          TextFieldBC(
-                            label: "DAP",
-                            notEmpty: true,
-                            minLength: 25,
-                            maxLength: 25,
-                            validator: (String? value) {
-                              if (value != null) {
-                                if (value.isEmpty) {
-                                  return "Campo \"DAP\" deve ser preenchido";
-                                } else {
-                                  RegExp regexp = RegExp(r'[a-zA-Z]{3}\d{22}');
-                                  bool itMatches = regexp.hasMatch(value);
-
-                                  if (!itMatches) {
-                                    return "DAP está com formato incorreto";
-                                  }
-                                }
-                              }
-                            },
-                            onSave: (String? value) {
-                              if (value != null) {
-                                _dap = value;
-                              }
-                            },
-                          ),
-                          SizedBox(height: 20),
-                          TextFieldBC(
-                            label: "Senha",
-                            notEmpty: true,
-                            obscureText: true,
-                            minLength: 8,
-                            onSave: (String? value) {
-                              if (value != null) {
-                                _senha = value;
-                              }
-                            },
-                          ),
-                          SizedBox(height: 20),
-                          TextFieldBC(
-                            label: "Confirmar Senha",
-                            obscureText: true,
-                            validator: (String? value) {
-                              if (value != null) {
-                                if (value.isEmpty) {
-                                  return "Campo \"Confirmar Senha\" deve ser preenchido";
-                                }
-
-                                if (value != _senha) {
-                                  return "Senhas não coincidem";
-                                }
-                              }
-                            },
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(vertical: 20),
-                            child: Column(
-                              children: [
-                                TextBlueButton(
-                                  label: "Cadastrar",
-                                  margin: EdgeInsets.fromLTRB(0, 40, 0, 20),
-                                  onPressed: submit,
-                                ),
-                                Center(
-                                  child: UnderlineButton(
-                                    label: "Cancelar",
-                                    onPressed: () {
-                                      print('Cancelei');
-                                    },
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-            Align(
-              alignment: Alignment.bottomLeft,
-              child:
-                  SvgPicture.asset("assets/white_stack_background_lower.svg"),
-            ),
-            // Stack(
-            //   children: [
-
-            //   ],
-            // ),
-          ],
-        ),
-      ),
-    );
   }
 }

@@ -31,7 +31,10 @@ class _LoginPageState extends State<LoginPage> {
           height: size.height,
           child: Stack(
             children: [
-              SvgPicture.asset("assets/login/Detail1.svg", width: size.width),
+              SvgPicture.asset(
+                "assets/authentication/Detail1.svg",
+                width: size.width,
+              ),
               Center(
                 child: Column(
                   children: [
@@ -176,7 +179,7 @@ class _LoginPageState extends State<LoginPage> {
               Positioned(
                 bottom: 0,
                 child: SvgPicture.asset(
-                  "assets/login/Detail2.svg",
+                  "assets/authentication/Detail2.svg",
                 ),
               ),
               loginController.loading
