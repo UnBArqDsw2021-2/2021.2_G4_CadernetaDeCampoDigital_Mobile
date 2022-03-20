@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class SelectTypePage extends StatelessWidget {
-  const SelectTypePage({Key? key}) : super(key: key);
+class SelectAccountPage extends StatelessWidget {
+  const SelectAccountPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,8 @@ class SelectTypePage extends StatelessWidget {
           children: [
             SafeArea(
               child: Padding(
-                padding: EdgeInsets.only(top: 40, bottom: 150),
+                padding: EdgeInsets.only(
+                    top: size.height * 0.049, bottom: size.height * 0.18),
                 child: Text(
                   "Qual tipo de conta deseja cadastrar ?",
                   style: TextStyle(color: Colors.white, fontSize: 24),
@@ -28,7 +29,7 @@ class SelectTypePage extends StatelessWidget {
               ),
             ),
             Container(
-              margin: EdgeInsets.symmetric(vertical: 30),
+              margin: EdgeInsets.symmetric(vertical: size.width * 0.08),
               child: MaterialButton(
                 onPressed: () {},
                 splashColor: Color(0XFF00B4D8).withOpacity(0.2),
@@ -49,19 +50,20 @@ class SelectTypePage extends StatelessWidget {
                               horizontal: size.width * 0.05),
                           child: Icon(
                             Icons.handyman_rounded,
-                            color: Colors.black,
+                            color: Color(0XFF03045E),
                           ),
                         ),
                         Container(
-                          height: 35,
+                          height: size.height * 0.043,
                           width: 1,
-                          color: Colors.black,
+                          color: Color(0XFF03045E),
                         ),
                         Padding(
                           padding: EdgeInsets.only(left: size.width * 0.06),
                           child: Text(
                             "TÉCNICO",
-                            style: TextStyle(fontSize: 20),
+                            style: TextStyle(
+                                fontSize: 20, color: Color(0XFF03045E)),
                           ),
                         )
                       ],
@@ -69,7 +71,7 @@ class SelectTypePage extends StatelessWidget {
               ),
             ),
             Container(
-              margin: EdgeInsets.symmetric(vertical: 70),
+              margin: EdgeInsets.symmetric(vertical: size.width * 0.18),
               child: MaterialButton(
                 onPressed: () {},
                 splashColor: Color(0XFF00B4D8).withOpacity(0.2),
@@ -90,19 +92,20 @@ class SelectTypePage extends StatelessWidget {
                               horizontal: size.width * 0.05),
                           child: Icon(
                             Icons.agriculture,
-                            color: Colors.black,
+                            color: Color(0XFF03045E),
                           ),
                         ),
                         Container(
-                          height: 35,
+                          height: size.height * 0.043,
                           width: 1,
-                          color: Colors.black,
+                          color: Color(0XFF03045E),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(left: size.width * 0.04),
+                          padding: EdgeInsets.only(left: size.width * 0.037),
                           child: Text(
                             "PRODUTOR",
-                            style: TextStyle(fontSize: 20),
+                            style: TextStyle(
+                                fontSize: 20, color: Color(0XFF03045E)),
                           ),
                         )
                       ],
@@ -110,7 +113,7 @@ class SelectTypePage extends StatelessWidget {
               ),
             ),
             Container(
-              margin: EdgeInsets.only(top: 60),
+              margin: EdgeInsets.only(top: size.height * 0.073),
               child: MaterialButton(
                 onPressed: () {
                   Navigator.pop(context);
