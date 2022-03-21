@@ -1,8 +1,6 @@
 import 'dart:convert';
-
 import 'package:caderneta_campo_digital/utils/utils.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 
 class LoginService {
   Future login(String cpf, String password) async {
@@ -24,9 +22,11 @@ class LoginService {
         ),
       );
     } on DioError catch (exception) {
-      if (kDebugMode) {
+      if (exception.response != null) {
         return exception;
       }
+
+      return null;
     }
 
     return loginResponse;

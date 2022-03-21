@@ -120,7 +120,7 @@ class _ProducerRegisterState extends State<ProducerRegisterPage> {
             TextFieldBC(
               label: "Senha",
               notEmpty: true,
-              obscureText: true,
+              password: true,
               minLength: 8,
               onSave: (String? value) {
                 if (value != null) {
@@ -131,7 +131,7 @@ class _ProducerRegisterState extends State<ProducerRegisterPage> {
             SizedBox(height: 20),
             TextFieldBC(
               label: "Confirmar Senha",
-              obscureText: true,
+              password: true,
               validator: (String? value) {
                 if (value != null) {
                   if (value.isEmpty) {

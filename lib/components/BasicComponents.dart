@@ -7,7 +7,7 @@ class TextFieldBC extends StatefulWidget {
   final keyboardType;
   final maxLength;
   final format;
-  final obscureText;
+  final password;
   final bool notEmpty;
   final int minLength;
   final inputFormatters;
@@ -20,7 +20,7 @@ class TextFieldBC extends StatefulWidget {
     this.keyboardType,
     this.maxLength,
     this.format,
-    this.obscureText = false,
+    this.password = false,
     this.notEmpty = false,
     this.minLength = 1,
     this.inputFormatters,
@@ -33,6 +33,7 @@ class TextFieldBC extends StatefulWidget {
 
 class _TextFieldBCState extends State<TextFieldBC> {
   final _controller = TextEditingController();
+  bool obscureText = false;
 
   @override
   void dispose() {
@@ -45,11 +46,23 @@ class _TextFieldBCState extends State<TextFieldBC> {
     return TextFormField(
       keyboardType: widget.keyboardType,
       maxLength: widget.maxLength,
-      obscureText: widget.obscureText,
+      obscureText: widget.password && !obscureText,
       inputFormatters: widget.inputFormatters,
       decoration: InputDecoration(
         border: OutlineInputBorder(),
         labelText: widget.label,
+        suffixIcon: widget.password
+            ? IconButton(
+                icon: Icon(Icons.remove_red_eye_outlined),
+                onPressed: () {
+                  setState(() {
+                    obscureText = !obscureText;
+                  });
+                },
+                highlightColor: Colors.transparent,
+                splashColor: Colors.blue.withOpacity(0.2),
+              )
+            : null,
       ),
       validator: widget.validator ??
           (String? value) {

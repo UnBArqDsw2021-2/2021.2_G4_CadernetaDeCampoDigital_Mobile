@@ -130,7 +130,7 @@ class _TechnicianRegisterPageState extends State<TechnicianRegisterPage> {
             TextFieldBC(
               label: "Senha",
               notEmpty: true,
-              obscureText: true,
+              password: true,
               minLength: 8,
               onSave: (String? value) {
                 if (value != null) {
@@ -141,7 +141,7 @@ class _TechnicianRegisterPageState extends State<TechnicianRegisterPage> {
             SizedBox(height: 20),
             TextFieldBC(
               label: "Confirmar Senha",
-              obscureText: true,
+              password: true,
               validator: (String? value) {
                 if (value != null) {
                   if (value.isEmpty) {

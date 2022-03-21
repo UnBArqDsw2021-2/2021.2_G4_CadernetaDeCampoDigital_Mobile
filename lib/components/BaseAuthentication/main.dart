@@ -20,54 +20,67 @@ class BaseAuthentication extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Stack(
-              children: [
-                SvgPicture.asset(
-                  "assets/authentication/Detail1.svg",
-                  width: size.width,
-                ),
-                isLoading
-                    ? Container()
-                    : Center(
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(vertical: 80),
-                          child: Text(
-                            label,
-                            style: TextStyle(
-                              fontSize: 36,
-                              color: MyColors().white,
-                              fontFamily: 'Roboto',
+      body: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints viewportConstraints) {
+          return SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: size.height),
+              child: IntrinsicHeight(
+                child: Column(
+                  children: [
+                    Stack(
+                      children: [
+                        SvgPicture.asset(
+                          "assets/authentication/Detail1.svg",
+                          width: size.width,
+                        ),
+                        isLoading
+                            ? Container()
+                            : Center(
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 80),
+                                  child: Text(
+                                    label,
+                                    style: TextStyle(
+                                      fontSize: 36,
+                                      color: MyColors().white,
+                                      fontFamily: 'Roboto',
+                                    ),
+                                  ),
+                                ),
+                              ),
+                      ],
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 20),
+                      child: SvgPicture.asset("assets/logo.svg"),
+                    ),
+                    isLoading
+                        ? (SizedBox(
+                            height: size.height * 0.65,
+                            child: Loading(),
+                          ))
+                        : Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 10,
                             ),
+                            child: child,
                           ),
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.bottomLeft,
+                        child: SvgPicture.asset(
+                          "assets/authentication/Detail2.svg",
                         ),
                       ),
-              ],
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 20),
-              child: SvgPicture.asset("assets/logo.svg"),
-            ),
-            isLoading
-                ? (SizedBox(
-                    height: size.height * 0.65,
-                    child: Loading(),
-                  ))
-                : Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 10,
                     ),
-                    child: child,
-                  ),
-            Align(
-              alignment: Alignment.bottomLeft,
-              child: SvgPicture.asset("assets/authentication/Detail2.svg"),
+                  ],
+                ),
+              ),
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
