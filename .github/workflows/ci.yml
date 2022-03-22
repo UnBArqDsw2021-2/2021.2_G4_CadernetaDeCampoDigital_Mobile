@@ -1,0 +1,44 @@
+name: ci
+
+on: 
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build APK
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-java@v1
+      with:
+        java-version: '12.x'
+    
+    - uses: subosito/flutter-action@v1
+      with:
+        flutter-version: '2.10.x'
+    
+    - name: Getting the dependencies for the Flutter project
+      run: flutter pub get
+      working-directory: ./
+
+    - name: Run tests for Flutter
+      run: flutter test --coverage
+      working-directory: ./
+
+    - name: Sending the results to codecov
+      run: bash <(curl -s https://codecov.io/bash) -t ${{secrets.CODECOV_TOKEN}}
+      working-directory: ./
+
+    - name: Run lint
+      run: flutter analyze
+      working-directory: ./
+
+    - name: Run Code Metrics
+      run: flutter pub run dart_code_metrics:metrics --reporter=github lib
+      working-directory: ./
