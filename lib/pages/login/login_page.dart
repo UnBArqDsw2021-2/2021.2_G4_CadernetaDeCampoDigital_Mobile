@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:caderneta_campo_digital/pages/select_account/select_account.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -148,7 +149,9 @@ class _LoginPageState extends State<LoginPage> {
                           EdgeInsets.symmetric(vertical: size.height * 0.01),
                       child: MaterialButton(
                         // ignore: no-empty-block
-                        onPressed: () {},
+                        onPressed: () {
+                          navigateToSelectAccount();
+                        },
                         splashColor: Color(0XFF00B4D8).withOpacity(0.2),
                         highlightColor: Colors.transparent,
                         child: Container(
@@ -198,6 +201,12 @@ class _LoginPageState extends State<LoginPage> {
       return SharedInfo.actualUser.isProductor
           ? HomeProdutorPage()
           : HomeTecnicoPage();
+    }));
+  }
+
+  void navigateToSelectAccount() {
+    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+      return SelectAccountPage();
     }));
   }
 
