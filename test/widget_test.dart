@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:caderneta_campo_digital/main.dart';
 import 'package:caderneta_campo_digital/pages/login/login_page.dart';
 
 void main() {
