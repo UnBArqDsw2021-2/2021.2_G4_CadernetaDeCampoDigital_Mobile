@@ -26,6 +26,7 @@ class Utils {
 
   String? clearData(String? data) {
     var newData = data!.split("/");
+
     return (newData.reversed).join("-");
   }
 
