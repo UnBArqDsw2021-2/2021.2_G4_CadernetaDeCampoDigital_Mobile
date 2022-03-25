@@ -17,36 +17,23 @@ class DioClient {
     Map<String, dynamic> header = {"Content-Type": "application/json"};
     String bodyRequest = jsonEncode(object);
 
-    print(bodyRequest);
     try {
       response = await http.post(
         url,
         data: bodyRequest,
         options: Options(
-            headers: header,
-            validateStatus: (status) {
-              return status! <= 500;
-            }),
+          headers: header,
+          validateStatus: (status) {
+            return status! <= 500;
+          },
+        ),
       );
 
-      print(response!.data);
-
-      if (response!.statusCode! > 400) {
-        return response;
-      } else {
-        return null;
-      }
+      return response!.statusCode! > 400 ? response : null;
     } on DioError catch (error) {
       if (error.response != null) {
-        print(error.response!.data);
-        print(error.response!.headers);
-        print(error.response!.requestOptions);
-      } else {
-        // Something happened in setting up or sending the request that triggered an Error
-        print(error.requestOptions);
-        print(error.message);
+        return error;
       }
-      return null;
     }
   }
 }

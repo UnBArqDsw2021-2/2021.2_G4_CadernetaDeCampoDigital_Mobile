@@ -6,8 +6,7 @@ class Loading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: Column(
+    return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
@@ -29,8 +28,8 @@ class Loading extends StatelessWidget {
               fontSize: 20,
             ),
           ),
-        )
+        ),
       ],
-    ));
+    );
   }
 }
