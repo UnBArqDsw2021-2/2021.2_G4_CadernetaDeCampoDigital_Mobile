@@ -1,9 +1,11 @@
 import 'package:caderneta_campo_digital/components/BaseAuthentication/main.dart';
+import 'package:caderneta_campo_digital/components/alert_messenger.dart';
+import 'package:caderneta_campo_digital/pages/login/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:caderneta_campo_digital/components/BasicComponents.dart';
 import 'package:caderneta_campo_digital/components/TextBlueButton/main.dart';
 import 'package:caderneta_campo_digital/components/UnderlineButton/main.dart';
-import 'package:caderneta_campo_digital/utils/main.dart';
+import 'package:caderneta_campo_digital/utils/utils.dart';
 import 'package:caderneta_campo_digital/services/dio.dart';
 import 'package:cpf_cnpj_validator/cpf_validator.dart';
 
@@ -162,6 +164,13 @@ class _TechnicianRegisterPageState extends State<TechnicianRegisterPage> {
             Center(
               child: UnderlineButton(
                 label: "Cancelar",
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (BuildContext context) {
+                      return LoginPage();
+                    }),
+                  );
+                },
               ),
             ),
           ],
@@ -199,29 +208,11 @@ class _TechnicianRegisterPageState extends State<TechnicianRegisterPage> {
     });
 
     if (response != null) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text(
-          'Cadastro feito com sucesso',
-          style: TextStyle(
-            fontSize: 12,
-            fontFamily: 'Roboto',
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-        backgroundColor: Colors.greenAccent,
-      ));
+      AlertMessenger.alertMessenger
+          .messenger(context, 'Cadastro feito com sucesso');
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text(
-          'Ocorreu um erro ao completar o cadastro',
-          style: TextStyle(
-            fontSize: 12,
-            fontFamily: 'Roboto',
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-        backgroundColor: Colors.redAccent,
-      ));
+      AlertMessenger.alertMessenger
+          .messenger(context, 'Ocorreu um erro ao completar o cadastro');
     }
   }
 }

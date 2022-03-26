@@ -1,13 +1,9 @@
-import 'package:caderneta_campo_digital/pages/register/main.dart';
+import 'package:caderneta_campo_digital/pages/register/producer_register/producer_register_page.dart';
 import 'package:caderneta_campo_digital/pages/register/technician_register/technician_register_page.dart';
 import 'package:flutter/material.dart';
 
 class SelectAccountPage extends StatelessWidget {
   const SelectAccountPage({Key? key}) : super(key: key);
-
-  void goToTechnicianPage() {}
-
-  void goToRegisterPage() {}
 
   @override
   Widget build(BuildContext context) {
