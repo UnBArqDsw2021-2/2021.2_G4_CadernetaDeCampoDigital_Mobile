@@ -7,8 +7,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:caderneta_campo_digital/pages/login/login_page.dart';
-import 'package:caderneta_campo_digital/pages/register/ProducerRegister/main.dart';
-import 'package:caderneta_campo_digital/pages/register/TechnicianRegister/main.dart';
+import 'package:caderneta_campo_digital/pages/register/producer_register/producer_register_page.dart';
+import 'package:caderneta_campo_digital/pages/register/technician_register/technician_register_page.dart';
 
 void main() {
   LoginPage loginPage = LoginPage();

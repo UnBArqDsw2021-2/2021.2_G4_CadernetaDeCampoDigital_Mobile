@@ -1,7 +1,13 @@
+import 'package:caderneta_campo_digital/pages/register/main.dart';
+import 'package:caderneta_campo_digital/pages/register/technician_register/technician_register_page.dart';
 import 'package:flutter/material.dart';
 
 class SelectAccountPage extends StatelessWidget {
   const SelectAccountPage({Key? key}) : super(key: key);
+
+  void goToTechnicianPage() {}
+
+  void goToRegisterPage() {}
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +46,12 @@ class SelectAccountPage extends StatelessWidget {
               margin: EdgeInsets.symmetric(vertical: size.width * 0.08),
               child: MaterialButton(
                 // ignore: no-empty-block
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (BuildContext context) {
+                    return TechnicianRegisterPage();
+                  }));
+                },
                 splashColor: Color(0XFF00B4D8).withOpacity(0.2),
                 highlightColor: Colors.transparent,
                 child: Container(
@@ -86,7 +97,12 @@ class SelectAccountPage extends StatelessWidget {
               margin: EdgeInsets.symmetric(vertical: size.width * 0.18),
               child: MaterialButton(
                 // ignore: no-empty-block
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (BuildContext context) {
+                    return ProducerRegisterPage();
+                  }));
+                },
                 splashColor: Color(0XFF00B4D8).withOpacity(0.2),
                 highlightColor: Colors.transparent,
                 child: Container(
