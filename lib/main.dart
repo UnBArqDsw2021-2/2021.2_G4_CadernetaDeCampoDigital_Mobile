@@ -1,5 +1,5 @@
+import 'package:caderneta_campo_digital/pages/property/property_page.dart';
 import 'package:flutter/material.dart';
-import 'package:caderneta_campo_digital/pages/splash_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SplashScreenPage(),
+      home: PropertyPage(),
     );
   }
 }
