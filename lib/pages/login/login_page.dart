@@ -213,6 +213,7 @@ class _LoginPageState extends State<LoginPage> {
                   )
                 : Container(),
             TextBlueButton(
+              key: Key("Entrar_Button"),
               label: "Entrar",
               margin: EdgeInsets.symmetric(vertical: size.height * 0.025),
               onPressed: buttonPressed,
