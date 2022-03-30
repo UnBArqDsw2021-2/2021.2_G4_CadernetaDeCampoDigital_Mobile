@@ -92,7 +92,7 @@ class TopbarArrowBack extends StatelessWidget implements PreferredSizeWidget {
                       child: MaterialButton(
                         padding: EdgeInsets.symmetric(horizontal: 5),
                         onPressed: () {
-                          if(onPressedEdit != null) {
+                          if (onPressedEdit != null) {
                             onPressedEdit!();
                           }
                         },
@@ -112,7 +112,7 @@ class TopbarArrowBack extends StatelessWidget implements PreferredSizeWidget {
                         child: MaterialButton(
                           padding: EdgeInsets.symmetric(horizontal: 5),
                           onPressed: () {
-                            if(onPressedHistoric != null) {
+                            if (onPressedHistoric != null) {
                               onPressedHistoric!();
                             }
                           },
