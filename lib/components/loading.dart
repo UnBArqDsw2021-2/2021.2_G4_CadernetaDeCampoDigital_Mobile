@@ -19,7 +19,7 @@ class Loading extends StatelessWidget {
         ),
         Center(
           child: Text(
-            'Aguarde enquanto realizamos seu cadastro',
+            'Carregando',
             textAlign: TextAlign.center,
             style: TextStyle(
               color: MyColors().blueButton,

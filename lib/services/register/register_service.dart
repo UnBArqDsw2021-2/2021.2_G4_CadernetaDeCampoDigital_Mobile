@@ -5,7 +5,7 @@ class RegisterService {
   Future<Response> sendTechnicianRegister(
     Map<String, dynamic> infoTechnician,
   ) async {
-    Response response = await DioClient.dioClient.post('api/tecnico/', {
+    Response response = await DioClient.dioClient.post('tecnico/', {
       'usuario': {
         'cpf': infoTechnician['cpf'],
         'dataNascimento': infoTechnician['dataNascimento'],
@@ -24,7 +24,7 @@ class RegisterService {
   Future<Response> sendProducerRegister(
     Map<String, dynamic> infoProducer,
   ) async {
-    Response response = await DioClient.dioClient.post('api/produtor/', {
+    Response response = await DioClient.dioClient.post('produtor/', {
       'usuario': {
         'cpf': infoProducer['cpf'],
         'dataNascimento': infoProducer['dataNascimento'],

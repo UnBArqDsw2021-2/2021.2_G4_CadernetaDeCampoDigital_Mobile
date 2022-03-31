@@ -5,7 +5,7 @@ class DioClient {
   static final dioClient = DioClient._();
   var http = Dio(
     BaseOptions(
-      baseUrl: 'http://0.0.0.0:8000/',
+      baseUrl: 'https://ccd-backend.herokuapp.com/api/',
       connectTimeout: 5000,
       receiveTimeout: 3000,
     ),
