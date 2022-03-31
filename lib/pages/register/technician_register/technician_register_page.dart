@@ -1,12 +1,12 @@
-import 'package:caderneta_campo_digital/components/BaseAuthentication/main.dart';
+import 'package:caderneta_campo_digital/components/base_authentication.dart';
 import 'package:caderneta_campo_digital/components/alert_messenger.dart';
+import 'package:caderneta_campo_digital/controllers/register/register_controller.dart';
 import 'package:caderneta_campo_digital/pages/login/login_page.dart';
 import 'package:flutter/material.dart';
-import 'package:caderneta_campo_digital/components/BasicComponents.dart';
-import 'package:caderneta_campo_digital/components/TextBlueButton/main.dart';
-import 'package:caderneta_campo_digital/components/UnderlineButton/main.dart';
+import 'package:caderneta_campo_digital/components/basic_components.dart';
+import 'package:caderneta_campo_digital/components/text_blue_button.dart';
+import 'package:caderneta_campo_digital/components/underline_button.dart';
 import 'package:caderneta_campo_digital/utils/utils.dart';
-import 'package:caderneta_campo_digital/services/dio.dart';
 import 'package:cpf_cnpj_validator/cpf_validator.dart';
 
 class TechnicianRegisterPage extends StatefulWidget {
@@ -25,6 +25,7 @@ class _TechnicianRegisterPageState extends State<TechnicianRegisterPage> {
   String? _formacao;
   String? _email;
   String? _senha;
+  RegisterController registerController = RegisterController();
   bool isLoading = false;
 
   final _formKey = GlobalKey<FormState>();
@@ -190,14 +191,14 @@ class _TechnicianRegisterPageState extends State<TechnicianRegisterPage> {
       isLoading = true;
     });
 
-    final response = await DioClient().post('api/tecnico/', {
-      'usuario': {
-        'cpf': Utils().clearMask(_cpf),
-        'dataNascimento': Utils().clearData(_dataNascimento),
-        'telefone': Utils().clearMask(_telefone),
-        'nome': _nome,
-        'senha': _senha,
-      },
+    dynamic response;
+
+    response = await registerController.sendForm('Technician', {
+      'cpf': Utils().clearMask(_cpf),
+      'dataNascimento': Utils().clearData(_dataNascimento),
+      'telefone': Utils().clearMask(_telefone),
+      'nome': _nome,
+      'senha': _senha,
       'crea': Utils().clearMask(_crea),
       'formacao': _formacao,
       'email': _email,
@@ -209,10 +210,10 @@ class _TechnicianRegisterPageState extends State<TechnicianRegisterPage> {
 
     if (response != null) {
       AlertMessenger.alertMessenger
-          .messenger(context, 'Cadastro feito com sucesso');
+          .successMessenger(context, 'Cadastro feito com sucesso');
     } else {
       AlertMessenger.alertMessenger
-          .messenger(context, 'Ocorreu um erro ao completar o cadastro');
+          .errorMessenger(context, 'Ocorreu um erro ao completar o cadastro');
     }
   }
 }

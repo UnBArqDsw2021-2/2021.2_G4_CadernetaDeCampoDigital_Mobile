@@ -1,8 +1,8 @@
 // ignore_for_file: sized_box_for_whitespace
 
-import 'package:caderneta_campo_digital/components/BaseAuthentication/main.dart';
-import 'package:caderneta_campo_digital/components/BasicComponents.dart';
-import 'package:caderneta_campo_digital/components/TextBlueButton/main.dart';
+import 'package:caderneta_campo_digital/components/base_authentication.dart';
+import 'package:caderneta_campo_digital/components/basic_components.dart';
+import 'package:caderneta_campo_digital/components/text_blue_button.dart';
 import 'package:caderneta_campo_digital/controllers/login/login_controller.dart';
 import 'package:caderneta_campo_digital/global/global.dart';
 import 'package:caderneta_campo_digital/pages/home_produtor/home_produtor.dart';
@@ -12,7 +12,7 @@ import 'package:flutter/services.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:caderneta_campo_digital/pages/select_account/select_account.dart';
 import 'package:caderneta_campo_digital/utils/utils.dart';
-import 'package:caderneta_campo_digital/components/UnderlineButton/main.dart';
+import 'package:caderneta_campo_digital/components/underline_button.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);

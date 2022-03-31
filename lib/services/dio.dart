@@ -1,8 +1,8 @@
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
 
 class DioClient {
+  static final dioClient = DioClient._();
   var http = Dio(
     BaseOptions(
       baseUrl: 'http://0.0.0.0:8000/',
@@ -11,14 +11,12 @@ class DioClient {
     ),
   );
 
-  Response? response;
-
   Future post(String url, object) async {
     Map<String, dynamic> header = {"Content-Type": "application/json"};
     String bodyRequest = jsonEncode(object);
 
     try {
-      response = await http.post(
+      Response response = await http.post(
         url,
         data: bodyRequest,
         options: Options(
@@ -29,11 +27,13 @@ class DioClient {
         ),
       );
 
-      return response!.statusCode! > 400 ? response : null;
+      return response;
     } on DioError catch (error) {
       if (error.response != null) {
         return error;
       }
     }
   }
+
+  DioClient._();
 }

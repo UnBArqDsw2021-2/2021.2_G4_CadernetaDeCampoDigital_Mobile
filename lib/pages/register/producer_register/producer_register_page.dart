@@ -1,13 +1,13 @@
-import 'package:caderneta_campo_digital/components/BaseAuthentication/main.dart';
-import 'package:caderneta_campo_digital/components/TextBlueButton/main.dart';
-import 'package:caderneta_campo_digital/components/UnderlineButton/main.dart';
+import 'package:caderneta_campo_digital/components/base_authentication.dart';
+import 'package:caderneta_campo_digital/components/text_blue_button.dart';
+import 'package:caderneta_campo_digital/components/underline_button.dart';
 import 'package:caderneta_campo_digital/components/alert_messenger.dart';
+import 'package:caderneta_campo_digital/controllers/register/register_controller.dart';
 import 'package:caderneta_campo_digital/pages/login/login_page.dart';
-import 'package:caderneta_campo_digital/services/dio.dart';
 import 'package:caderneta_campo_digital/utils/utils.dart';
 import 'package:cpf_cnpj_validator/cpf_validator.dart';
 import 'package:flutter/material.dart';
-import '../../../components/BasicComponents.dart';
+import '../../../components/basic_components.dart';
 
 class ProducerRegisterPage extends StatefulWidget {
   const ProducerRegisterPage({Key? key}) : super(key: key);
@@ -23,6 +23,7 @@ class _ProducerRegisterState extends State<ProducerRegisterPage> {
   String? _senha;
   String? _dap;
   bool isLoading = false;
+  RegisterController registerController = RegisterController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -187,14 +188,14 @@ class _ProducerRegisterState extends State<ProducerRegisterPage> {
       isLoading = true;
     });
 
-    final response = await DioClient().post('api/produtor/', {
-      'usuario': {
-        'nome': _nome,
-        'dataNascimento': Utils().clearData(_dataNascimento),
-        'telefone': Utils().clearMask(_telefone),
-        'senha': _senha,
-        'cpf': Utils().clearMask(_cpf),
-      },
+    dynamic response;
+
+    response = await registerController.sendForm('Producer', {
+      'nome': _nome,
+      'dataNascimento': Utils().clearData(_dataNascimento),
+      'telefone': Utils().clearMask(_telefone),
+      'senha': _senha,
+      'cpf': Utils().clearMask(_cpf),
       'dap': _dap!.toUpperCase(),
     });
 
@@ -204,10 +205,10 @@ class _ProducerRegisterState extends State<ProducerRegisterPage> {
 
     if (response != null) {
       AlertMessenger.alertMessenger
-          .messenger(context, 'Cadastro feito com sucesso');
+          .successMessenger(context, 'Cadastro feito com sucesso');
     } else {
       AlertMessenger.alertMessenger
-          .messenger(context, 'Ocorreu um erro ao completar o cadastro');
+          .errorMessenger(context, 'Ocorreu um erro ao completar o cadastro');
     }
   }
 }

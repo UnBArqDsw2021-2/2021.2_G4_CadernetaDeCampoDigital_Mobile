@@ -5,7 +5,7 @@ class AlertMessenger {
 
   AlertMessenger._();
 
-  messenger(context, message) {
+  successMessenger(context, message) {
     return ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(
         message,
@@ -16,6 +16,20 @@ class AlertMessenger {
         ),
       ),
       backgroundColor: Colors.greenAccent,
+    ));
+  }
+
+  errorMessenger(context, message) {
+    return ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(
+        message,
+        style: TextStyle(
+          fontSize: 12,
+          fontFamily: 'Roboto',
+          fontWeight: FontWeight.w400,
+        ),
+      ),
+      backgroundColor: Colors.redAccent,
     ));
   }
 }
