@@ -1,6 +1,10 @@
+import 'dart:math';
+
 import 'package:caderneta_campo_digital/pages/profile/components/profile_text.dart';
 import 'package:flutter/material.dart';
 import '../../components/icon_text_button.dart';
+import '../../global/global.dart';
+import '../../utils/utils.dart';
 import '../register/producer_register/producer_register_page.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -9,6 +13,9 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    String name = SharedInfo.actualUser.name;
+    String cpf = Utils().maskCpf.maskText(SharedInfo.actualUser.cpf);
+    String accountType = SharedInfo.actualUser.isProductor ? "Produtor" : "Técnico";
 
     return Scaffold(
       body: Container(
@@ -32,12 +39,12 @@ class ProfilePage extends StatelessWidget {
                 child: Icon(
                   Icons.person,
                   color: Colors.white,
-                  size: size.width * 0.35,
+                  size: min(size.width * 0.35, size.height * 0.35),
                 ),
               ),
-              ProfileText('Fulano da Silva'),
-              ProfileText('000.000.000-01'),
-              ProfileText('Técnico'),
+              ProfileText(name),
+              ProfileText(cpf),
+              ProfileText(accountType),
               ProfileText('Informação 1'),
               ProfileText('Informação 2'),
               ProfileText('Informação 3'),
@@ -52,10 +59,6 @@ class ProfilePage extends StatelessWidget {
                 0.02,
                 borderColor: Colors.white,
                 splashColor: Color(0XFF00B4D8).withOpacity(0.2),
-                onPressed: () => Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (BuildContext context) {
-                  return ProducerRegisterPage();
-                })),
               ),
               IconTextButton(
                 'Sair',
