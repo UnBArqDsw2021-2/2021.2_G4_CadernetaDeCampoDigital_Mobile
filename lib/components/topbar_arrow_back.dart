@@ -56,6 +56,7 @@ class TopbarArrowBack extends StatelessWidget implements PreferredSizeWidget {
         style: TextStyle(
           color: Color(0xFFFFFFFF),
           fontSize: 22,
+          fontWeight: FontWeight.normal,
         ),
       ),
       flexibleSpace: Container(
@@ -91,7 +92,9 @@ class TopbarArrowBack extends StatelessWidget implements PreferredSizeWidget {
                       child: MaterialButton(
                         padding: EdgeInsets.symmetric(horizontal: 5),
                         onPressed: () {
-                          onPressedEdit!();
+                          if(onPressedEdit != null) {
+                            onPressedEdit!();
+                          }
                         },
                         highlightColor: Colors.transparent,
                         child: SvgPicture.asset(
@@ -109,7 +112,9 @@ class TopbarArrowBack extends StatelessWidget implements PreferredSizeWidget {
                         child: MaterialButton(
                           padding: EdgeInsets.symmetric(horizontal: 5),
                           onPressed: () {
-                            onPressedHistoric!();
+                            if(onPressedHistoric != null) {
+                              onPressedHistoric!();
+                            }
                           },
                           highlightColor: Colors.transparent,
                           child: Icon(
