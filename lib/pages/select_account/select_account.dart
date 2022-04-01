@@ -48,8 +48,8 @@ class SelectAccountPage extends StatelessWidget {
                   color: Color(0XFF03045E),
                   size: size.width * 0.07,
                 ),
-                textColor: Color(0XFF03045E),
-                backgroundColor: Colors.white,
+                0.15,
+                borderColor: Colors.white,
                 splashColor: Color(0XFF00B4D8).withOpacity(0.2),
                 onPressed: () => Navigator.of(context)
                     .push(MaterialPageRoute(builder: (BuildContext context) {
@@ -64,8 +64,8 @@ class SelectAccountPage extends StatelessWidget {
                   color: Color(0XFF03045E),
                   size: size.width * 0.07,
                 ),
-                textColor: Color(0XFF03045E),
-                backgroundColor: Colors.white,
+                0.15,
+                borderColor: Colors.white,
                 splashColor: Color(0XFF00B4D8).withOpacity(0.2),
                 onPressed: () => Navigator.of(context)
                     .push(MaterialPageRoute(builder: (BuildContext context) {

@@ -4,25 +4,31 @@ class IconTextButton extends StatelessWidget {
   final String label;
   final Size size;
   final Icon icon;
+  final num marginSize;
+  final Color borderColor;
   final Color? textColor;
   final Color? backgroundColor;
   final Color? splashColor;
   final Function? onPressed;
 
   const IconTextButton(
-    this.label, this.size, this.icon, {
+    this.label,
+    this.size,
+    this.icon,
+    this.marginSize, {
     Key? key,
-    this.textColor,
-    this.backgroundColor,
+    this.textColor = const Color(0XFF03045E),
+    required this.borderColor,
+    this.backgroundColor = Colors.white,
     this.onPressed,
-    this.splashColor,
+    this.splashColor = const Color(0XFF00B4D8),
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) { 
-
+  Widget build(BuildContext context) {
+    
     return Container(
-      margin: EdgeInsets.symmetric(vertical: size.width * 0.15),
+      margin: EdgeInsets.symmetric(vertical: size.width * marginSize),
       child: MaterialButton(
         // ignore: no-empty-block
         onPressed: () => onPressed,
@@ -33,6 +39,7 @@ class IconTextButton extends StatelessWidget {
           width: size.width * 0.5,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(15)),
+            border: Border.all(color: borderColor, width: 2.0),
             color: backgroundColor,
           ),
           child: Row(
@@ -46,13 +53,14 @@ class IconTextButton extends StatelessWidget {
               Container(
                 height: size.height * 0.043,
                 width: 1,
-                color: Color(0XFF03045E),
+                color: textColor,
               ),
               Padding(
                 padding: EdgeInsets.only(left: size.width * 0.037),
                 child: Text(
                   label,
-                  style: TextStyle(fontSize: size.width * 0.06, color: textColor),
+                  style:
+                      TextStyle(fontSize: size.width * 0.06, color: textColor),
                 ),
               ),
             ],
