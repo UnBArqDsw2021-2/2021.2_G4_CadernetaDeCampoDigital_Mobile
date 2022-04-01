@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class ProfileText extends StatelessWidget {
@@ -10,10 +12,10 @@ class ProfileText extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return Container(
-      margin: EdgeInsets.symmetric(vertical: size.width * 0.05),
+      margin: EdgeInsets.symmetric(vertical: min(size.width * 0.05, size.height * 0.05)),
       child: Text(
         label ,
-        style: TextStyle(fontSize: size.width * 0.05, color: Colors.white),
+        style: TextStyle(fontSize: min(size.width * 0.05, size.height * 0.05), color: Colors.white),
       ),
     );
   }

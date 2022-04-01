@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 class IconTextButton extends StatelessWidget {
   final String label;
@@ -28,14 +29,14 @@ class IconTextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     
     return Container(
-      margin: EdgeInsets.symmetric(vertical: size.width * marginSize),
+      margin: EdgeInsets.symmetric(vertical: min(size.width * marginSize, size.height * marginSize)),
       child: MaterialButton(
         // ignore: no-empty-block
         onPressed: () => onPressed,
         splashColor: splashColor,
         highlightColor: Colors.transparent,
         child: Container(
-          height: size.height * 0.07,
+          height: max(size.height * 0.07, size.width * 0.07),
           width: size.width * 0.5,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(15)),
@@ -56,11 +57,11 @@ class IconTextButton extends StatelessWidget {
                 color: textColor,
               ),
               Padding(
-                padding: EdgeInsets.only(left: size.width * 0.037),
+                padding: EdgeInsets.only(left: min(size.width * 0.037, size.height * 0.037)),
                 child: Text(
                   label,
                   style:
-                      TextStyle(fontSize: size.width * 0.06, color: textColor),
+                      TextStyle(fontSize: min(size.width * 0.06, size.height * 0.06), color: textColor),
                 ),
               ),
             ],
