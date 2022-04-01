@@ -10,7 +10,7 @@ class IconTextButton extends StatelessWidget {
   final Color? textColor;
   final Color? backgroundColor;
   final Color? splashColor;
-  final Function? onPressed;
+  final onPressed;
 
   const IconTextButton(
     this.label,
@@ -21,7 +21,7 @@ class IconTextButton extends StatelessWidget {
     this.textColor = const Color(0XFF03045E),
     required this.borderColor,
     this.backgroundColor = Colors.white,
-    this.onPressed,
+    required this.onPressed,
     this.splashColor = const Color(0XFF00B4D8),
   }) : super(key: key);
 
@@ -32,7 +32,7 @@ class IconTextButton extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: min(size.width * marginSize, size.height * marginSize)),
       child: MaterialButton(
         // ignore: no-empty-block
-        onPressed: () => onPressed,
+        onPressed: onPressed,
         splashColor: splashColor,
         highlightColor: Colors.transparent,
         child: Container(
