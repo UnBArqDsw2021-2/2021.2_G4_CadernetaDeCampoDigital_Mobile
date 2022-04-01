@@ -1,11 +1,10 @@
 import 'dart:math';
-
+import 'package:caderneta_campo_digital/controllers/profile/profile_controller.dart';
 import 'package:caderneta_campo_digital/pages/profile/components/profile_text.dart';
 import 'package:flutter/material.dart';
 import '../../components/icon_text_button.dart';
 import '../../global/global.dart';
 import '../../utils/utils.dart';
-import '../register/producer_register/producer_register_page.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -59,6 +58,7 @@ class ProfilePage extends StatelessWidget {
                 0.02,
                 borderColor: Colors.white,
                 splashColor: Color(0XFF00B4D8).withOpacity(0.2),
+                onPressed: () => {ProfileController().logout(context)},
               ),
               IconTextButton(
                 'Sair',
@@ -73,10 +73,7 @@ class ProfilePage extends StatelessWidget {
                 textColor: Color.fromRGBO(176,37,37,1),
                 backgroundColor: Colors.transparent,
                 splashColor: Color(0XFF00B4D8).withOpacity(0.2),
-                onPressed: () => Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (BuildContext context) {
-                  return ProducerRegisterPage();
-                })),
+                onPressed: () => {ProfileController().logout(context)},
               ),
               IconTextButton(
                 'Excluir',
@@ -91,10 +88,7 @@ class ProfilePage extends StatelessWidget {
                 textColor: Colors.white,
                 backgroundColor: Color.fromRGBO(176,37,37,1),
                 splashColor: Color(0XFF00B4D8).withOpacity(0.2),
-                onPressed: () => Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (BuildContext context) {
-                  return ProducerRegisterPage();
-                })),
+                onPressed: () => {ProfileController().logout(context)},
               ),
             ],
           ),
