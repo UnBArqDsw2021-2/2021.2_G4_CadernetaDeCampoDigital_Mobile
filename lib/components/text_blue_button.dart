@@ -28,9 +28,9 @@ class TextBlueButton extends StatelessWidget {
           backgroundColor: MaterialStateProperty.resolveWith<Color?>(
             (Set<MaterialState> states) {
               if (states.contains(MaterialState.pressed))
-                return MyColors().blueButton.withOpacity(0.7);
+                return MyColors().blue.withOpacity(0.7);
 
-              return MyColors().blueButton.withOpacity(1.0);
+              return MyColors().blue.withOpacity(1.0);
             },
           ),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(

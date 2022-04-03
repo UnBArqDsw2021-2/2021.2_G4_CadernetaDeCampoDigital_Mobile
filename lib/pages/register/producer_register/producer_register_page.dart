@@ -206,6 +206,11 @@ class _ProducerRegisterState extends State<ProducerRegisterPage> {
     if (response != null) {
       AlertMessenger.alertMessenger
           .successMessenger(context, 'Cadastro feito com sucesso');
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (BuildContext context) {
+          return LoginPage();
+        }),
+      );
     } else {
       AlertMessenger.alertMessenger
           .errorMessenger(context, 'Ocorreu um erro ao completar o cadastro');
