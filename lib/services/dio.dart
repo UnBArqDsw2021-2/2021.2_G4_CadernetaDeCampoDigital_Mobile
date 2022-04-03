@@ -35,5 +35,29 @@ class DioClient {
     }
   }
 
+  Future get(String url) async {
+    Map<String, dynamic> header = {"Content-Type": "application/json"};
+
+    try {
+      Response response = await http.get(
+        url,
+        options: Options(
+          headers: header,
+          validateStatus: (status) {
+            return status! <= 500;
+          },
+        ),
+      );
+
+      return response;
+    } on DioError catch (error) {
+      // ignore: avoid_print
+      print("requisição: " + error.toString());
+      if (error.response != null) {
+        return error;
+      }
+    }
+  }
+
   DioClient._();
 }
