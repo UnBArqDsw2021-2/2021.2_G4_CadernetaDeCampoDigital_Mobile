@@ -1,5 +1,8 @@
 import 'package:caderneta_campo_digital/components/estate_card.dart';
+import 'package:caderneta_campo_digital/components/rounded_image_button.dart';
 import 'package:caderneta_campo_digital/components/topbar.dart';
+import 'package:caderneta_campo_digital/global/colors.dart';
+import 'package:caderneta_campo_digital/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class HomeProdutorPage extends StatelessWidget {
@@ -13,7 +16,21 @@ class HomeProdutorPage extends StatelessWidget {
       appBar: Topbar(topbarHeight: (size * 0.14)),
       body: SingleChildScrollView(
         child: Column(
-          children: const <Widget>[
+          children: <Widget>[
+            RoundedImagebutton(
+              contents: Column(
+                children: <Widget>[
+                  Center(
+                    child: Text(
+                      'Adicionar\npropriedade',
+                      style: Utils.estateTextStyle,
+                    ),
+                  ),
+                ],
+              ),
+              image: 'assets/plus.png',
+              backgroundColor: MyColors().blue,
+            ),
             EstateCard(
               estateName: "Propriedade 1",
               estateAddress: "ENDERECO",

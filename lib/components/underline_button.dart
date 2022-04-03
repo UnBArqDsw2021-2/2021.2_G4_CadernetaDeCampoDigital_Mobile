@@ -18,7 +18,7 @@ class UnderlineButton extends StatelessWidget {
           fontWeight: FontWeight.w400,
           fontFamily: 'Roboto',
           fontSize: 20,
-          color: MyColors().blueButton,
+          color: MyColors().blue,
           decoration: TextDecoration.underline,
         ),
       ),
