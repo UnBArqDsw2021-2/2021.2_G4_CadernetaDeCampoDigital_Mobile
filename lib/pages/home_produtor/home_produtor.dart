@@ -2,6 +2,7 @@ import 'package:caderneta_campo_digital/components/estate_card.dart';
 import 'package:caderneta_campo_digital/components/rounded_image_button.dart';
 import 'package:caderneta_campo_digital/components/topbar.dart';
 import 'package:caderneta_campo_digital/global/colors.dart';
+import 'package:caderneta_campo_digital/pages/add_property/add_property.dart';
 import 'package:caderneta_campo_digital/utils/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -29,6 +30,13 @@ class HomeProdutorPage extends StatelessWidget {
                 ],
               ),
               image: 'assets/plus.png',
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (BuildContext context) {
+                    return AddPropertyPage();
+                  }),
+                );
+              },
               backgroundColor: MyColors().blue,
             ),
             EstateCard(
