@@ -34,7 +34,6 @@ class IconTextButton extends StatelessWidget {
         vertical: min(size.width * marginSize, size.height * marginSize),
       ),
       child: MaterialButton(
-        // ignore: no-empty-block
         onPressed: onPressed,
         splashColor: splashColor,
         highlightColor: Colors.transparent,
