@@ -17,7 +17,7 @@ class _PendenciesPageState extends State<PendenciesPage> {
 
     return Scaffold(
       appBar: TopbarArrowBack(
-        hasToolbar: false,
+        hasActions: false,
         title: "Pendências",
         topbarHeight: size * 0.11,
       ),
