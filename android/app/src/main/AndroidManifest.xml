@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.caderneta_campo_digital">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="caderneta_campo_digital"
         android:icon="@mipmap/ic_launcher">
