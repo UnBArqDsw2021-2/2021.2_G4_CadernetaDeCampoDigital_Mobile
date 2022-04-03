@@ -1,9 +1,6 @@
-import 'dart:ffi';
-
 import 'package:caderneta_campo_digital/components/alert_messenger.dart';
 import 'package:caderneta_campo_digital/components/basic_components.dart';
 import 'package:caderneta_campo_digital/components/text_blue_button.dart';
-import 'package:caderneta_campo_digital/components/topbar.dart';
 import 'package:caderneta_campo_digital/components/topbar_arrow_back.dart';
 import 'package:caderneta_campo_digital/controllers/add_property/add_property_controller.dart';
 import 'package:caderneta_campo_digital/utils/utils.dart';

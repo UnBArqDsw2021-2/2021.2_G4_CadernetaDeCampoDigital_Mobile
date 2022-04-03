@@ -1,5 +1,3 @@
-import 'package:caderneta_campo_digital/global/colors.dart';
-import 'package:caderneta_campo_digital/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class RoundedImagebutton extends StatelessWidget {
