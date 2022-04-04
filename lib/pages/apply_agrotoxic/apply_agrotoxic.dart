@@ -44,6 +44,7 @@ class _ApplyAgrotoxicPageState extends State<ApplyAgrotoxicPage> {
   String? _quantity;
   String? _name;
   String? _type;
+  // ignore: unused_field
   String? _period; //Será usado no futuro
   final _formKey = GlobalKey<FormState>();
 
