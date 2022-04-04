@@ -1,5 +1,5 @@
 import 'package:caderneta_campo_digital/controllers/pesticide_analysis/pesticide_analysis_controller.dart';
-import 'package:caderneta_campo_digital/models/PesticideModel.dart';
+import 'package:caderneta_campo_digital/models/PesticideAplicationModel.dart';
 import 'package:caderneta_campo_digital/utils/utils.dart';
 import 'package:flutter/material.dart';
 

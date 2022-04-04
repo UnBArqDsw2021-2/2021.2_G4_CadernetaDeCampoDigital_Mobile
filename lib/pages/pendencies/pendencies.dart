@@ -1,5 +1,5 @@
 import 'package:caderneta_campo_digital/components/topbar_arrow_back.dart';
-import 'package:caderneta_campo_digital/models/PesticideModel.dart';
+import 'package:caderneta_campo_digital/models/PesticideAplicationModel.dart';
 import 'package:caderneta_campo_digital/pages/pendencies/components/pesticide_card.dart';
 import 'package:flutter/material.dart';
 
@@ -31,7 +31,7 @@ class _PendenciesPageState extends State<PendenciesPage> {
                   pesticide: "pesticide",
                   plantation: "plantation",
                   dosage: 12,
-                  aplicationDate: DateTime.now(),
+                  aplicationDate: "20/03/2022",
                   photo: "photo",
                   state: "state",
                 ),
