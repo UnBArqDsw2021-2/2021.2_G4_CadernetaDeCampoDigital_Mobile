@@ -41,7 +41,11 @@ class PesticideCard extends StatelessWidget {
                 Center(
                   child: Text(
                     pesticide.pesticide,
-                    style: Utils.estateTextStyle,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 22,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
                 Padding(
@@ -57,6 +61,11 @@ class PesticideCard extends StatelessWidget {
                       ),
                     ),
                   ),
+                ),
+                //Alterar para o produtor vindo de pesticide.plantation.talhao.produtor.nome
+                Text(
+                  "Produtor",
+                  style: Utils.estateTextStyle,
                 ),
                 Text(
                   pesticide.plantation,

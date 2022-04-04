@@ -3,6 +3,7 @@ import 'dart:convert';
 class PesticideAplicationModel {
   final int id;
   final String pesticide;
+  //Alterar para a model de plantacao futuramente
   final String plantation;
   final int dosage;
   final String aplicationDate;

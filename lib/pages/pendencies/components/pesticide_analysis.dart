@@ -52,6 +52,11 @@ class _PesticideAnalysisDialogState extends State<PesticideAnalysisDialog> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                //Alterar para o produtor vindo de pesticide.plantation.talhao.produtor.nome
+                Text(
+                  "Produtor",
+                  style: Utils.estateTextStyle,
+                ),
                 Text(
                   widget.pesticide.plantation,
                   style: Utils.estateTextStyle,
@@ -90,7 +95,6 @@ class _PesticideAnalysisDialogState extends State<PesticideAnalysisDialog> {
       actions: <Widget>[
         Center(
           child: MaterialButton(
-            // ignore: avoid_print
             onPressed: buttonPressed,
             highlightColor: Colors.transparent,
             splashColor: Colors.transparent,
