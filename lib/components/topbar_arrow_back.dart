@@ -4,12 +4,16 @@ import 'package:flutter_svg/flutter_svg.dart';
 class TopbarArrowBack extends StatelessWidget implements PreferredSizeWidget {
   final Size topbarHeight;
   final String title;
-  final bool hasToolbar;
+  final bool hasActions;
+  final Function? onPressedEdit;
+  final Function? onPressedHistoric;
   const TopbarArrowBack({
     Key? key,
     required this.topbarHeight,
     required this.title,
-    required this.hasToolbar,
+    required this.hasActions,
+    this.onPressedEdit,
+    this.onPressedHistoric,
   }) : super(key: key);
 
   @override
@@ -43,7 +47,7 @@ class TopbarArrowBack extends StatelessWidget implements PreferredSizeWidget {
           color: Color(0xFFFFFFFF),
         ),
       ]),
-      centerTitle: false,
+      centerTitle: true,
       title: Text(
         title,
         overflow: TextOverflow.ellipsis,
@@ -52,6 +56,7 @@ class TopbarArrowBack extends StatelessWidget implements PreferredSizeWidget {
         style: TextStyle(
           color: Color(0xFFFFFFFF),
           fontSize: 22,
+          fontWeight: FontWeight.normal,
         ),
       ),
       flexibleSpace: Container(
@@ -75,36 +80,47 @@ class TopbarArrowBack extends StatelessWidget implements PreferredSizeWidget {
           bottomRight: Radius.circular(20),
         ),
       ),
-      actions: hasToolbar
+      actions: hasActions
           ? [
               Padding(
                 padding: const EdgeInsets.only(right: 10),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                child: Row(
                   children: [
                     SizedBox(
-                      height: size.height * 0.05,
-                      child: TextButton(
+                      width: size.width * 0.1,
+                      height: size.height * 0.09,
+                      child: MaterialButton(
+                        padding: EdgeInsets.symmetric(horizontal: 5),
                         onPressed: () {
-                          print('editar');
+                          if(onPressedEdit != null) {
+                            onPressedEdit!();
+                          }
                         },
-                        child: Text(
-                          'editar',
-                          style:
-                              TextStyle(color: Color(0xFFFFFFFF), fontSize: 12),
+                        highlightColor: Colors.transparent,
+                        child: SvgPicture.asset(
+                          'assets/edit.svg',
+                          width: 24,
+                          height: 24,
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: size.height * 0.05,
-                      child: TextButton(
-                        onPressed: () {
-                          print('histórico');
-                        },
-                        child: Text(
-                          'histórico',
-                          style:
-                              TextStyle(color: Color(0xFFFFFFFF), fontSize: 12),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 5),
+                      child: SizedBox(
+                        width: size.width * 0.1,
+                        height: size.height * 0.09,
+                        child: MaterialButton(
+                          padding: EdgeInsets.symmetric(horizontal: 5),
+                          onPressed: () {
+                            if(onPressedHistoric != null) {
+                              onPressedHistoric!();
+                            }
+                          },
+                          highlightColor: Colors.transparent,
+                          child: Icon(
+                            Icons.history_edu,
+                            color: Color(0xFFFFFFFF),
+                          ),
                         ),
                       ),
                     ),

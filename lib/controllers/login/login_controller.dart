@@ -1,7 +1,6 @@
 import 'package:caderneta_campo_digital/global/global.dart';
 import 'package:caderneta_campo_digital/models/models.dart';
 import 'package:caderneta_campo_digital/services/login/login_service.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 
 class LoginController {
@@ -11,10 +10,11 @@ class LoginController {
   String errorText = "";
   bool loading = false;
 
-  Future<bool> loginPressed() async {
-    String cpf = controllerCpf.text.replaceAll(".", "").replaceAll("-", "");
-    Response? response = await loginService.login(cpf, controllerPassword.text);
+  Future<bool> loginPressed(valueCpf, valuePassword) async {
+    String cpf = valueCpf.replaceAll(".", "").replaceAll("-", "");
+    var response = await loginService.login(cpf, valuePassword);
     loading = false;
+
     if (response == null) {
       errorText = "Problemas com o servidor!";
 
