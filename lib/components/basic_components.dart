@@ -172,13 +172,18 @@ class AutocompleteBC extends StatefulWidget {
   final String label;
   final suggestionsCallback;
   final onSuggestionSelected;
+  final onSave;
+  final bool notEmpty;
   final String noItemsFoundBuilder;
+
   const AutocompleteBC({
     Key? key,
     required this.label,
     required this.suggestionsCallback,
     required this.noItemsFoundBuilder,
     this.onSuggestionSelected,
+    this.onSave,
+    this.notEmpty = false,
   }) : super(key: key);
 
   @override
@@ -191,6 +196,7 @@ class _AutocompleteBCState extends State<AutocompleteBC> {
   @override
   Widget build(BuildContext context) {
     return TypeAheadFormField(
+      onSaved: widget.onSave,
       suggestionsCallback: widget.suggestionsCallback,
       textFieldConfiguration: TextFieldConfiguration(
         decoration: InputDecoration(
@@ -218,8 +224,8 @@ class _AutocompleteBCState extends State<AutocompleteBC> {
         );
       },
       validator: (value) {
-        if (value!.isEmpty) {
-          return 'O campo deve ser preenchido.';
+        if (widget.notEmpty && value != null && value.isEmpty) {
+          return "Campo \"${widget.label}\" deve ser preenchido";
         }
 
         return null;

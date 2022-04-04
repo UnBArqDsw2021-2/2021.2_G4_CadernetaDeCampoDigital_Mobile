@@ -1,44 +1,6 @@
+import 'package:caderneta_campo_digital/models/models.dart';
 import 'package:caderneta_campo_digital/services/dio.dart';
 import 'package:dio/dio.dart';
-
-class AgrotoxicType {
-  final String id;
-  final String name;
-
-  AgrotoxicType(this.id, this.name);
-
-  static AgrotoxicType fromJson(Map<String, dynamic> data) => AgrotoxicType(
-        data["idTipoAgrotoxico"],
-        data["nome"],
-      );
-
-  @override
-  String toString() {
-    return name;
-  }
-}
-
-class Agrotoxic {
-  final String id;
-  final String name;
-  final AgrotoxicType type;
-
-  Agrotoxic(this.id, this.name, this.type);
-
-  static Agrotoxic fromJson(Map<String, dynamic> data) => Agrotoxic(
-        data["idAgrotoxico"],
-        data["nome"],
-        AgrotoxicType(
-          data["tipo"]["idTipoAgrotoxico"],
-          data["tipo"]["nome"],
-        ),
-      );
-
-  @override
-  String toString() {
-    return name;
-  }
-}
 
 class AgrotoxicService {
   static Future<List<Agrotoxic>> getAgrotoxics() async {
@@ -71,5 +33,40 @@ class AgrotoxicService {
     }
 
     throw Exception();
+  }
+
+  Future<Response> sendAgrotoxicTypeRegister(
+    Map<String, dynamic> infoAgrotoxicType,
+  ) async {
+    Response response = await DioClient.dioClient.post('agrotoxico/tipo/', {
+      'nome': infoAgrotoxicType['nome'],
+    });
+
+    return response;
+  }
+
+  Future<Response> sendAgrotoxicRegister(
+    Map<String, dynamic> infoAgrotoxic,
+  ) async {
+    Response response = await DioClient.dioClient.post('agrotoxico/', {
+      'nome': infoAgrotoxic['nome'],
+      'tipo': infoAgrotoxic['tipo'],
+    });
+
+    return response;
+  }
+
+  Future<Response> sendAgrotoxicApplication(
+    Map<String, dynamic> infoApplication,
+  ) async {
+    Response response =
+        await DioClient.dioClient.post('plantio/aplicar/agrotoxico/', {
+      'plantio': infoApplication['plantio'],
+      'agrotoxico': infoApplication['agrotoxico'],
+      'dataAplicacao': infoApplication['dataAplicacao'],
+      'dosagemAplicacao': infoApplication['dosagemAplicacao'],
+    });
+
+    return response;
   }
 }
