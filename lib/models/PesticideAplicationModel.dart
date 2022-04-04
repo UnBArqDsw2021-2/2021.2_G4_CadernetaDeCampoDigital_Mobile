@@ -5,7 +5,7 @@ class PesticideAplicationModel {
   final String pesticide;
   final String plantation;
   final int dosage;
-  final DateTime aplicationDate;
+  final String aplicationDate;
   final String photo;
   final String state;
 

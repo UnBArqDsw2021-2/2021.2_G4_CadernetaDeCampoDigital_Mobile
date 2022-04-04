@@ -1,4 +1,4 @@
-import 'package:caderneta_campo_digital/models/PesticideModel.dart';
+import 'package:caderneta_campo_digital/models/PesticideAplicationModel.dart';
 import 'package:caderneta_campo_digital/pages/pendencies/components/pesticide_analysis.dart';
 import 'package:caderneta_campo_digital/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -63,7 +63,7 @@ class PesticideCard extends StatelessWidget {
                   style: Utils.estateTextStyle,
                 ),
                 Text(
-                  pesticide.aplicationDate.toString(),
+                  pesticide.aplicationDate,
                   style: Utils.estateTextStyle,
                 ),
                 Text(
