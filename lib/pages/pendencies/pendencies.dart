@@ -22,22 +22,20 @@ class _PendenciesPageState extends State<PendenciesPage> {
         topbarHeight: size * 0.11,
       ),
       body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            children: <Widget>[
-              PesticideCard(
-                pesticide: PesticideAplicationModel(
-                  id: 1,
-                  pesticide: "pesticide",
-                  plantation: "plantation",
-                  dosage: 12,
-                  aplicationDate: "20/03/2022",
-                  photo: "photo",
-                  state: "state",
-                ),
+        child: Column(
+          children: <Widget>[
+            PesticideCard(
+              pesticide: PesticideAplicationModel(
+                id: 1,
+                pesticide: "pesticide",
+                plantation: "plantation",
+                dosage: 12,
+                aplicationDate: "20/03/2022",
+                photo: "photo",
+                state: "state",
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
