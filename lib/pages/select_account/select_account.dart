@@ -3,6 +3,8 @@ import 'package:caderneta_campo_digital/pages/register/producer_register/produce
 import 'package:caderneta_campo_digital/pages/register/technician_register/technician_register_page.dart';
 import 'package:flutter/material.dart';
 
+import '../../global/colors.dart';
+
 class SelectAccountPage extends StatelessWidget {
   const SelectAccountPage({Key? key}) : super(key: key);
 
@@ -49,7 +51,7 @@ class SelectAccountPage extends StatelessWidget {
                   size: size.width * 0.07,
                 ),
                 0.15,
-                borderColor: Colors.white,
+                borderColor: MyColors().white,
                 splashColor: Color(0XFF00B4D8).withOpacity(0.2),
                 onPressed: () => Navigator.of(context)
                     .push(MaterialPageRoute(builder: (BuildContext context) {
@@ -61,7 +63,7 @@ class SelectAccountPage extends StatelessWidget {
                 size,
                 Icon(
                   Icons.agriculture,
-                  color: Color(0XFF03045E),
+                  color: MyColors().darkBlue,
                   size: size.width * 0.07,
                 ),
                 0.15,

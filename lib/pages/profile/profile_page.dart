@@ -3,6 +3,7 @@ import 'package:caderneta_campo_digital/controllers/profile/profile_controller.d
 import 'package:caderneta_campo_digital/pages/profile/components/profile_text.dart';
 import 'package:flutter/material.dart';
 import '../../components/icon_text_button.dart';
+import '../../global/colors.dart';
 import '../../global/global.dart';
 import '../../utils/utils.dart';
 
@@ -37,7 +38,7 @@ class ProfilePage extends StatelessWidget {
               children: [
                  Icon(
                     Icons.person,
-                    color: Colors.white,
+                    color: MyColors().white,
                     size: min(size.width * 0.35, size.height * 0.35),
                   ),
                 ProfileText(name),
@@ -51,11 +52,11 @@ class ProfilePage extends StatelessWidget {
                   size,
                   Icon(
                     Icons.edit,
-                    color: Color(0XFF03045E),
+                    color: MyColors().darkBlue,
                     size: size.width * 0.07,
                   ),
                   0.03,
-                  borderColor: Colors.white,
+                  borderColor: MyColors().white,
                   splashColor: Color(0XFF00B4D8).withOpacity(0.2),
                   onPressed: () => {ProfileController().logout(context)},
                 ),
