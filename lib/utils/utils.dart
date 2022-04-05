@@ -24,6 +24,15 @@ class Utils {
     mask: "#########-#",
     filter: {"#": RegExp(r'[0-9]')},
   );
+  final maskCep = MaskTextInputFormatter(
+    mask: "##.###-###",
+    filter: {"#": RegExp(r'[0-9]')},
+  );
+
+  final maskHectares = MaskTextInputFormatter(
+    mask: "####.#",
+    filter: {"#": RegExp(r'[0-9]')},
+  );
 
   String? clearMask(String? string) {
     String newString = string!.replaceAll(RegExp(r'[\s\.\-\(\)]+'), '');

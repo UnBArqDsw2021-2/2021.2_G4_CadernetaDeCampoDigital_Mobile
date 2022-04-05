@@ -13,7 +13,7 @@ class Loading extends StatelessWidget {
           padding: EdgeInsets.only(bottom: 20),
           child: Center(
             child: CircularProgressIndicator(
-              color: MyColors().blueButton,
+              color: MyColors().blue,
             ),
           ),
         ),
@@ -22,7 +22,7 @@ class Loading extends StatelessWidget {
             'Carregando',
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: MyColors().blueButton,
+              color: MyColors().blue,
               fontFamily: 'Roboto',
               fontWeight: FontWeight.bold,
               fontSize: 20,
