@@ -14,7 +14,8 @@ class ProfilePage extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     String name = SharedInfo.actualUser.name;
     String cpf = Utils().maskCpf.maskText(SharedInfo.actualUser.cpf);
-    String accountType = SharedInfo.actualUser.isProductor ? "Produtor" : "Técnico";
+    String accountType =
+        SharedInfo.actualUser.isProductor ? "Produtor" : "Técnico";
 
     return Scaffold(
       body: Container(
@@ -30,67 +31,52 @@ class ProfilePage extends StatelessWidget {
             end: Alignment.bottomCenter,
           ),
         ),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                margin: EdgeInsets.only(top: size.height * 0.07),
-                child: Icon(
-                  Icons.person,
-                  color: Colors.white,
-                  size: min(size.width * 0.35, size.height * 0.35),
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                 Icon(
+                    Icons.person,
+                    color: Colors.white,
+                    size: min(size.width * 0.35, size.height * 0.35),
+                  ),
+                ProfileText(name),
+                ProfileText(cpf),
+                ProfileText(accountType),
+                (accountType == 'Produtor')
+                    ? ProfileText('DAP')
+                    : ProfileText('CREA'),
+                IconTextButton(
+                  'Editar',
+                  size,
+                  Icon(
+                    Icons.edit,
+                    color: Color(0XFF03045E),
+                    size: size.width * 0.07,
+                  ),
+                  0.03,
+                  borderColor: Colors.white,
+                  splashColor: Color(0XFF00B4D8).withOpacity(0.2),
+                  onPressed: () => {ProfileController().logout(context)},
                 ),
-              ),
-              ProfileText(name),
-              ProfileText(cpf),
-              ProfileText(accountType),
-              ProfileText('Informação 1'),
-              ProfileText('Informação 2'),
-              ProfileText('Informação 3'),
-              IconTextButton(
-                'Editar',
-                size,
-                Icon(
-                  Icons.edit,
-                  color: Color(0XFF03045E),
-                  size: size.width * 0.07,
+                
+                IconTextButton(
+                  'Sair',
+                  size,
+                  Icon(
+                    Icons.exit_to_app,
+                    color: Color.fromRGBO(176, 37, 37, 1),
+                    size: size.width * 0.07,
+                  ),
+                  0.03,
+                  borderColor: Color.fromRGBO(176, 37, 37, 1),
+                  textColor: Color.fromRGBO(176, 37, 37, 1),
+                  backgroundColor: Colors.transparent,
+                  splashColor: Color(0XFF00B4D8).withOpacity(0.2),
+                  onPressed: () => {ProfileController().logout(context)},
                 ),
-                0.02,
-                borderColor: Colors.white,
-                splashColor: Color(0XFF00B4D8).withOpacity(0.2),
-                onPressed: () => {ProfileController().logout(context)},
-              ),
-              IconTextButton(
-                'Sair',
-                size,
-                Icon(
-                  Icons.exit_to_app,
-                  color: Color.fromRGBO(176,37,37,1),
-                  size: size.width * 0.07,
-                ),
-                0.02,
-                borderColor: Color.fromRGBO(176,37,37,1),
-                textColor: Color.fromRGBO(176,37,37,1),
-                backgroundColor: Colors.transparent,
-                splashColor: Color(0XFF00B4D8).withOpacity(0.2),
-                onPressed: () => {ProfileController().logout(context)},
-              ),
-              IconTextButton(
-                'Excluir',
-                size,
-                Icon(
-                  Icons.delete,
-                  color: Colors.white,
-                  size: size.width * 0.07,
-                ),
-                0.02,
-                borderColor: Color.fromRGBO(176,37,37,1),
-                textColor: Colors.white,
-                backgroundColor: Color.fromRGBO(176,37,37,1),
-                splashColor: Color(0XFF00B4D8).withOpacity(0.2),
-                onPressed: () => {ProfileController().logout(context)},
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
