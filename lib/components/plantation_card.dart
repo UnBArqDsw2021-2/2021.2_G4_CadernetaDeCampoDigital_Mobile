@@ -1,7 +1,7 @@
 import 'package:caderneta_campo_digital/models/talhao.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
-
+import 'package:caderneta_campo_digital/utils/utils.dart';
 import '../models/plantio.dart';
 
 class PlantationCard extends StatefulWidget {
@@ -21,6 +21,7 @@ class _PlantationCardState extends State<PlantationCard> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    Utils utils = Utils();
 
     return Container(
       height: size.height * (!widget.plantations.isEmpty ? 0.11 : 0.08),
@@ -83,7 +84,7 @@ class _PlantationCardState extends State<PlantationCard> {
                             TextStyle(color: Color(0xFF000000), fontSize: 12),
                       ),
                       Text(
-                        widget.plantations.dataPlantio,
+                        utils.formatData(widget.plantations.dataPlantio),
                         style:
                             TextStyle(color: Color(0xFF000000), fontSize: 12),
                       ),
