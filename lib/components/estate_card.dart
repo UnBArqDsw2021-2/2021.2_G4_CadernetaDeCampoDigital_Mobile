@@ -1,9 +1,10 @@
+import 'package:caderneta_campo_digital/models/propriedade.dart';
 import 'package:caderneta_campo_digital/pages/estate/estate_page.dart';
 import 'package:caderneta_campo_digital/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class EstateCard extends StatelessWidget {
-  final Map<String, dynamic> estate;
+  final Propriedade estate;
 
   const EstateCard({
     Key? key,
@@ -11,17 +12,11 @@ class EstateCard extends StatelessWidget {
   }) : super(key: key);
 
   String getAddress() {
-    return estate['cidade'] + ' ' + estate['estado'] + ' cep: ' + estate['cep'];
+    return estate.cidade + ' ' + estate.estado + ' cep: ' + estate.cep;
   }
 
   int getQtdTalhoes() {
-    var talhoes = estate['talhao'];
-
-    if (talhoes is List) {
-      return talhoes.length;
-    }
-
-    return 0;
+    return estate.talhoes.length;
   }
 
   @override
@@ -72,7 +67,7 @@ class EstateCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      estate['complemento'],
+                      estate.complemento,
                       style: Utils.estateTextStyle,
                       softWrap: false,
                       overflow: TextOverflow.ellipsis,
