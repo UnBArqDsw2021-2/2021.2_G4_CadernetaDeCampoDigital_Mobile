@@ -44,7 +44,7 @@ class SelectAccountPage extends StatelessWidget {
                 'Técnico',
                 size,
                 Icon(
-                  Icons.agriculture,
+                  Icons.handyman_rounded,
                   color: Color(0XFF03045E),
                   size: size.width * 0.07,
                 ),
