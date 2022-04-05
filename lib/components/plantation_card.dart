@@ -1,10 +1,17 @@
-import 'package:caderneta_campo_digital/pages/property/property_page.dart';
+import 'package:caderneta_campo_digital/models/talhao.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../models/plantio.dart';
+
 class PlantationCard extends StatefulWidget {
-  final Plantation plantation;
-  const PlantationCard({Key? key, required this.plantation}) : super(key: key);
+  final Plantio plantations;
+  final List<TalhaoButton> buttons;
+  const PlantationCard({
+    Key? key,
+    required this.plantations,
+    required this.buttons,
+  }) : super(key: key);
 
   @override
   State<PlantationCard> createState() => _PlantationCardState();
@@ -16,17 +23,17 @@ class _PlantationCardState extends State<PlantationCard> {
     Size size = MediaQuery.of(context).size;
 
     return Container(
-      height: size.height * (!widget.plantation.empty ? 0.11 : 0.08),
+      height: size.height * (!widget.plantations.isEmpty ? 0.11 : 0.08),
       child: Row(
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 14),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(25),
-              child: !widget.plantation.empty
+              child: !widget.plantations.isEmpty
                   ? Image.network(
-                      widget.plantation.imageUrl.isNotEmpty
-                          ? widget.plantation.imageUrl
+                      widget.plantations.imageUrl.isNotEmpty
+                          ? widget.plantations.imageUrl
                           : 'https://blog.chbagro.com.br/user-files/blog/174577.jpg',
                       loadingBuilder: (
                         BuildContext context,
@@ -65,25 +72,25 @@ class _PlantationCardState extends State<PlantationCard> {
           Container(
             padding: EdgeInsets.only(left: 26),
             width: size.width * 0.3,
-            child: !widget.plantation.empty
+            child: !widget.plantations.isEmpty
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        widget.plantation.name,
+                        widget.plantations.cultura.nome,
                         style:
-                            TextStyle(color: Color(0xFF000000), fontSize: 10),
+                            TextStyle(color: Color(0xFF000000), fontSize: 12),
                       ),
                       Text(
-                        widget.plantation.plantingDate,
+                        widget.plantations.dataPlantio,
                         style:
-                            TextStyle(color: Color(0xFF000000), fontSize: 10),
+                            TextStyle(color: Color(0xFF000000), fontSize: 12),
                       ),
                       Text(
-                        widget.plantation.serieNumber,
+                        widget.plantations.estado,
                         style:
-                            TextStyle(color: Color(0xFF000000), fontSize: 10),
+                            TextStyle(color: Color(0xFF000000), fontSize: 12),
                       ),
                     ],
                   )
@@ -104,14 +111,15 @@ class _PlantationCardState extends State<PlantationCard> {
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               physics: NeverScrollableScrollPhysics(),
-              itemCount: widget.plantation.buttons.length,
+              itemCount: widget.buttons.length,
               itemBuilder: (BuildContext context, int index) {
                 return SizedBox(
-                  width: size.width * 0.42 / widget.plantation.buttons.length,
+                  width:
+                      size.width * 0.42 / widget.buttons.length,
                   child: MaterialButton(
                     padding: EdgeInsets.symmetric(horizontal: 5),
                     onPressed: () {
-                      widget.plantation.buttons[index].onPressed();
+                      widget.buttons[index].onPressed();
                     },
                     splashColor: Color(0XFF00B4D8).withOpacity(0.2),
                     highlightColor: Colors.transparent,
@@ -123,7 +131,7 @@ class _PlantationCardState extends State<PlantationCard> {
                       ),
                       child: Center(
                         child: Text(
-                          widget.plantation.buttons[index].title,
+                          widget.buttons[index].title,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Color(0XFFFFFFFF),
