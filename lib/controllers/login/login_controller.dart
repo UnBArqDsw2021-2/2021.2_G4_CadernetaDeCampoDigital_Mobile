@@ -1,5 +1,5 @@
 import 'package:caderneta_campo_digital/global/global.dart';
-import 'package:caderneta_campo_digital/models/models.dart';
+import 'package:caderneta_campo_digital/models/user.dart';
 import 'package:caderneta_campo_digital/services/login/login_service.dart';
 import 'package:flutter/cupertino.dart';
 
