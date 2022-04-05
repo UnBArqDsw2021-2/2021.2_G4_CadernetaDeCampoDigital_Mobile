@@ -30,6 +30,8 @@ class DioClient {
         ),
       );
 
+      // print(response);
+
       return response;
     } on DioError catch (error) {
       if (error.response != null) {
