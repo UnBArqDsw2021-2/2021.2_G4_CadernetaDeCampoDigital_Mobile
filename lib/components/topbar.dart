@@ -1,3 +1,4 @@
+import 'package:caderneta_campo_digital/pages/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:caderneta_campo_digital/global/global.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
@@ -49,7 +50,10 @@ class Topbar extends StatelessWidget implements PreferredSizeWidget {
             color: Colors.white,
             highlightColor: Color(0xFF90E0EF),
             // ignore: no-empty-block
-            onPressed: () {},
+            onPressed: () { Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (BuildContext context) {
+                  return ProfilePage();
+                }));},
           ),
         ),
       ],
