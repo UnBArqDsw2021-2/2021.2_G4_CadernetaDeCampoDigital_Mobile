@@ -1,17 +1,28 @@
+import 'package:caderneta_campo_digital/pages/estate/estate_page.dart';
 import 'package:caderneta_campo_digital/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class EstateCard extends StatelessWidget {
-  final String estateName;
-  final String estateAddress;
-  final int qtdPlot;
+  final Map<String, dynamic> estate;
 
   const EstateCard({
     Key? key,
-    required this.estateName,
-    required this.estateAddress,
-    required this.qtdPlot,
+    required this.estate,
   }) : super(key: key);
+
+  String getAddress() {
+    return estate['cidade'] + ' ' + estate['estado'] + ' cep: ' + estate['cep'];
+  }
+
+  int getQtdTalhoes() {
+    var talhoes = estate['talhao'];
+
+    if (talhoes is List) {
+      return talhoes.length;
+    }
+
+    return 0;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +40,14 @@ class EstateCard extends StatelessWidget {
           borderRadius: border,
           onTap: () {
             debugPrint('EstateCard');
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (BuildContext context) {
+                  return EstatePage(estate: estate);
+                },
+              ),
+            );
           },
           child: Row(
             children: <Widget>[
@@ -46,23 +65,32 @@ class EstateCard extends StatelessWidget {
                   ),
                 ),
               ),
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    estateName,
-                    style: Utils.estateTextStyle,
-                  ),
-                  Text(
-                    estateAddress,
-                    style: Utils.estateTextStyle,
-                  ),
-                  Text(
-                    qtdPlot.toString(),
-                    style: Utils.estateTextStyle,
-                  ),
-                ],
+              SizedBox(
+                width: size.width * 0.6,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      estate['complemento'],
+                      style: Utils.estateTextStyle,
+                      softWrap: false,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                    ),
+                    Text(
+                      getAddress(),
+                      style: Utils.estateTextStyle,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                    ),
+                    Text(
+                      getQtdTalhoes().toString(),
+                      style: Utils.estateTextStyle,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
