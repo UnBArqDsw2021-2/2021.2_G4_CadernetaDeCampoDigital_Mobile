@@ -70,6 +70,7 @@ class HomeProdutorController {
   }
 
   void setData(data) {
+    estates = [];
     for (dynamic estate in data) {
       var produtor = estate['produtor'];
       Tecnico tecnico = estate['tecnico'] == null

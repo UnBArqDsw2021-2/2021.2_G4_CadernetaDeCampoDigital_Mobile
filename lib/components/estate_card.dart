@@ -15,8 +15,8 @@ class EstateCard extends StatelessWidget {
     return estate.cidade + ' ' + estate.estado + ' cep: ' + estate.cep;
   }
 
-  int getQtdTalhoes() {
-    return estate.talhoes.length;
+  String getQtdTalhoes() {
+    return 'Número de talhões: '+  estate.talhoes.length.toString();
   }
 
   @override
@@ -80,7 +80,7 @@ class EstateCard extends StatelessWidget {
                       maxLines: 2,
                     ),
                     Text(
-                      getQtdTalhoes().toString(),
+                      getQtdTalhoes(),
                       style: Utils.estateTextStyle,
                       overflow: TextOverflow.ellipsis,
                     ),
