@@ -28,7 +28,7 @@ class OutlinedTextButton extends StatelessWidget {
         child: Text(
           label,
           style: TextStyle(
-            color: MyColors().blueButton,
+            color: MyColors().blue,
             fontFamily: 'Roboto',
             fontWeight: FontWeight.normal,
             fontSize: 20,
@@ -40,7 +40,7 @@ class OutlinedTextButton extends StatelessWidget {
           ),
           side: BorderSide(
             width: 5.0,
-            color: MyColors().blueButton,
+            color: MyColors().blue,
           ),
         ),
       ),
