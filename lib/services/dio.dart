@@ -48,6 +48,8 @@ class DioClient {
         ),
       );
 
+      // print(response);
+
       return response;
     } on DioError catch (error) {
       // ignore: avoid_print
