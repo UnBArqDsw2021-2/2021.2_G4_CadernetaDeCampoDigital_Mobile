@@ -27,14 +27,14 @@ class InfoField extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         color: Colors.white,
-        border: Border.all(width: 1),
+        border: Border.all(width: 1, color: Colors.black.withOpacity(0.35)),
         borderRadius: BorderRadius.circular(15),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.8),
-            spreadRadius: 2,
-            blurRadius: 2,
-            offset: Offset(0, 2),
+            color: Colors.black.withOpacity(0.25),
+            spreadRadius: 0,
+            blurRadius: 4,
+            offset: Offset(0, 4),
           ),
         ],
       ),
