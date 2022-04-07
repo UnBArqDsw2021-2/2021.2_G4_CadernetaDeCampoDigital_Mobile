@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:dio/dio.dart';
 
 class DioClient {
@@ -12,13 +11,13 @@ class DioClient {
   );
 
   Future post(String url, object) async {
-    Map<String, dynamic> header = {"Content-Type": "application/json"};
-    String bodyRequest = jsonEncode(object);
+    Map<String, dynamic> header = {"Content-Type": "multipart/form-data"};
+    var formData = FormData.fromMap(object);
 
     try {
       Response response = await http.post(
         url,
-        data: bodyRequest,
+        data: formData,
         options: Options(
           headers: header,
           validateStatus: (status) {
@@ -26,8 +25,6 @@ class DioClient {
           },
         ),
       );
-
-      // print(response);
 
       return response;
     } on DioError catch (error) {

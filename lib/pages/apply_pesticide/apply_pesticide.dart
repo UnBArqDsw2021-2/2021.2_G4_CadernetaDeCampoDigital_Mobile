@@ -11,6 +11,7 @@ import 'package:caderneta_campo_digital/global/colors.dart';
 import 'package:caderneta_campo_digital/models/PesticideModel.dart';
 import 'package:caderneta_campo_digital/services/pesticide/pesticide_service.dart';
 import 'package:caderneta_campo_digital/utils/utils.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
@@ -38,6 +39,7 @@ class _ApplyPesticidePageState extends State<ApplyPesticidePage> {
   bool isNecessaryToAddType = false;
   String selectedPesticide = '';
   File? image;
+  String imageError = '';
   bool isLoading = false;
   PesticideController pesticideController = PesticideController();
   String? _applicationDate;
@@ -107,6 +109,27 @@ class _ApplyPesticidePageState extends State<ApplyPesticidePage> {
               TextFieldBC(
                 label: "Dosagem Aplicada (Litros)",
                 keyboardType: TextInputType.number,
+                validator: (String? value) {
+                  if (value != null) {
+                    if (value.isEmpty) {
+                      return "Campo \"Dosagem Aplicada\" deve ser preenchido";
+                    }
+
+                    if (double.parse(value) <= 0) {
+                      return "Dosagem deve ser maior que zero litros.";
+                    }
+
+                    if (double.parse(value) >= 10) {
+                      return "Dosagem deve ser menor que dez litros.";
+                    }
+
+                    if (value.length > 4) {
+                      return "Dosagem deve ter até duas casas decimais.";
+                    }
+                  }
+
+                  return null;
+                },
                 onSave: (String? value) {
                   if (value != null) {
                     _quantity = value;
@@ -259,6 +282,12 @@ class _ApplyPesticidePageState extends State<ApplyPesticidePage> {
                                       pickImage(ImageSource.camera);
                                     },
                                   ),
+                                  Text(
+                                    imageError,
+                                    style: TextStyle(
+                                      color: Colors.red,
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -289,12 +318,13 @@ class _ApplyPesticidePageState extends State<ApplyPesticidePage> {
       final imageTemporary = File(imageResponse.path);
       setState(() => image = imageTemporary);
     } on PlatformException catch (e) {
-      debugPrint("Failed to pick image $e");
+      debugPrint("Falha ao selecionar a imagem $e");
     }
   }
 
   Future<List<Pesticide>> searchPesticides(String query) async {
     final pesticides = await PesticideService.getPesticides();
+
     final optionsFound = List.of(pesticides).where((pesticide) {
       final pesticideLower = pesticide.name.toLowerCase();
       final queryLower = query.toLowerCase();
@@ -309,6 +339,21 @@ class _ApplyPesticidePageState extends State<ApplyPesticidePage> {
     }
 
     return optionsFound;
+  }
+
+  void informResult(dynamic response) {
+    if (response != null) {
+      Navigator.pop(context);
+      AlertMessenger.alertMessenger.successMessenger(
+        context,
+        'Aplicação de agrotóxico registrada com sucesso',
+      );
+    } else {
+      AlertMessenger.alertMessenger.errorMessenger(
+        context,
+        'Ocorreu um erro ao completar a aplicação de agrotóxico',
+      );
+    }
   }
 
   Future<List<PesticideType>> searchPesticideTypes(String query) async {
@@ -356,7 +401,6 @@ class _ApplyPesticidePageState extends State<ApplyPesticidePage> {
     return types.first;
   }
 
-  // ignore: long-method
   void submit() async {
     _formKey.currentState!.save();
 
@@ -378,7 +422,7 @@ class _ApplyPesticidePageState extends State<ApplyPesticidePage> {
       });
 
       Map<String, dynamic> responseObj = jsonDecode(response.toString());
-      typeID = responseObj["idTipoPesticideo"];
+      typeID = responseObj["idTipoAgrotoxico"];
     } else if (isNecessaryToAddPesticide) {
       if (typeID == '') {
         final type = await findPesticideType();
@@ -392,7 +436,7 @@ class _ApplyPesticidePageState extends State<ApplyPesticidePage> {
 
       Map<String, dynamic> responseObj = jsonDecode(response.toString());
 
-      pesticideID = responseObj["idPesticideo"];
+      pesticideID = responseObj["idAgrotoxico"];
     } else {
       if (pesticideID == '') {
         final pesticide = await findPesticide();
@@ -401,7 +445,7 @@ class _ApplyPesticidePageState extends State<ApplyPesticidePage> {
 
       response = await pesticideController.sendPesticideApplicationForm({
         'plantio': widget.plantationID,
-        'pesticideo': pesticideID,
+        'agrotoxico': pesticideID,
         'dataAplicacao': Utils().clearData(_applicationDate),
         'dosagemAplicacao': double.parse(_quantity!),
       });
@@ -413,21 +457,52 @@ class _ApplyPesticidePageState extends State<ApplyPesticidePage> {
       isLoading = false;
     });
 
-    if (response != null) {
-      AlertMessenger.alertMessenger.successMessenger(
-        context,
-        'Aplicação de agrotóxico registrada com sucesso',
-      );
-      Navigator.pop(context);
-    } else {
-      AlertMessenger.alertMessenger.errorMessenger(
-        context,
-        'Ocorreu um erro ao completar a aplicação de agrotóxico',
-      );
-    }
+    informResult(response);
   }
 
   void send() async {
-    debugPrint("AINDA SERÁ IMPLEMENTADO NO BACKEND");
+    _formKey.currentState!.save();
+
+    if (!_formKey.currentState!.validate()) {
+      return null;
+    }
+
+    if (image == null) {
+      setState(() {
+        imageError = "Foto do agrotóxico é obrigatória";
+      });
+
+      return null;
+    }
+
+    setState(() {
+      isLoading = true;
+    });
+
+    String fileName = image!.path.split('/').last;
+
+    Map<String, MultipartFile> fileMap = {
+      'fotoAgrotoxico': MultipartFile(
+        image!.openRead(),
+        await image!.length(),
+        filename: fileName,
+      ),
+    };
+
+    dynamic response =
+        await pesticideController.sendPesticideApplicationPhotoForm(
+      {
+        'plantio': widget.plantationID,
+        'dataAplicacao': Utils().clearData(_applicationDate),
+        'dosagemAplicacao': double.parse(_quantity!),
+      },
+      fileMap,
+    );
+
+    setState(() {
+      isLoading = false;
+    });
+
+    informResult(response);
   }
 }

@@ -2,11 +2,11 @@ class PesticideType {
   final String id;
   final String name;
 
-  PesticideType(this.id, this.name);
+  PesticideType({required this.id, required this.name});
 
-  static PesticideType fromJson(Map<String, dynamic> data) => PesticideType(
-        data["idTipoPesticideo"],
-        data["nome"],
+  factory PesticideType.fromMap(Map<String, dynamic> data) => PesticideType(
+        id: data["idTipoAgrotoxico"],
+        name: data["nome"],
       );
 
   @override
@@ -20,16 +20,18 @@ class Pesticide {
   final String name;
   final PesticideType type;
 
-  Pesticide(this.id, this.name, this.type);
+  Pesticide({required this.id, required this.name, required this.type});
 
-  static Pesticide fromJson(Map<String, dynamic> data) => Pesticide(
-        data["idPesticideo"],
-        data["nome"],
-        PesticideType(
-          data["tipo"]["idTipoPesticideo"],
-          data["tipo"]["nome"],
-        ),
-      );
+  factory Pesticide.fromMap(Map<String, dynamic> map) {
+    return Pesticide(
+      id: map["idAgrotoxico"],
+      name: map["nome"],
+      type: PesticideType(
+        id: map["tipo"]["idTipoAgrotoxico"],
+        name: map["tipo"]["nome"],
+      ),
+    );
+  }
 
   @override
   String toString() {
