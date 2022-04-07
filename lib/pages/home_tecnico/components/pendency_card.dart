@@ -1,3 +1,4 @@
+import 'package:caderneta_campo_digital/pages/pendencies/pendencies.dart';
 import 'package:flutter/material.dart';
 
 class PendencyCard extends StatefulWidget {
@@ -27,7 +28,12 @@ class _PendencyCardState extends State<PendencyCard> {
         child: InkWell(
           borderRadius: border,
           onTap: () {
-            debugPrint('PendencyCard');
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (BuildContext context) {
+                return PendenciesPage();
+              }),
+            );
           },
           child: Column(
             children: <Widget>[
