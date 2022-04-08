@@ -5,16 +5,24 @@ class TextBlueButton extends StatelessWidget {
   final label;
   final onPressed;
   final margin;
+  final width;
+  final heigth;
 
-  const TextBlueButton({Key? key, this.label, this.onPressed, this.margin})
-      : super(key: key);
+  const TextBlueButton({
+    Key? key,
+    this.label,
+    this.onPressed,
+    this.margin,
+    this.width,
+    this.heigth,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: margin,
-      width: 200,
-      height: 60,
+      width: width ?? 200,
+      height: heigth ?? 60,
       child: TextButton(
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.resolveWith<Color?>(
