@@ -8,6 +8,7 @@ class IconTextButton extends StatelessWidget {
   final num marginSize;
   final Color borderColor;
   final Color? textColor;
+  final double? fontSize;
   final Color? backgroundColor;
   final Color? splashColor;
   final onPressed;
@@ -19,6 +20,7 @@ class IconTextButton extends StatelessWidget {
     this.marginSize, {
     Key? key,
     this.textColor = const Color(0XFF03045E),
+    this.fontSize = 0,
     required this.borderColor,
     this.backgroundColor = Colors.white,
     required this.onPressed,
@@ -27,11 +29,11 @@ class IconTextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return Container(
-      margin: EdgeInsets.symmetric(vertical: min(size.width * marginSize, size.height * marginSize)),
+      margin: EdgeInsets.symmetric(
+        vertical: min(size.width * marginSize, size.height * marginSize),
+      ),
       child: MaterialButton(
-        // ignore: no-empty-block
         onPressed: onPressed,
         splashColor: splashColor,
         highlightColor: Colors.transparent,
@@ -57,11 +59,17 @@ class IconTextButton extends StatelessWidget {
                 color: textColor,
               ),
               Padding(
-                padding: EdgeInsets.only(left: min(size.width * 0.037, size.height * 0.037)),
+                padding: EdgeInsets.only(
+                  left: min(size.width * 0.037, size.height * 0.037),
+                ),
                 child: Text(
                   label,
-                  style:
-                      TextStyle(fontSize: min(size.width * 0.06, size.height * 0.06), color: textColor),
+                  style: TextStyle(
+                    fontSize: fontSize != 0
+                        ? fontSize
+                        : min(size.width * 0.06, size.height * 0.06),
+                    color: textColor,
+                  ),
                 ),
               ),
             ],
