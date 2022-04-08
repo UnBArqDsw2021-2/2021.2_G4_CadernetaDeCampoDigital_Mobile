@@ -57,7 +57,7 @@ class PlotsList extends StatelessWidget {
                                 debugPrint('histórico');
                               },
                               child: Text(
-                                'histórico',
+                                'Histórico',
                                 style: TextStyle(
                                   color: Color(0xFF000000),
                                   fontSize: 12,

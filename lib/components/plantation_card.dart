@@ -81,17 +81,17 @@ class _PlantationCardState extends State<PlantationCard> {
                       Text(
                         widget.plantations.cultura.nome,
                         style:
-                            TextStyle(color: Color(0xFF000000), fontSize: 12),
+                            TextStyle(color: Color(0xFF000000), fontSize: 14),
                       ),
                       Text(
                         utils.formatData(widget.plantations.dataPlantio),
                         style:
-                            TextStyle(color: Color(0xFF000000), fontSize: 12),
+                            TextStyle(color: Color(0xFF000000), fontSize: 14),
                       ),
                       Text(
                         widget.plantations.estado,
                         style:
-                            TextStyle(color: Color(0xFF000000), fontSize: 12),
+                            TextStyle(color: Color(0xFF000000), fontSize: 14),
                       ),
                     ],
                   )
@@ -99,7 +99,7 @@ class _PlantationCardState extends State<PlantationCard> {
                     'Vazio',
                     style: TextStyle(
                       fontFamily: 'Roboto-regular',
-                      fontSize: 12,
+                      fontSize: 14,
                       color: Color(0xFF000000),
                     ),
                   ),
@@ -136,7 +136,7 @@ class _PlantationCardState extends State<PlantationCard> {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Color(0XFFFFFFFF),
-                            fontSize: 9,
+                            fontSize: 10,
                             fontFamily: 'Roboto-Regular',
                           ),
                         ),

@@ -12,7 +12,7 @@ class EstateCard extends StatelessWidget {
   }) : super(key: key);
 
   String getAddress() {
-    return estate.cidade + ' ' + estate.estado + ' cep: ' + estate.cep;
+    return estate.cidade + ' - ' + estate.estado + '\nCEP: ' + estate.cep;
   }
 
   String getQtdTalhoes() {
