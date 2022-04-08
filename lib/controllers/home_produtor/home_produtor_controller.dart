@@ -1,11 +1,11 @@
-import 'package:caderneta_campo_digital/models/propriedade.dart';
-import 'package:caderneta_campo_digital/models/tecnico.dart';
+import 'package:caderneta_campo_digital/models/PropriedadeModel.dart';
+import 'package:caderneta_campo_digital/models/TecnicoModel.dart';
 import 'package:dio/dio.dart';
 
-import '../../models/cultura.dart';
-import '../../models/plantio.dart';
-import '../../models/produtor.dart';
-import '../../models/talhao.dart';
+import '../../models/CulturaModel.dart';
+import '../../models/PlantioModel.dart';
+import '../../models/ProdutorModel.dart';
+import '../../models/TalhaoModel.dart';
 import '../../services/home_productor/home_productor_service.dart';
 
 class HomeProdutorController {
@@ -26,17 +26,17 @@ class HomeProdutorController {
     return true;
   }
 
-  List<Plantio> getPlantios(array) {
-    List<Plantio> plantios = [];
+  List<PlantioModel> getPlantios(array) {
+    List<PlantioModel> plantios = [];
 
     if(array.isEmpty) {
-      plantios.add(Plantio.empty());
+      plantios.add(PlantioModel.empty());
     } else {
       for (dynamic plantio in array) {
         plantios.add(
-          Plantio(
+          PlantioModel(
             plantio['idPlantio'],
-            Cultura(
+            CulturaModel(
               plantio['cultura']['idCultura'],
               plantio['cultura']['nome'],
             ),
@@ -52,12 +52,12 @@ class HomeProdutorController {
     return plantios;
   }
 
-  List<Talhao> getTalhoes(array) {
-    List<Talhao> talhoes = [];
+  List<TalhaoModel> getTalhoes(array) {
+    List<TalhaoModel> talhoes = [];
 
     for (dynamic talhao in array) {
       talhoes.add(
-        Talhao(
+        TalhaoModel(
           talhao['idTalhao'],
           talhao['idPropriedade'],
           talhao['numero'],
@@ -73,9 +73,9 @@ class HomeProdutorController {
     estates = [];
     for (dynamic estate in data) {
       var produtor = estate['produtor'];
-      Tecnico tecnico = estate['tecnico'] == null
-          ? Tecnico.nulo()
-          : Tecnico(
+      TecnicoModel tecnico = estate['tecnico'] == null
+          ? TecnicoModel.nulo()
+          : TecnicoModel(
               estate['tecnico']['usuario']['cpf'],
               estate['tecnico']['usuario']['dataNascimento'],
               estate['tecnico']['usuario']['telefone'],
@@ -94,7 +94,7 @@ class HomeProdutorController {
         estate['numeroCasa'],
         estate['hectares'],
         estate['logradouro'],
-        Produtor(
+        ProdutorModel(
           produtor['usuario']['cpf'],
           produtor['usuario']['dataNascimento'],
           produtor['usuario']['telefone'],

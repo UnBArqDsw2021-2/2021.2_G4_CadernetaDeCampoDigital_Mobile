@@ -1,6 +1,6 @@
-import 'package:caderneta_campo_digital/models/produtor.dart';
-import 'package:caderneta_campo_digital/models/talhao.dart';
-import 'package:caderneta_campo_digital/models/tecnico.dart';
+import 'package:caderneta_campo_digital/models/ProdutorModel.dart';
+import 'package:caderneta_campo_digital/models/TalhaoModel.dart';
+import 'package:caderneta_campo_digital/models/TecnicoModel.dart';
 import 'package:tuple/tuple.dart';
 
 class Propriedade {
@@ -13,9 +13,9 @@ class Propriedade {
   final int numeroCasa;
   final String hectares;
   final String logradouro;
-  final Produtor produtor;
-  final Tecnico tecnico;
-  final List<Talhao> talhoes;
+  final ProdutorModel produtor;
+  final TecnicoModel tecnico;
+  final List<TalhaoModel> talhoes;
 
   Propriedade(
     this.id,
@@ -32,11 +32,11 @@ class Propriedade {
     this.talhoes,
   );
 
-  Tuple2<List<Talhao>, List<Talhao>> getPlotsActive({required List<Talhao> plots}) {
-    List<Talhao> activePlots = [];
-    List<Talhao> nonActivePlots = [];
+  Tuple2<List<TalhaoModel>, List<TalhaoModel>> getPlotsActive({required List<TalhaoModel> plots}) {
+    List<TalhaoModel> activePlots = [];
+    List<TalhaoModel> nonActivePlots = [];
 
-    for (Talhao plot in plots) {
+    for (TalhaoModel plot in plots) {
       if(plot.plantios[0].isEmpty) {
         plot.setButtonsToEmptyTalhao();
         nonActivePlots.add(plot);

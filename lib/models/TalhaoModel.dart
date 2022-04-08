@@ -1,14 +1,14 @@
-import 'package:caderneta_campo_digital/models/plantio.dart';
+import 'package:caderneta_campo_digital/models/PlantioModel.dart';
 import 'package:flutter/cupertino.dart';
 
-class Talhao {
+class TalhaoModel {
   final String id;
   final String idPropriedade;
   final int numero;
-  final List<Plantio> plantios;
+  final List<PlantioModel> plantios;
   List<TalhaoButton> buttons = [];
 
-  Talhao(this.id, this.idPropriedade, this.numero, this.plantios);
+  TalhaoModel(this.id, this.idPropriedade, this.numero, this.plantios);
 
   void setButtonsToNotEmptyTalhao() {
     buttons = [

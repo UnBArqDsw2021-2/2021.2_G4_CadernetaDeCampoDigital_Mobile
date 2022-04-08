@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../../../components/plantation_card.dart';
-import '../../../models/talhao.dart';
+import '../../../models/TalhaoModel.dart';
 
 class PlotsList extends StatelessWidget {
   final String title;
-  final List<Talhao> plots;
+  final List<TalhaoModel> plots;
   const PlotsList({Key? key, required this.plots, required this.title})
       : super(key: key);
 

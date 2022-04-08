@@ -1,4 +1,4 @@
-import 'package:caderneta_campo_digital/models/propriedade.dart';
+import 'package:caderneta_campo_digital/models/PropriedadeModel.dart';
 import 'package:caderneta_campo_digital/pages/estate/estate_page.dart';
 import 'package:caderneta_campo_digital/utils/utils.dart';
 import 'package:flutter/material.dart';

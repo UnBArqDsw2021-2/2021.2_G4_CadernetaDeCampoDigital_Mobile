@@ -1,11 +1,11 @@
-class Produtor {
+class ProdutorModel {
   final String cpf;
   final String dataNascimento;
   final String telefone;
   final String nome;
   final String dap;
 
-  Produtor(
+  ProdutorModel(
     this.cpf,
     this.dataNascimento,
     this.telefone,

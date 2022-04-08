@@ -1,4 +1,4 @@
-class Tecnico {
+class TecnicoModel {
   late String cpf;
   late String dataNascimento;
   late String telefone;
@@ -6,7 +6,7 @@ class Tecnico {
   late String crea;
   late String formacao;
 
-  Tecnico(
+  TecnicoModel(
     this.cpf,
     this.dataNascimento,
     this.telefone,
@@ -15,7 +15,7 @@ class Tecnico {
     this.formacao,
   );
 
-  Tecnico.nulo() {
+  TecnicoModel.nulo() {
     cpf = '';
     dataNascimento = '';
     telefone = '';

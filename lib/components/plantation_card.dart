@@ -1,11 +1,11 @@
-import 'package:caderneta_campo_digital/models/talhao.dart';
+import 'package:caderneta_campo_digital/models/TalhaoModel.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:caderneta_campo_digital/utils/utils.dart';
-import '../models/plantio.dart';
+import '../models/PlantioModel.dart';
 
 class PlantationCard extends StatefulWidget {
-  final Plantio plantations;
+  final PlantioModel plantations;
   final List<TalhaoButton> buttons;
   const PlantationCard({
     Key? key,
