@@ -29,24 +29,20 @@ class HomeProdutorController {
   List<PlantioModel> getPlantios(array) {
     List<PlantioModel> plantios = [];
 
-    if(array.isEmpty) {
-      plantios.add(PlantioModel.empty());
-    } else {
-      for (dynamic plantio in array) {
-        plantios.add(
-          PlantioModel(
-            plantio['idPlantio'],
-            CulturaModel(
-              plantio['cultura']['idCultura'],
-              plantio['cultura']['nome'],
-            ),
-            plantio['dataPlantio'],
-            plantio['estado'],
-            '',
-            false,
+    for (dynamic plantio in array) {
+      plantios.add(
+        PlantioModel(
+          plantio['idPlantio'],
+          CulturaModel(
+            plantio['cultura']['idCultura'],
+            plantio['cultura']['nome'],
           ),
-        );
-      }
+          plantio['dataPlantio'],
+          plantio['estado'],
+          '',
+          false,
+        ),
+      );
     }
 
     return plantios;

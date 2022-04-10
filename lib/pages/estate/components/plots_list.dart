@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../components/plantation_card.dart';
+import '../../../models/PlantioModel.dart';
 import '../../../models/TalhaoModel.dart';
 
 class PlotsList extends StatelessWidget {
@@ -8,6 +9,20 @@ class PlotsList extends StatelessWidget {
   final List<TalhaoModel> plots;
   const PlotsList({Key? key, required this.plots, required this.title})
       : super(key: key);
+
+  PlantioModel getActivePlantio(List<PlantioModel> plantios) {
+    String estado;
+    if(title == "Ativos") {
+      estado = "Plantado";
+      for (PlantioModel plantio in plantios) {
+        if(plantio.estado == estado) {
+          return plantio;
+        }
+      }
+    }
+
+    return PlantioModel.empty();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +81,7 @@ class PlotsList extends StatelessWidget {
                             ),
                           ),
                           PlantationCard(
-                            plantations: plots[index].plantios[0],
+                            plantation: getActivePlantio(plots[index].plantios),
                             buttons: plots[index].buttons,
                           ),
                           Container(

@@ -5,11 +5,11 @@ import 'package:caderneta_campo_digital/utils/utils.dart';
 import '../models/PlantioModel.dart';
 
 class PlantationCard extends StatefulWidget {
-  final PlantioModel plantations;
+  final PlantioModel plantation;
   final List<TalhaoButton> buttons;
   const PlantationCard({
     Key? key,
-    required this.plantations,
+    required this.plantation,
     required this.buttons,
   }) : super(key: key);
 
@@ -24,17 +24,17 @@ class _PlantationCardState extends State<PlantationCard> {
     Utils utils = Utils();
 
     return Container(
-      height: size.height * (!widget.plantations.isEmpty ? 0.11 : 0.08),
+      height: size.height * (!widget.plantation.isEmpty ? 0.11 : 0.08),
       child: Row(
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 14),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(25),
-              child: !widget.plantations.isEmpty
+              child: !widget.plantation.isEmpty
                   ? Image.network(
-                      widget.plantations.imageUrl.isNotEmpty
-                          ? widget.plantations.imageUrl
+                      widget.plantation.imageUrl.isNotEmpty
+                          ? widget.plantation.imageUrl
                           : 'https://blog.chbagro.com.br/user-files/blog/174577.jpg',
                       loadingBuilder: (
                         BuildContext context,
@@ -73,23 +73,23 @@ class _PlantationCardState extends State<PlantationCard> {
           Container(
             padding: EdgeInsets.only(left: 26),
             width: size.width * 0.3,
-            child: !widget.plantations.isEmpty
+            child: !widget.plantation.isEmpty
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        widget.plantations.cultura.nome,
+                        widget.plantation.cultura.nome,
                         style:
                             TextStyle(color: Color(0xFF000000), fontSize: 14),
                       ),
                       Text(
-                        utils.formatData(widget.plantations.dataPlantio),
+                        utils.formatData(widget.plantation.dataPlantio),
                         style:
                             TextStyle(color: Color(0xFF000000), fontSize: 14),
                       ),
                       Text(
-                        widget.plantations.estado,
+                        widget.plantation.estado,
                         style:
                             TextStyle(color: Color(0xFF000000), fontSize: 14),
                       ),

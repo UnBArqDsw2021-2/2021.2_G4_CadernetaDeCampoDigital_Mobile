@@ -39,9 +39,8 @@ class Propriedade {
     bool isActive = false;
 
     for (TalhaoModel plot in plots) {
-
+      isActive = false;
       for (PlantioModel plantation in plot.plantios) {
-        isActive = false;
         if(plantation.estado == "Plantado") {
           plot.setButtonsToNotEmptyTalhao();
           activePlots.add(plot);
