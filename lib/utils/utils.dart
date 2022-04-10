@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class Utils {
@@ -44,6 +45,10 @@ class Utils {
     var newData = data!.split("/");
 
     return (newData.reversed).join("-");
+  }
+
+  String formatData(String? data) {
+    return DateFormat('dd/MM/yyy', 'pt-BR').format(DateTime.parse(data!));
   }
 
   Utils();
