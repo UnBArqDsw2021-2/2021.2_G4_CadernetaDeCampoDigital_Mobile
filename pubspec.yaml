@@ -39,6 +39,8 @@ dependencies:
   shimmer: ^2.0.0
   flutter_typeahead: ^3.2.4
   image_picker: ^0.8.4+11
+  mockito: ^5.1.0
+  build_runner: ^2.1.8
 
 dev_dependencies:
   dart_code_metrics: ^4.12.0

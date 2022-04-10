@@ -87,6 +87,7 @@ class _AddPropertyState extends State<AddPropertyPage> {
                   children: [
                     SizedBox(height: 20),
                     TextFieldBC(
+                      key: Key('add_property_cep_field'),
                       label: "CEP",
                       notEmpty: true,
                       minLength: 3,
@@ -104,6 +105,7 @@ class _AddPropertyState extends State<AddPropertyPage> {
                         Flexible(
                           flex: 2,
                           child: TextFieldBC(
+                            key: Key('add_property_cidade_field'),
                             label: "Cidade",
                             notEmpty: true,
                             keyboardType: TextInputType.text,
@@ -119,6 +121,7 @@ class _AddPropertyState extends State<AddPropertyPage> {
                           child: Container(
                             margin: EdgeInsets.only(left: 10),
                             child: DropdownButtonFormField(
+                              key: Key('add_property_estado_field'),
                               hint: Text('Estado'),
                               decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
@@ -143,6 +146,7 @@ class _AddPropertyState extends State<AddPropertyPage> {
                         Flexible(
                           flex: 2,
                           child: TextFieldBC(
+                            key: Key('add_property_bairro_field'),
                             label: "Bairro",
                             notEmpty: true,
                             minLength: 1,
@@ -158,6 +162,7 @@ class _AddPropertyState extends State<AddPropertyPage> {
                           child: Container(
                             margin: EdgeInsets.only(left: 10),
                             child: TextFieldBC(
+                              key: Key('add_property_casa_field'),
                               label: "Casa",
                               notEmpty: true,
                               minLength: 1,
@@ -174,6 +179,7 @@ class _AddPropertyState extends State<AddPropertyPage> {
                     ),
                     SizedBox(height: 20),
                     TextFieldBC(
+                      key: Key('add_property_logradouro_field'),
                       label: "Logradouro",
                       notEmpty: true,
                       minLength: 1,
@@ -185,6 +191,7 @@ class _AddPropertyState extends State<AddPropertyPage> {
                     ),
                     SizedBox(height: 20),
                     TextFieldBC(
+                      key: Key('add_property_hectares_field'),
                       label: "Hectares",
                       notEmpty: true,
                       minLength: 1,
@@ -200,6 +207,7 @@ class _AddPropertyState extends State<AddPropertyPage> {
                     ),
                     SizedBox(height: 20),
                     TextFieldBC(
+                      key: Key('add_property_complemento_field'),
                       label: "Complemento",
                       notEmpty: true,
                       minLength: 1,
@@ -212,8 +220,11 @@ class _AddPropertyState extends State<AddPropertyPage> {
                     Container(
                       margin: EdgeInsets.symmetric(vertical: 80),
                       child: TextBlueButton(
+                        key: Key('add_property_adicionar'),
                         label: 'Adicionar',
-                        onPressed: submit,
+                        onPressed: () {
+                          submit();
+                        },
                       ),
                     ),
                   ],
