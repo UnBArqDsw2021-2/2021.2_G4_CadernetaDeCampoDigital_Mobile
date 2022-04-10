@@ -150,7 +150,8 @@ class _UpdatePropertyState extends State<UpdatePropertyPage> {
                     ),
                     SizedBox(height: 20),
                     TextFieldBC(
-                      initialValue: widget.estate.hectares,
+                      initialValue:
+                          Utils().maskHectares.maskText(widget.estate.hectares),
                       label: "Hectares",
                       notEmpty: true,
                       minLength: 1,
