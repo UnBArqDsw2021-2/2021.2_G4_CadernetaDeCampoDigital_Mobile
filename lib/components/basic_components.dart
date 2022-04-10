@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:intl/intl.dart';
 
 class TextFieldBC extends StatefulWidget {
@@ -162,6 +163,72 @@ class _TextFieldDateBCState extends State<TextFieldDateBC> {
         setState(() {
           _controller.text = formattedDate;
         });
+      },
+    );
+  }
+}
+
+class AutocompleteBC extends StatefulWidget {
+  final String label;
+  final suggestionsCallback;
+  final onSuggestionSelected;
+  final onSave;
+  final bool notEmpty;
+  final String noItemsFoundBuilder;
+
+  const AutocompleteBC({
+    Key? key,
+    required this.label,
+    required this.suggestionsCallback,
+    required this.noItemsFoundBuilder,
+    this.onSuggestionSelected,
+    this.onSave,
+    this.notEmpty = false,
+  }) : super(key: key);
+
+  @override
+  _AutocompleteBCState createState() => _AutocompleteBCState();
+}
+
+class _AutocompleteBCState extends State<AutocompleteBC> {
+  final _controller = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return TypeAheadFormField(
+      onSaved: widget.onSave,
+      suggestionsCallback: widget.suggestionsCallback,
+      textFieldConfiguration: TextFieldConfiguration(
+        decoration: InputDecoration(
+          hintText: widget.label,
+          border: OutlineInputBorder(),
+        ),
+        controller: _controller,
+      ),
+      noItemsFoundBuilder: (context) => SizedBox(
+        height: 60,
+        child: Center(
+          child: Text(
+            widget.noItemsFoundBuilder,
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ),
+      onSuggestionSelected: (value) {
+        _controller.text = value == null ? '' : value.toString();
+        if (widget.onSuggestionSelected != null) widget.onSuggestionSelected();
+      },
+      itemBuilder: (context, suggestion) {
+        return ListTile(
+          title: Text(suggestion.toString()),
+        );
+      },
+      validator: (value) {
+        if (widget.notEmpty && value != null && value.isEmpty) {
+          return "Campo \"${widget.label}\" deve ser preenchido";
+        }
+
+        return null;
       },
     );
   }

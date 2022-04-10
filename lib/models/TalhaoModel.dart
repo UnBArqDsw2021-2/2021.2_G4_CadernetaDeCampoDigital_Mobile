@@ -1,5 +1,4 @@
 import 'package:caderneta_campo_digital/models/PlantioModel.dart';
-import 'package:flutter/cupertino.dart';
 
 class TalhaoModel {
   final String id;
@@ -12,23 +11,29 @@ class TalhaoModel {
 
   void setButtonsToNotEmptyTalhao() {
     buttons = [
-      TalhaoButton(id, 'Adicionar agrotóxico', () => debugPrint('Adicionar agrotóxico')),
-      TalhaoButton(id, 'Marcar como colhida', () => debugPrint('Marcar como colhida')),
+      TalhaoButton(id, numero, 'Adicionar agrotóxico', ButtonType.adicionarAgrotoxico),
+      TalhaoButton(id, numero, 'Marcar como colhida', ButtonType.marcarComoColhido),
     ];
   }
 
   void setButtonsToEmptyTalhao() {
     buttons = [
-      TalhaoButton(id, 'Adicionar plantação', () => debugPrint('Adicionar plantação')),
+      TalhaoButton(id, numero, 'Adicionar plantação', ButtonType.adicionarPlantacao),
     ];
   }
 }
 
-
 class TalhaoButton {
   final String idTalhao;
+  final int numTalhao;
   final String title;
-  final Function onPressed;
+  final ButtonType buttonType;
 
-  TalhaoButton(this.idTalhao, this.title, this.onPressed);
+  TalhaoButton(this.idTalhao, this.numTalhao, this.title, this.buttonType);
+}
+
+enum ButtonType {
+  adicionarAgrotoxico,
+  marcarComoColhido,
+  adicionarPlantacao,
 }

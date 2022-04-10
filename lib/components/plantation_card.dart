@@ -1,4 +1,5 @@
 import 'package:caderneta_campo_digital/models/TalhaoModel.dart';
+import 'package:caderneta_campo_digital/pages/apply_pesticide/apply_pesticide.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:caderneta_campo_digital/utils/utils.dart';
@@ -115,12 +116,11 @@ class _PlantationCardState extends State<PlantationCard> {
               itemCount: widget.buttons.length,
               itemBuilder: (BuildContext context, int index) {
                 return SizedBox(
-                  width:
-                      size.width * 0.42 / widget.buttons.length,
+                  width: size.width * 0.42 / widget.buttons.length,
                   child: MaterialButton(
                     padding: EdgeInsets.symmetric(horizontal: 5),
                     onPressed: () {
-                      widget.buttons[index].onPressed();
+                      chooseOnPressedActionByButtonType(widget.buttons[index]);
                     },
                     splashColor: Color(0XFF00B4D8).withOpacity(0.2),
                     highlightColor: Colors.transparent,
@@ -176,5 +176,24 @@ class _PlantationCardState extends State<PlantationCard> {
         ],
       ),
     );
+  }
+
+  void chooseOnPressedActionByButtonType(TalhaoButton button) {
+    if (button.buttonType == ButtonType.adicionarAgrotoxico) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (BuildContext context) {
+          return ApplyPesticidePage(
+            plantationName: widget.plantation.cultura.nome,
+            plantationID: widget.plantation.id,
+            tilesNumber: button.numTalhao,
+          );
+        }),
+      );
+    } else if (button.buttonType == ButtonType.marcarComoColhido) {
+      debugPrint("Marcar como colhida");
+    } else if (button.buttonType == ButtonType.adicionarPlantacao) {
+      debugPrint("Adicionar plantação");
+    }
   }
 }
