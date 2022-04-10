@@ -14,7 +14,8 @@ class DioClient {
 
   Future post(String url, object) async {
     Map<String, dynamic> header = {
-      "Content-Type": "application/json",};
+      "Content-Type": "application/json",
+    };
 
     String bodyRequest = jsonEncode(object);
 
@@ -49,6 +50,33 @@ class DioClient {
     try {
       Response response = await http.get(
         url,
+        options: Options(
+          headers: header,
+          validateStatus: (status) {
+            return status! <= 500;
+          },
+        ),
+      );
+
+      return response;
+    } on DioError catch (error) {
+      if (error.response != null) {
+        return error;
+      }
+    }
+  }
+
+  Future patch(String url, object) async {
+    Map<String, dynamic> header = {
+      "Content-Type": "application/json",
+    };
+
+    String bodyRequest = jsonEncode(object);
+
+    try {
+      Response response = await http.patch(
+        url,
+        data: bodyRequest,
         options: Options(
           headers: header,
           validateStatus: (status) {
