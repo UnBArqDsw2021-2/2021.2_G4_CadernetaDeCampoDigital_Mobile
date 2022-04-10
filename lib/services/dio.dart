@@ -1,28 +1,25 @@
-import 'dart:convert';
-import 'package:caderneta_campo_digital/global/global.dart';
 import 'package:dio/dio.dart';
+
+import '../global/global.dart';
 
 class DioClient {
   static final dioClient = DioClient._();
   var http = Dio(
     BaseOptions(
       baseUrl: 'https://ccd-backend.herokuapp.com/api/',
-      connectTimeout: 5000,
-      receiveTimeout: 3000,
+      connectTimeout: 10000,
+      receiveTimeout: 10000,
     ),
   );
 
   Future post(String url, object) async {
-    Map<String, dynamic> header = {
-      "Content-Type": "application/json",
-    };
-
-    String bodyRequest = jsonEncode(object);
+    Map<String, dynamic> header = {"Content-Type": "multipart/form-data"};
+    var formData = FormData.fromMap(object);
 
     try {
       Response response = await http.post(
         url,
-        data: bodyRequest,
+        data: formData,
         options: Options(
           headers: header,
           validateStatus: (status) {
@@ -31,7 +28,27 @@ class DioClient {
         ),
       );
 
-      // print(response);
+      return response;
+    } on DioError catch (error) {
+      if (error.response != null) {
+        return error;
+      }
+    }
+  }
+
+  Future get(String url) async {
+    Map<String, dynamic> header = {"Content-Type": "application/json"};
+
+    try {
+      Response response = await http.get(
+        url,
+        options: Options(
+          headers: header,
+          validateStatus: (status) {
+            return status! <= 500;
+          },
+        ),
+      );
 
       return response;
     } on DioError catch (error) {
@@ -67,16 +84,13 @@ class DioClient {
   }
 
   Future patch(String url, object) async {
-    Map<String, dynamic> header = {
-      "Content-Type": "application/json",
-    };
-
-    String bodyRequest = jsonEncode(object);
+    Map<String, dynamic> header = {"Content-Type": "application/json"};
+    var formData = FormData.fromMap(object);
 
     try {
       Response response = await http.patch(
         url,
-        data: bodyRequest,
+        data: formData,
         options: Options(
           headers: header,
           validateStatus: (status) {

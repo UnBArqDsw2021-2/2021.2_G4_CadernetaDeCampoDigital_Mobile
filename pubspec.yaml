@@ -37,6 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_svg: ^1.0.3
   shimmer: ^2.0.0
+  flutter_typeahead: ^3.2.4
+  image_picker: ^0.8.4+11
 
 dev_dependencies:
   dart_code_metrics: ^4.12.0

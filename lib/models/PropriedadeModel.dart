@@ -1,3 +1,4 @@
+import 'package:caderneta_campo_digital/models/PlantioModel.dart';
 import 'package:caderneta_campo_digital/models/ProdutorModel.dart';
 import 'package:caderneta_campo_digital/models/TalhaoModel.dart';
 import 'package:caderneta_campo_digital/models/TecnicoModel.dart';
@@ -35,14 +36,22 @@ class Propriedade {
   Tuple2<List<TalhaoModel>, List<TalhaoModel>> getPlotsActive({required List<TalhaoModel> plots}) {
     List<TalhaoModel> activePlots = [];
     List<TalhaoModel> nonActivePlots = [];
+    bool isActive = false;
 
     for (TalhaoModel plot in plots) {
-      if(plot.plantios[0].isEmpty) {
+      isActive = false;
+      for (PlantioModel plantation in plot.plantios) {
+        if(plantation.estado == "Plantado") {
+          plot.setButtonsToNotEmptyTalhao();
+          activePlots.add(plot);
+          isActive = true;
+          break;
+        }
+      }
+
+      if(!isActive) {
         plot.setButtonsToEmptyTalhao();
         nonActivePlots.add(plot);
-      } else {
-        plot.setButtonsToNotEmptyTalhao();
-        activePlots.add(plot);
       }
     }
 
