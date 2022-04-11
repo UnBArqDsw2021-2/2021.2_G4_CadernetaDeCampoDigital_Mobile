@@ -12,7 +12,7 @@ class DioClient {
     ),
   );
 
-  Future post(String url, object) async {
+  Future post(String url, Map<String, dynamic> object) async {
     Map<String, dynamic> header = {"Content-Type": "multipart/form-data"};
     var formData = FormData.fromMap(object);
 

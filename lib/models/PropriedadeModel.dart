@@ -16,7 +16,7 @@ class Propriedade {
   final String logradouro;
   final ProdutorModel produtor;
   final TecnicoModel tecnico;
-  final List<TalhaoModel> talhoes;
+  List<TalhaoModel> talhoes;
 
   Propriedade(
     this.id,
@@ -33,7 +33,9 @@ class Propriedade {
     this.talhoes,
   );
 
-  Tuple2<List<TalhaoModel>, List<TalhaoModel>> getPlotsActive({required List<TalhaoModel> plots}) {
+  Tuple2<List<TalhaoModel>, List<TalhaoModel>> getPlotsActive({
+    required List<TalhaoModel> plots,
+  }) {
     List<TalhaoModel> activePlots = [];
     List<TalhaoModel> nonActivePlots = [];
     bool isActive = false;
@@ -41,7 +43,7 @@ class Propriedade {
     for (TalhaoModel plot in plots) {
       isActive = false;
       for (PlantioModel plantation in plot.plantios) {
-        if(plantation.estado == "Plantado") {
+        if (plantation.estado == "Plantado") {
           plot.setButtonsToNotEmptyTalhao();
           activePlots.add(plot);
           isActive = true;
@@ -49,7 +51,7 @@ class Propriedade {
         }
       }
 
-      if(!isActive) {
+      if (!isActive) {
         plot.setButtonsToEmptyTalhao();
         nonActivePlots.add(plot);
       }

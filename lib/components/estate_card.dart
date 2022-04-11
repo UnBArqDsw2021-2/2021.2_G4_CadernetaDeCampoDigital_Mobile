@@ -16,7 +16,7 @@ class EstateCard extends StatelessWidget {
   }
 
   String getQtdTalhoes() {
-    return 'Número de talhões: '+  estate.talhoes.length.toString();
+    return 'Número de talhões: ' + estate.talhoes.length.toString();
   }
 
   @override
