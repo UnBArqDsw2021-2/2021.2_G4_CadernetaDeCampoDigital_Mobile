@@ -1,3 +1,4 @@
+import 'package:caderneta_campo_digital/global/global.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -80,7 +81,7 @@ class TopbarArrowBack extends StatelessWidget implements PreferredSizeWidget {
           bottomRight: Radius.circular(20),
         ),
       ),
-      actions: hasActions
+      actions: hasActions && SharedInfo.actualUser.isProductor
           ? [
               Padding(
                 padding: const EdgeInsets.only(right: 10),
@@ -128,7 +129,30 @@ class TopbarArrowBack extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
             ]
-          : [],
+          : hasActions
+              ? [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    child: SizedBox(
+                      width: size.width * 0.1,
+                      height: size.height * 0.09,
+                      child: MaterialButton(
+                        padding: EdgeInsets.symmetric(horizontal: 5),
+                        onPressed: () {
+                          if (onPressedHistoric != null) {
+                            onPressedHistoric!();
+                          }
+                        },
+                        highlightColor: Colors.transparent,
+                        child: Icon(
+                          Icons.history_edu,
+                          color: Color(0xFFFFFFFF),
+                        ),
+                      ),
+                    ),
+                  ),
+                ]
+              : [],
     );
   }
 }
