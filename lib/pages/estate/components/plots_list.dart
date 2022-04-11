@@ -1,3 +1,4 @@
+import 'package:caderneta_campo_digital/models/PropriedadeModel.dart';
 import 'package:flutter/material.dart';
 
 import '../../../components/plantation_card.dart';
@@ -7,15 +8,20 @@ import '../../../models/TalhaoModel.dart';
 class PlotsList extends StatelessWidget {
   final String title;
   final List<TalhaoModel> plots;
-  const PlotsList({Key? key, required this.plots, required this.title})
-      : super(key: key);
+  final Propriedade estate;
+  const PlotsList({
+    Key? key,
+    required this.plots,
+    required this.title,
+    required this.estate,
+  }) : super(key: key);
 
   PlantioModel getActivePlantio(List<PlantioModel> plantios) {
     String estado;
-    if(title == "Ativos") {
+    if (title == "Ativos") {
       estado = "Plantado";
       for (PlantioModel plantio in plantios) {
-        if(plantio.estado == estado) {
+        if (plantio.estado == estado) {
           return plantio;
         }
       }
@@ -83,6 +89,8 @@ class PlotsList extends StatelessWidget {
                           PlantationCard(
                             plantation: getActivePlantio(plots[index].plantios),
                             buttons: plots[index].buttons,
+                            talhao: plots[index],
+                            estate: estate,
                           ),
                           Container(
                             height: 1,

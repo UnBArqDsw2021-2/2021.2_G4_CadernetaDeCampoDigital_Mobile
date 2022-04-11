@@ -14,7 +14,6 @@ class EstatePage extends StatefulWidget {
 }
 
 class _EstatePageState extends State<EstatePage> {
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -27,32 +26,35 @@ class _EstatePageState extends State<EstatePage> {
         hasActions: true,
         title: widget.estate.complemento,
       ),
-      body: widget.estate.talhoes.isNotEmpty ? SingleChildScrollView(
-        child: Column(
-          children: [
-            PlotsList(
-              plots: plots.item1,
-              title: 'Ativos',
-            ),
-            Container(
-              margin: EdgeInsets.only(
-                top: 10,
-                bottom: 10,
+      body: widget.estate.talhoes.isNotEmpty
+          ? SingleChildScrollView(
+              child: Column(
+                children: [
+                  PlotsList(
+                    plots: plots.item1,
+                    title: 'Ativos',
+                    estate: widget.estate,
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(
+                      top: 10,
+                      bottom: 10,
+                    ),
+                    width: size.width,
+                    height: 1,
+                    color: Color(0xFF000000),
+                  ),
+                  PlotsList(
+                    plots: plots.item2,
+                    title: 'Inativos',
+                    estate: widget.estate,
+                  ),
+                ],
               ),
-              width: size.width,
-              height: 1,
-              color: Color(0xFF000000),
+            )
+          : Center(
+              child: Text('Não existem talhões', style: Utils.estateTextStyle),
             ),
-            PlotsList(
-              plots: plots.item2,
-              title: 'Inativos',
-            ),
-          ],
-        ),
-      )
-      : Center(
-        child: Text('Não existem talhões', style: Utils.estateTextStyle),
-      ),
     );
   }
 }
