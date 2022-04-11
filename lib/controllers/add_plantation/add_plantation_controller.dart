@@ -36,8 +36,7 @@ class AddPlantationController {
         return false;
       }
       Map<String, dynamic> object = {
-        // "cultura": responseCultura.data["idCultura"],
-        "cultura": "c2e88db3-229f-4730-9605-e6ddacb0a52a",
+        "cultura": responseCultura.data["idCultura"],
         "talhao": talhao.id,
         "dataPlantio": date,
         "estado": "Plantado",
