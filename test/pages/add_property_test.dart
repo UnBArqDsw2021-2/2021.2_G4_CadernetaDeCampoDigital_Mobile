@@ -9,14 +9,8 @@ import 'add_property_test.mocks.dart';
 
 @GenerateMocks([AddPropertyController])
 void main() {
-  setUp(() {
-    MockAddPropertyController addPropertyController =
-        MockAddPropertyController();
+  MockAddPropertyController addPropertyController = MockAddPropertyController();
 
-    when(addPropertyController.sendForm({})).thenAnswer(
-      (realInvocation) => Future.value(true),
-    );
-  });
   group('Add property page', () {
     const addPropertyPage = AddPropertyPage();
 
@@ -38,6 +32,9 @@ void main() {
       'should have CEP, Cidade, Estado, Bairro, Casa, Logradouro and Hectares fields',
       (WidgetTester tester) async {
         await tester.pumpWidget(makeTestableWidget(addPropertyPage));
+        when(addPropertyController.sendForm(any)).thenAnswer(
+          (_) async => {'response': true},
+        );
 
         final cepInputFinder = find.text('CEP');
         final cityInputFinder = find.text('Cidade');
@@ -62,7 +59,6 @@ void main() {
       (WidgetTester tester) async {
         await tester.pumpWidget(makeTestableWidget(addPropertyPage));
 
-        // const cep = '69309079';
         const cidade = 'Boa Vista';
         const estado = 'RR';
         const bairro = 'Liberdade';
@@ -128,13 +124,13 @@ void main() {
         expect(hectaresInputFinder, findsOneWidget);
         expect(complementInputFinder, findsOneWidget);
 
-        // final button = find.byKey(Key('add_property_adicionar'));
-        // expect(button, findsOneWidget);
+        final button = find.byKey(Key('add_property_adicionar'));
+        expect(button, findsOneWidget);
 
-        // await dragTesterUntilVisible(tester, button);
-        // await tester.pumpAndSettle();
+        await dragTesterUntilVisible(tester, button);
+        await tester.pumpAndSettle();
 
-        // await tester.tap(button);
+        await tester.tap(button);
         // await tester.pump(Duration(seconds: 10));
       },
     );

@@ -4,6 +4,7 @@ import 'package:caderneta_campo_digital/components/loading.dart';
 import 'package:caderneta_campo_digital/components/text_blue_button.dart';
 import 'package:caderneta_campo_digital/components/topbar_arrow_back.dart';
 import 'package:caderneta_campo_digital/controllers/add_property/add_property_controller.dart';
+import 'package:caderneta_campo_digital/services/add_property/add_property_service.dart';
 import 'package:caderneta_campo_digital/utils/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +26,9 @@ class _AddPropertyState extends State<AddPropertyPage> {
   String? _hectares;
   String? _complement;
 
-  AddPropertyController addPropertyController = AddPropertyController();
+  AddPropertyController addPropertyController = AddPropertyController(
+    AddPropertyService(),
+  );
 
   final GlobalKey<FormState> _formPropertyKey = GlobalKey<FormState>();
 

@@ -4,7 +4,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class AddPropertyController {
-  AddPropertyService addPropertyService = AddPropertyService();
+  final AddPropertyService _addPropertyService;
+
+  AddPropertyController(this._addPropertyService);
 
   final List<String> _ufs = [
     'AC',
@@ -40,7 +42,7 @@ class AddPropertyController {
     try {
       formsValue['produtor'] = SharedInfo.actualUser.cpf;
 
-      Response response = await addPropertyService.createProperty(formsValue);
+      Response response = await _addPropertyService.createProperty(formsValue);
 
       if (response.statusCode! >= 400) {
         return null;
