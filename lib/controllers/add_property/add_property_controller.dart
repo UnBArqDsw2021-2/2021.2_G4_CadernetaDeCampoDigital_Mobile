@@ -1,10 +1,15 @@
 import 'package:caderneta_campo_digital/global/global.dart';
+import 'package:caderneta_campo_digital/models/AddPropertyModel.dart';
 import 'package:caderneta_campo_digital/services/add_property/add_property_service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
-class AddPropertyController {
+enum AddPropertyState { loading, success, failed }
+
+class AddPropertyController extends ChangeNotifier {
   final AddPropertyService _addPropertyService;
+  var state;
+  var addProperty = AddPropertyModel('', '', '', '', '', '', '', '');
 
   AddPropertyController(this._addPropertyService);
 
@@ -38,19 +43,28 @@ class AddPropertyController {
     'TO',
   ];
 
-  Future sendForm(Map<String, dynamic> formsValue) async {
-    try {
-      formsValue['produtor'] = SharedInfo.actualUser.cpf;
+  Future submit() async {
+    state = AddPropertyState.loading;
+    notifyListeners();
 
-      Response response = await _addPropertyService.createProperty(formsValue);
+    try {
+      Map<String, dynamic> addPropertyMap = addProperty.toMap();
+      addPropertyMap['produtor'] = SharedInfo.actualUser.cpf;
+
+      Response response =
+          await _addPropertyService.createProperty(addPropertyMap);
 
       if (response.statusCode! >= 400) {
-        return null;
+        throw ErrorHint('Ocorreu um erro ao criar propriedade');
       }
+
+      state = AddPropertyState.success;
+      notifyListeners();
 
       return response;
     } catch (e) {
-      return null;
+      state = AddPropertyState.failed;
+      notifyListeners();
     }
   }
 

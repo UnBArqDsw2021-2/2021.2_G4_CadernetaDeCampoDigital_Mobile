@@ -1,5 +1,7 @@
 import 'package:caderneta_campo_digital/controllers/add_property/add_property_controller.dart';
+import 'package:caderneta_campo_digital/models/AddPropertyModel.dart';
 import 'package:caderneta_campo_digital/pages/add_property/add_property.dart';
+import 'package:caderneta_campo_digital/services/add_property/add_property_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -7,7 +9,7 @@ import 'package:mockito/mockito.dart';
 
 import 'add_property_test.mocks.dart';
 
-@GenerateMocks([AddPropertyController])
+@GenerateMocks([AddPropertyController, AddPropertyService, AddPropertyModel])
 void main() {
   MockAddPropertyController addPropertyController = MockAddPropertyController();
 
@@ -126,12 +128,6 @@ void main() {
 
         final button = find.byKey(Key('add_property_adicionar'));
         expect(button, findsOneWidget);
-
-        await dragTesterUntilVisible(tester, button);
-        await tester.pumpAndSettle();
-
-        await tester.tap(button);
-        // await tester.pump(Duration(seconds: 10));
       },
     );
   });

@@ -342,14 +342,16 @@ class _ApplyPesticidePageState extends State<ApplyPesticidePage> {
   }
 
   void informResult(dynamic response) {
+    final alertMessenger = AlertMessenger();
+
     if (response != null) {
       Navigator.pop(context);
-      AlertMessenger.alertMessenger.successMessenger(
+      alertMessenger.successMessenger(
         context,
         'Aplicação de agrotóxico registrada com sucesso',
       );
     } else {
-      AlertMessenger.alertMessenger.errorMessenger(
+      alertMessenger.errorMessenger(
         context,
         'Ocorreu um erro ao completar a aplicação de agrotóxico',
       );

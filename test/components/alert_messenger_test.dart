@@ -25,12 +25,11 @@ class MyWidget extends StatelessWidget {
           return GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: () {
+              final alertMessenger = AlertMessenger();
               if (response) {
-                AlertMessenger.alertMessenger
-                    .successMessenger(context, successMessage);
+                alertMessenger.successMessenger(context, successMessage);
               } else {
-                AlertMessenger.alertMessenger
-                    .errorMessenger(context, errorMessage);
+                alertMessenger.errorMessenger(context, errorMessage);
               }
             },
             child: SizedBox(

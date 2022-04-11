@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 
 class AlertMessenger {
-  static final alertMessenger = AlertMessenger._();
-
-  AlertMessenger._();
-
   successMessenger(context, message) {
     return ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(
