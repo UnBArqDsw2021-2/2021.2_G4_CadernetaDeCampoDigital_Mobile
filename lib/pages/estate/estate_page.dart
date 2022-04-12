@@ -23,7 +23,7 @@ class _EstatePageState extends State<EstatePage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    Tuple2 plots = widget.estate.getPlotsActive(isProductorTheViewer: widget.isProductorTheViewer);
+    Tuple2 plots = widget.estate.getPlots(isProductorTheViewer: widget.isProductorTheViewer);
 
     return Scaffold(
       appBar: TopbarArrowBack(

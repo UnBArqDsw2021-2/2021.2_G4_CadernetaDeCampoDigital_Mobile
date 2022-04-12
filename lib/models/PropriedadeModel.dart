@@ -33,7 +33,7 @@ class Propriedade {
     this.talhoes,
   );
 
-  Tuple2<List<TalhaoModel>, List<TalhaoModel>> getPlotsActive({
+  Tuple2<List<TalhaoModel>, List<TalhaoModel>> getPlots({
     bool isProductorTheViewer = false,
   }) {
     List<TalhaoModel> activePlots = [];
