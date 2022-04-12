@@ -8,6 +8,8 @@ class HomeProdutorService {
 
     getResponse = await DioClient.dioClient.fetch('propriedade/');
 
+    print(getResponse.data);
+
     return getResponse;
   }
 }
