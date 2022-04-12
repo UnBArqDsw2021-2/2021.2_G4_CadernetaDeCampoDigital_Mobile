@@ -126,7 +126,7 @@ class _AddPropertyState extends State<AddPropertyPage> {
                                 ),
                                 isDense: true,
                               ),
-                              items: addPropertyController.getUFsList(),
+                              items: Utils().getUFsList(),
                               onChanged: (String? newValue) {
                                 setState(() {
                                   _uf = newValue;
