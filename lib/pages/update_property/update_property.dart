@@ -20,6 +20,8 @@ class _UpdatePropertyState extends State<UpdatePropertyPage> {
   bool isLoading = false;
   String? _cep;
   String? _street;
+  String? _city;
+  String? _uf;
   String? _houseNumber;
   String? _address;
   String? _hectares;
@@ -45,6 +47,8 @@ class _UpdatePropertyState extends State<UpdatePropertyPage> {
       'id': widget.estate.id,
       'cep': Utils().clearMask(_cep),
       'bairro': _street,
+      'estado': _uf,
+      'cidade': _city,
       'complemento': _complement,
       'numeroCasa': _houseNumber,
       'hectares': _hectares,
@@ -98,6 +102,47 @@ class _UpdatePropertyState extends State<UpdatePropertyPage> {
                           _cep = value;
                         }
                       },
+                    ),
+                    SizedBox(height: 20),
+                    Row(
+                      children: [
+                        Flexible(
+                          flex: 2,
+                          child: TextFieldBC(
+                            initialValue: widget.estate.cidade,
+                            label: "Cidade",
+                            notEmpty: true,
+                            keyboardType: TextInputType.text,
+                            onSave: (String? value) {
+                              if (value != null) {
+                                _city = value;
+                              }
+                            },
+                          ),
+                        ),
+                        Flexible(
+                          flex: 1,
+                          child: Container(
+                            margin: EdgeInsets.only(left: 10),
+                            child: DropdownButtonFormField(
+                              hint: Text('Estado'),
+                              value: widget.estate.estado,
+                              decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.grey),
+                                ),
+                                isDense: true,
+                              ),
+                              items: Utils().getUFsList(),
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  _uf = newValue;
+                                });
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                     SizedBox(height: 20),
                     Row(
