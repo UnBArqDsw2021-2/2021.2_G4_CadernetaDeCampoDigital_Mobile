@@ -33,24 +33,30 @@ class Propriedade {
     this.talhoes,
   );
 
-  Tuple2<List<TalhaoModel>, List<TalhaoModel>> getPlotsActive({required List<TalhaoModel> plots}) {
+  Tuple2<List<TalhaoModel>, List<TalhaoModel>> getPlots({
+    bool isProductorTheViewer = false,
+  }) {
     List<TalhaoModel> activePlots = [];
     List<TalhaoModel> nonActivePlots = [];
     bool isActive = false;
 
-    for (TalhaoModel plot in plots) {
+    for (TalhaoModel plot in talhoes) {
       isActive = false;
       for (PlantioModel plantation in plot.plantios) {
-        if(plantation.estado == "Plantado") {
-          plot.setButtonsToNotEmptyTalhao();
+        if (plantation.estado == "Plantado") {
+          if (isProductorTheViewer) {
+            plot.setButtonsToNotEmptyTalhao();
+          }
           activePlots.add(plot);
           isActive = true;
           break;
         }
       }
 
-      if(!isActive) {
-        plot.setButtonsToEmptyTalhao();
+      if (!isActive) {
+        if (isProductorTheViewer) {
+          plot.setButtonsToEmptyTalhao();
+        }
         nonActivePlots.add(plot);
       }
     }
