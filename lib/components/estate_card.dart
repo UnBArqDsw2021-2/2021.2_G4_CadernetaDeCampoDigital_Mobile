@@ -1,3 +1,4 @@
+import 'package:caderneta_campo_digital/global/global.dart';
 import 'package:caderneta_campo_digital/models/PropriedadeModel.dart';
 import 'package:caderneta_campo_digital/pages/estate/estate_page.dart';
 import 'package:caderneta_campo_digital/utils/utils.dart';
@@ -16,7 +17,7 @@ class EstateCard extends StatelessWidget {
   }
 
   String getQtdTalhoes() {
-    return 'Número de talhões: '+  estate.talhoes.length.toString();
+    return 'Número de talhões: ' + estate.talhoes.length.toString();
   }
 
   @override
@@ -39,7 +40,10 @@ class EstateCard extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (BuildContext context) {
-                  return EstatePage(estate: estate);
+                  return EstatePage(
+                    estate: estate,
+                    isProductorTheViewer: SharedInfo.actualUser.isProductor,
+                  );
                 },
               ),
             );
