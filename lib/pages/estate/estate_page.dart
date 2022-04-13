@@ -7,7 +7,12 @@ import 'package:tuple/tuple.dart';
 
 class EstatePage extends StatefulWidget {
   final Propriedade estate;
-  const EstatePage({Key? key, required this.estate}) : super(key: key);
+  final bool isProductorTheViewer;
+  const EstatePage({
+    Key? key,
+    required this.estate,
+    required this.isProductorTheViewer,
+  }) : super(key: key);
 
   @override
   State<EstatePage> createState() => _EstatePageState();
@@ -18,7 +23,8 @@ class _EstatePageState extends State<EstatePage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    Tuple2 plots = widget.estate.getPlotsActive(plots: widget.estate.talhoes);
+    Tuple2 plots = widget.estate
+        .getPlots(isProductorTheViewer: widget.isProductorTheViewer);
 
     return Scaffold(
       appBar: TopbarArrowBack(

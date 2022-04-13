@@ -340,6 +340,7 @@ class _AddPlantationDialogState extends State<AddPlantationDialog> {
             MaterialPageRoute(
               builder: (context) => EstatePage(
                 estate: newEstate,
+                isProductorTheViewer: true,
               ),
             ),
           );
