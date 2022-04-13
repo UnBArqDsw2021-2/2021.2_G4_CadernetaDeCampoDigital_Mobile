@@ -41,7 +41,7 @@ class RecordCard extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(25),
                 child: Image.network(
-                  'https://blog.chbagro.com.br/user-files/blog/174577.jpg',
+                  plantio.cultura.imageUrl,
                   loadingBuilder: (
                     BuildContext context,
                     Widget child,
