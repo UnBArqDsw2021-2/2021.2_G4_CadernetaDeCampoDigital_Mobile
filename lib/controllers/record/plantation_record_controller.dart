@@ -37,10 +37,10 @@ class PlantationRecordController {
           CulturaModel(
             element["cultura"]["idCultura"],
             element["cultura"]["nome"],
+            element["cultura"]["foto"],
           ),
           element["dataPlantio"],
           element["estado"],
-          "",
           false,
         );
         historyList.add(RecordCard(plantio: plantio));
