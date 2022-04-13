@@ -6,19 +6,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:provider/provider.dart';
 
 import 'add_property_test.mocks.dart';
 
 @GenerateMocks([AddPropertyController, AddPropertyService, AddPropertyModel])
 void main() {
-  MockAddPropertyController addPropertyController = MockAddPropertyController();
+  MockAddPropertyService addPropertyService = MockAddPropertyService();
 
   group('Add property page', () {
     const addPropertyPage = AddPropertyPage();
 
     Widget makeTestableWidget(widget) {
-      return MaterialApp(
-        home: widget,
+      return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+            create: (_) => AddPropertyController(addPropertyService),
+          ),
+        ],
+        child: MaterialApp(
+          home: widget,
+        ),
       );
     }
 
@@ -34,9 +42,9 @@ void main() {
       'should have CEP, Cidade, Estado, Bairro, Casa, Logradouro and Hectares fields',
       (WidgetTester tester) async {
         await tester.pumpWidget(makeTestableWidget(addPropertyPage));
-        when(addPropertyController.sendForm(any)).thenAnswer(
-          (_) async => {'response': true},
-        );
+        // when(addPropertyController.submit()).thenAnswer(
+        //   (_) async => {'response': true},
+        // );
 
         final cepInputFinder = find.text('CEP');
         final cityInputFinder = find.text('Cidade');
