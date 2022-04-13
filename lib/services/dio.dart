@@ -88,7 +88,10 @@ class DioClient {
   }
 
   Future patch(String url, object) async {
-    Map<String, dynamic> header = {"Content-Type": "application/json"};
+    Map<String, dynamic> header = {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + SharedInfo.actualUser.accessToken,
+    };
     var formData = FormData.fromMap(object);
 
     try {

@@ -8,13 +8,16 @@ class PendencyController {
   PendencyService pendencyService = PendencyService();
   List<PesticideAplicationModel> pesticideAplications = [];
 
-  Future<bool> analysisPressed() async {
-    Response response =
-        await pendencyService.analysePendency(analysisTextController.text);
+  Future<bool> analysisPressed(String aplicacaoId) async {
+    Response response = await pendencyService.analysePendency(
+      analysisTextController.text,
+      aplicacaoId,
+    );
 
-    if (response.data == null) {
+    if (response.statusCode != 200) {
       return false;
     }
+    await getPendencies();
 
     return true;
   }

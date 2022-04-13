@@ -17,6 +17,7 @@ class PesticideAnalysisDialog extends StatefulWidget {
 class _PesticideAnalysisDialogState extends State<PesticideAnalysisDialog> {
   final PendencyController pendencyController = PendencyController();
   final _formKey = GlobalKey<FormState>();
+  late String errorMessage = '';
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +56,10 @@ class _PesticideAnalysisDialogState extends State<PesticideAnalysisDialog> {
                   widget.pesticide.produtor,
                   style: Utils.estateTextStyle,
                 ),
-                //Text(widget.pesticide.cultura,style: Utils.estateTextStyle,),
+                Text(
+                  widget.pesticide.cultura,
+                  style: Utils.estateTextStyle,
+                ),
                 Text(
                   widget.pesticide.aplicationDate.toString(),
                   style: Utils.estateTextStyle,
@@ -88,6 +92,18 @@ class _PesticideAnalysisDialogState extends State<PesticideAnalysisDialog> {
         ),
       ),
       actions: <Widget>[
+        errorMessage.isEmpty
+            ? Container()
+            : Center(
+                child: Padding(
+                  padding: EdgeInsets.only(bottom: 5),
+                  child: Text(
+                    errorMessage,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.red),
+                  ),
+                ),
+              ),
         Center(
           child: MaterialButton(
             onPressed: buttonPressed,
@@ -116,7 +132,15 @@ class _PesticideAnalysisDialogState extends State<PesticideAnalysisDialog> {
 
   void buttonPressed() async {
     if (_formKey.currentState!.validate()) {
-      pendencyController.analysisPressed();
+      dynamic response =
+          await pendencyController.analysisPressed(widget.pesticide.id);
+
+      if (response)
+        Navigator.of(context).pop();
+      else
+        setState(() {
+          errorMessage = "Agrotóxico inválido";
+        });
     }
   }
 }

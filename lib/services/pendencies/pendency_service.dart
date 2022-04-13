@@ -10,7 +10,10 @@ class PendencyService {
     return response;
   }
 
-  Future<Response> analysePendency(String agrotoxico) async {
+  Future<Response> analysePendency(
+    String agrotoxico,
+    String aplicacaoId,
+  ) async {
     Object analysis = {
       'agrotoxico': agrotoxico,
       'status': 'S',
@@ -19,7 +22,7 @@ class PendencyService {
     Response response;
 
     response = await DioClient.dioClient
-        .patch('plantio/analise/agrotoxico/$agrotoxico/', analysis);
+        .patch('plantio/analise/agrotoxico/$aplicacaoId/', analysis);
 
     return response;
   }
