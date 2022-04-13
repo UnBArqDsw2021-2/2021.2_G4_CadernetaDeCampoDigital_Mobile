@@ -56,10 +56,7 @@ class PesticideCard extends StatelessWidget {
                   pesticide.produtor,
                   style: Utils.estateTextStyle,
                 ),
-                Text(
-                  pesticide.cultura,
-                  style: Utils.estateTextStyle,
-                ),
+                //Text(pesticide.cultura,style: Utils.estateTextStyle,),
                 Text(
                   pesticide.aplicationDate,
                   style: Utils.estateTextStyle,

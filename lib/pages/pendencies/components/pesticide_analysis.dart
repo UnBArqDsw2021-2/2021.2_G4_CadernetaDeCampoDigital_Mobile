@@ -55,10 +55,7 @@ class _PesticideAnalysisDialogState extends State<PesticideAnalysisDialog> {
                   widget.pesticide.produtor,
                   style: Utils.estateTextStyle,
                 ),
-                Text(
-                  widget.pesticide.cultura,
-                  style: Utils.estateTextStyle,
-                ),
+                //Text(widget.pesticide.cultura,style: Utils.estateTextStyle,),
                 Text(
                   widget.pesticide.aplicationDate.toString(),
                   style: Utils.estateTextStyle,

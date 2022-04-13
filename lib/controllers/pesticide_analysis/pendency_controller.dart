@@ -9,7 +9,13 @@ class PendencyController {
   List<PesticideAplicationModel> pesticideAplications = [];
 
   Future<bool> analysisPressed() async {
-    print(analysisTextController.toString());
+    Response response =
+        await pendencyService.analysePendency(analysisTextController.text);
+
+    if (response.data == null) {
+      return false;
+    }
+
     return true;
   }
 
@@ -34,7 +40,7 @@ class PendencyController {
   void setData(data) {
     pesticideAplications = [];
     for (dynamic aplication in data) {
-      pesticideAplications.add(PesticideAplicationModel.fromJson(aplication));
+      pesticideAplications.add(PesticideAplicationModel.fromMap(aplication));
     }
   }
 }
