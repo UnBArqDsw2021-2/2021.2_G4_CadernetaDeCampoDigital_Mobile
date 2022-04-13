@@ -68,7 +68,10 @@ class _EstatePageState extends State<EstatePage> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (BuildContext context) => RecordPage(estate: widget.estate),
+        builder: (BuildContext context) => RecordPage(
+          propriedadeId: widget.estate.id,
+          isPlotRequest: false,
+        ),
       ),
     );
   }

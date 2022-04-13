@@ -1,3 +1,4 @@
+import 'package:caderneta_campo_digital/pages/record/plantation_record.dart';
 import 'package:flutter/material.dart';
 
 import '../../../components/plantation_card.dart';
@@ -12,10 +13,10 @@ class PlotsList extends StatelessWidget {
 
   PlantioModel getActivePlantio(List<PlantioModel> plantios) {
     String estado;
-    if(title == "Ativos") {
+    if (title == "Ativos") {
       estado = "Plantado";
       for (PlantioModel plantio in plantios) {
-        if(plantio.estado == estado) {
+        if (plantio.estado == estado) {
           return plantio;
         }
       }
@@ -69,7 +70,17 @@ class PlotsList extends StatelessWidget {
                             alignment: Alignment.topRight,
                             child: TextButton(
                               onPressed: () {
-                                debugPrint('histórico');
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        RecordPage(
+                                      propriedadeId: plots[index].idPropriedade,
+                                      isPlotRequest: true,
+                                      plotId: plots[index].id,
+                                    ),
+                                  ),
+                                );
                               },
                               child: Text(
                                 'Histórico',

@@ -12,8 +12,13 @@ class PlantationRecordController {
   bool loading = false;
   String failMessage = "";
 
-  Future<bool> loadHistory(String idPropriedade) async {
-    Response? response = await recordService.getHistoric(idPropriedade);
+  Future<bool> loadHistory(
+    String idPropriedade,
+    bool isPlotHistoric,
+    String? plotId,
+  ) async {
+    Response? response =
+        await recordService.getHistoric(idPropriedade, isPlotHistoric, plotId);
 
     if (response == null) {
       failMessage =
