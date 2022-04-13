@@ -4,6 +4,7 @@ import '../../components/basic_components.dart';
 import '../../components/estate_card.dart';
 import '../../components/loading.dart';
 import '../../components/topbar_arrow_back.dart';
+import '../../controllers/without_technician/without_technician.dart';
 import '../../utils/utils.dart';
 
 class WithoutTechnician extends StatefulWidget {
@@ -14,6 +15,7 @@ class WithoutTechnician extends StatefulWidget {
 }
 
 class _WithoutTechnicianState extends State<WithoutTechnician> {
+  WithoutTechnicianController withoutTechnicianController = WithoutTechnicianController();
 
   @override
   Widget build(BuildContext context) {
@@ -27,12 +29,39 @@ class _WithoutTechnicianState extends State<WithoutTechnician> {
       ),
       body: Form(
         child: Container(
-          padding: EdgeInsets.all(10),
+          padding: EdgeInsets.all(20),
           child: Column(
           children: [
             TextFieldBC(
               label: "Nome da Propriedade",
               keyboardType: TextInputType.text,
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 4),
+              height: size.height * 0.62,
+              child: FutureBuilder(
+                future: withoutTechnicianController.getEstates(),
+                builder: (context, snapshot) {
+                  return snapshot.connectionState == ConnectionState.done
+                      ? snapshot.data == true
+                          ? ListView.builder(
+                              padding: const EdgeInsets.all(8),
+                              itemCount: withoutTechnicianController.estates.length,
+                              itemBuilder: (context, index) {
+                                return EstateCard(
+                                  estate: withoutTechnicianController.estates[index],
+                                );
+                              },
+                            )
+                          : Center(
+                              child: Text(
+                                'Não existem propriedades',
+                                style: Utils.estateTextStyle,
+                              ),
+                            )
+                      : Loading();
+                },
+              ),
             ),    
           ],
       ),
