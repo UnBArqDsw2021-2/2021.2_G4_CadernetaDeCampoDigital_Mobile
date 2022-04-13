@@ -7,19 +7,23 @@ import 'package:tuple/tuple.dart';
 
 class EstatePage extends StatefulWidget {
   final Propriedade estate;
-  const EstatePage({Key? key, required this.estate}) : super(key: key);
+  final bool isProductorTheViewer;
+  const EstatePage({
+    Key? key,
+    required this.estate,
+    required this.isProductorTheViewer,
+  }) : super(key: key);
 
   @override
   State<EstatePage> createState() => _EstatePageState();
 }
 
 class _EstatePageState extends State<EstatePage> {
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    Tuple2 plots = widget.estate.getPlotsActive(plots: widget.estate.talhoes);
+    Tuple2 plots = widget.estate.getPlots(isProductorTheViewer: widget.isProductorTheViewer);
 
     return Scaffold(
       appBar: TopbarArrowBack(
@@ -27,32 +31,33 @@ class _EstatePageState extends State<EstatePage> {
         hasActions: true,
         title: widget.estate.complemento,
       ),
-      body: widget.estate.talhoes.isNotEmpty ? SingleChildScrollView(
-        child: Column(
-          children: [
-            PlotsList(
-              plots: plots.item1,
-              title: 'Ativos',
-            ),
-            Container(
-              margin: EdgeInsets.only(
-                top: 10,
-                bottom: 10,
+      body: widget.estate.talhoes.isNotEmpty
+          ? SingleChildScrollView(
+              child: Column(
+                children: [
+                  PlotsList(
+                    plots: plots.item1,
+                    title: 'Ativos',
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(
+                      top: 10,
+                      bottom: 10,
+                    ),
+                    width: size.width,
+                    height: 1,
+                    color: Color(0xFF000000),
+                  ),
+                  PlotsList(
+                    plots: plots.item2,
+                    title: 'Inativos',
+                  ),
+                ],
               ),
-              width: size.width,
-              height: 1,
-              color: Color(0xFF000000),
+            )
+          : Center(
+              child: Text('Não existem talhões', style: Utils.estateTextStyle),
             ),
-            PlotsList(
-              plots: plots.item2,
-              title: 'Inativos',
-            ),
-          ],
-        ),
-      )
-      : Center(
-        child: Text('Não existem talhões', style: Utils.estateTextStyle),
-      ),
     );
   }
 }
