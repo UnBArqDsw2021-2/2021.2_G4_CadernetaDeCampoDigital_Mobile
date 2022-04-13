@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 
+import '../global/global.dart';
+
 class DioClient {
   static final dioClient = DioClient._();
   var http = Dio(
@@ -54,6 +56,31 @@ class DioClient {
     } on DioError catch (error) {
       // ignore: avoid_print
       print("requisição: " + error.toString());
+      if (error.response != null) {
+        return error;
+      }
+    }
+  }
+
+  Future fetch(String url) async {
+    Map<String, dynamic> header = {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + SharedInfo.actualUser.accessToken,
+    };
+
+    try {
+      Response response = await http.get(
+        url,
+        options: Options(
+          headers: header,
+          validateStatus: (status) {
+            return status! <= 500;
+          },
+        ),
+      );
+
+      return response;
+    } on DioError catch (error) {
       if (error.response != null) {
         return error;
       }

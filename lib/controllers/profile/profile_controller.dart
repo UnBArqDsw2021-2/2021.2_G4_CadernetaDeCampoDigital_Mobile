@@ -1,6 +1,7 @@
 import 'package:caderneta_campo_digital/global/global.dart';
 import 'package:caderneta_campo_digital/models/UserModel.dart';
 import 'package:flutter/material.dart';
+import '../../models/UserModel.dart';
 import '../../pages/login/login_page.dart';
 
 class ProfileController {
