@@ -1,4 +1,4 @@
-import 'package:caderneta_campo_digital/controllers/pesticide_analysis/pesticide_analysis_controller.dart';
+import 'package:caderneta_campo_digital/controllers/pesticide_analysis/pendency_controller.dart';
 import 'package:caderneta_campo_digital/models/PesticideAplicationModel.dart';
 import 'package:caderneta_campo_digital/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -15,8 +15,7 @@ class PesticideAnalysisDialog extends StatefulWidget {
 }
 
 class _PesticideAnalysisDialogState extends State<PesticideAnalysisDialog> {
-  final PesticideAnalysisController analysisController =
-      PesticideAnalysisController();
+  final PendencyController pendencyController = PendencyController();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -40,7 +39,7 @@ class _PesticideAnalysisDialogState extends State<PesticideAnalysisDialog> {
                   borderRadius: border,
                   child: InkWell(
                     child: Image.network(
-                      'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
+                      widget.pesticide.photo,
                       fit: BoxFit.cover,
                       height: size.width * 0.5,
                       width: size.width * 0.85,
@@ -52,13 +51,12 @@ class _PesticideAnalysisDialogState extends State<PesticideAnalysisDialog> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                //Alterar para o produtor vindo de pesticide.plantation.talhao.produtor.nome
                 Text(
-                  "Produtor",
+                  widget.pesticide.produtor,
                   style: Utils.estateTextStyle,
                 ),
                 Text(
-                  widget.pesticide.plantation,
+                  widget.pesticide.cultura,
                   style: Utils.estateTextStyle,
                 ),
                 Text(
@@ -84,8 +82,8 @@ class _PesticideAnalysisDialogState extends State<PesticideAnalysisDialog> {
                     labelText: 'Identificação do Agrotóxico',
                   ),
                   validator: (value) =>
-                      analysisController.validateAnalysis(value),
-                  controller: analysisController.analysisTextController,
+                      pendencyController.validateAnalysis(value),
+                  controller: pendencyController.analysisTextController,
                 ),
               ),
             ),
@@ -121,7 +119,7 @@ class _PesticideAnalysisDialogState extends State<PesticideAnalysisDialog> {
 
   void buttonPressed() async {
     if (_formKey.currentState!.validate()) {
-      Navigator.of(context).pop();
+      pendencyController.analysisPressed();
     }
   }
 }

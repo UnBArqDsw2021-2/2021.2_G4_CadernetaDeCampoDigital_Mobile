@@ -1,3 +1,4 @@
+import 'package:caderneta_campo_digital/controllers/pesticide_analysis/pendency_controller.dart';
 import 'package:caderneta_campo_digital/pages/pendencies/pendencies.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,8 @@ class _PendencyCardState extends State<PendencyCard> {
   Widget build(BuildContext context) {
     BorderRadius border = BorderRadius.circular(15);
     Size size = MediaQuery.of(context).size;
-    int pendencies = 5;
+    PendencyController pendencyController = PendencyController();
+    pendencyController.getPendencies();
 
     return Container(
       margin: EdgeInsets.only(top: 20, right: 15, left: 15),
@@ -62,7 +64,8 @@ class _PendencyCardState extends State<PendencyCard> {
                 height: size.height * 0.1,
                 alignment: Alignment.center,
                 child: Text(
-                  (pendencies.toString() + " Avaliações de agrotóxicos"),
+                  (pendencyController.pesticideAplications.length.toString() +
+                      " Avaliações de agrotóxicos"),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.black,
