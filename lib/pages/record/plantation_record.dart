@@ -1,13 +1,13 @@
 import 'package:caderneta_campo_digital/components/page_base.dart';
 import 'package:caderneta_campo_digital/global/colors.dart';
-import 'package:caderneta_campo_digital/models/PlantioModel.dart';
+import 'package:caderneta_campo_digital/models/PropriedadeModel.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
 class RecordPage extends StatelessWidget {
-  final PlantioModel plantation;
+  final Propriedade estate;
 
-  const RecordPage({Key? key, required this.plantation}) : super(key: key);
+  const RecordPage({Key? key, required this.estate}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,84 +40,78 @@ class RecordPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 14),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(25),
-                          child: !plantation.isEmpty
-                              ? Image.network(
-                                  plantation.imageUrl.isNotEmpty
-                                      ? plantation.imageUrl
-                                      : 'https://blog.chbagro.com.br/user-files/blog/174577.jpg',
-                                  loadingBuilder: (
-                                    BuildContext context,
-                                    Widget child,
-                                    ImageChunkEvent? loadingProgress,
-                                  ) {
-                                    if (loadingProgress == null) {
-                                      return child;
-                                    }
+                  child: MaterialButton(
+                    padding: EdgeInsets.all(0),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 14),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(25),
+                            child: Image.network(
+                              'https://blog.chbagro.com.br/user-files/blog/174577.jpg',
+                              loadingBuilder: (
+                                BuildContext context,
+                                Widget child,
+                                ImageChunkEvent? loadingProgress,
+                              ) {
+                                if (loadingProgress == null) {
+                                  return child;
+                                }
 
-                                    return SizedBox(
-                                      width: 50.0,
-                                      height: 50.0,
-                                      child: Shimmer.fromColors(
-                                        baseColor: Color(0xFFEBEBF4),
-                                        highlightColor: Color(0xFFF4F4F4),
-                                        child: Container(
-                                          color: Color(0xFFFFFFFF),
-                                          height: 50,
-                                          width: 50,
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  width: 50,
-                                  height: 50,
-                                  fit: BoxFit.fill,
-                                )
-                              : Container(
-                                  color: Color(0xFFFFFFFF),
-                                  width: 50,
-                                  height: 50,
-                                ),
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: size.width * 0.05),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Plantação: " + plantation.cultura.nome,
-                              style: TextStyle(fontSize: 12),
+                                return SizedBox(
+                                  width: 50.0,
+                                  height: 50.0,
+                                  child: Shimmer.fromColors(
+                                    baseColor: Color(0xFFEBEBF4),
+                                    highlightColor: Color(0xFFF4F4F4),
+                                    child: Container(
+                                      color: Color(0xFFFFFFFF),
+                                      height: 50,
+                                      width: 50,
+                                    ),
+                                  ),
+                                );
+                              },
+                              width: 50,
+                              height: 50,
+                              fit: BoxFit.fill,
                             ),
-                            Text(
-                              "Data Plantio: " + plantation.dataPlantio,
-                              style: TextStyle(fontSize: 12),
-                            ),
-                            Text(
-                              "Data Colheita: 05/03/2022",
-                              style: TextStyle(fontSize: 12),
-                            ),
-                          ],
+                          ),
                         ),
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          print("teste");
-                        },
-                        icon: Icon(
-                          Icons.description_sharp,
-                          color: MyColors().blue,
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: size.width * 0.05,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Text(
+                                "Plantação: " + "Nome Cultura",
+                                style: TextStyle(fontSize: 12),
+                              ),
+                              Text(
+                                "Data Plantio: " + "Data Plantio",
+                                style: TextStyle(fontSize: 12),
+                              ),
+                              Text(
+                                "Data Colheita: 05/03/2022",
+                                style: TextStyle(fontSize: 12),
+                              ),
+                            ],
+                          ),
                         ),
-                        padding: EdgeInsets.only(left: size.width * 0.06),
-                      ),
-                    ],
+                        Padding(
+                          padding: EdgeInsets.only(left: size.width * 0.06),
+                          child: Icon(
+                            Icons.description_sharp,
+                            color: MyColors().blue,
+                          ),
+                        ),
+                      ],
+                    ),
+                    onPressed: () {},
                   ),
                 ),
               ],
