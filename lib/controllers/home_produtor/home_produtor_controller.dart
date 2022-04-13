@@ -39,7 +39,7 @@ class HomeProdutorController {
           ),
           plantio['dataPlantio'],
           plantio['estado'],
-          '',
+          plantio['cultura']['foto'],
           false,
         ),
       );
