@@ -26,7 +26,7 @@ class EstateCard extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return Container(
-      margin: EdgeInsets.only(top: 20, right: 15, left: 15),
+      margin: EdgeInsets.only(top: 20, right: 10, left: 10),
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: border,
@@ -65,7 +65,7 @@ class EstateCard extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                width: size.width * 0.6,
+                width: size.width * 0.5,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,13 +80,13 @@ class EstateCard extends StatelessWidget {
                     Text(
                       getAddress(),
                       style: Utils.estateTextStyle,
-                      overflow: TextOverflow.ellipsis,
+                      overflow: TextOverflow.clip,
                       maxLines: 2,
                     ),
                     Text(
                       getQtdTalhoes(),
                       style: Utils.estateTextStyle,
-                      overflow: TextOverflow.ellipsis,
+                      overflow: TextOverflow.clip,
                     ),
                   ],
                 ),

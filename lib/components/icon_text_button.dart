@@ -68,6 +68,7 @@ class IconTextButton extends StatelessWidget {
                 ),
                 child: Text(
                   label,
+                   overflow: TextOverflow.clip,
                   style: TextStyle(
                     fontSize: fontSize != 0
                         ? fontSize

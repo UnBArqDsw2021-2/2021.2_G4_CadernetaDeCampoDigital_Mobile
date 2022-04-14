@@ -5,7 +5,7 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 class Utils {
   static final TextStyle estateTextStyle = TextStyle(
     color: Colors.black,
-    fontSize: 20,
+    fontSize: 18,
     fontFamily: 'Roboto-Regular',
   );
 
