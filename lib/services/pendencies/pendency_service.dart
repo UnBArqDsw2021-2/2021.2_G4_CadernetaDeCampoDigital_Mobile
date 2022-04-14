@@ -10,13 +10,21 @@ class PendencyService {
     return response;
   }
 
+  Future<Response> getPesticides() async {
+    Response response;
+
+    response = await DioClient.dioClient.fetch('agrotoxico/');
+
+    return response;
+  }
+
   Future<Response> analysePendency(
     String agrotoxico,
     String aplicacaoId,
   ) async {
     Object analysis = {
       'agrotoxico': agrotoxico,
-      'status': 'S',
+      'estadoAnalise': 'S',
     };
 
     Response response;

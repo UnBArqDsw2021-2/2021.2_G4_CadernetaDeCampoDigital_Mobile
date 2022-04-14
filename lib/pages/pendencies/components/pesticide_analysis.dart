@@ -1,5 +1,7 @@
 import 'package:caderneta_campo_digital/controllers/pesticide_analysis/pendency_controller.dart';
 import 'package:caderneta_campo_digital/models/PesticideAplicationModel.dart';
+import 'package:caderneta_campo_digital/models/PesticideModel.dart';
+import 'package:caderneta_campo_digital/pages/pendencies/pendencies.dart';
 import 'package:caderneta_campo_digital/utils/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +20,14 @@ class _PesticideAnalysisDialogState extends State<PesticideAnalysisDialog> {
   final PendencyController pendencyController = PendencyController();
   final _formKey = GlobalKey<FormState>();
   late String errorMessage = '';
+  List<Pesticide> pesticides = [];
+  String? pesticideId;
+
+  @override
+  void initState() {
+    super.initState();
+    setPesticides();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,15 +94,21 @@ class _PesticideAnalysisDialogState extends State<PesticideAnalysisDialog> {
                 padding: EdgeInsets.only(
                   top: size.height * 0.025,
                 ),
-                child: TextFormField(
-                  key: Key("pesticideIdentification"),
+                child: DropdownButtonFormField(
+                  isExpanded: true,
+                  hint: Text('Agrotóxico'),
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Identificação do Agrotóxico',
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey),
+                    ),
+                    isDense: true,
                   ),
-                  validator: (value) =>
-                      pendencyController.validateAnalysis(value),
-                  controller: pendencyController.analysisTextController,
+                  items: pendencyController.getPesticideList(pesticides),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      pesticideId = newValue;
+                    });
+                  },
                 ),
               ),
             ),
@@ -140,15 +156,30 @@ class _PesticideAnalysisDialogState extends State<PesticideAnalysisDialog> {
 
   void buttonPressed() async {
     if (_formKey.currentState!.validate()) {
-      dynamic response =
-          await pendencyController.analysisPressed(widget.pesticide.id);
+      dynamic response = await pendencyController.analysisPressed(
+        widget.pesticide.id,
+        pesticideId!,
+      );
 
       if (response)
-        Navigator.of(context).pop();
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (BuildContext context) {
+            return PendenciesPage();
+          }),
+        );
       else
         setState(() {
           errorMessage = "Agrotóxico inválido";
         });
     }
+  }
+
+  void setPesticides() {
+    pendencyController.getPesticides().then(
+          (value) => setState(() {
+            pesticides = value;
+          }),
+        );
   }
 }

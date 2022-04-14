@@ -1,24 +1,25 @@
 import 'package:caderneta_campo_digital/models/PesticideAplicationModel.dart';
+import 'package:caderneta_campo_digital/models/PesticideModel.dart';
 import 'package:caderneta_campo_digital/services/pendencies/pendency_service.dart';
+import 'package:caderneta_campo_digital/services/pesticide/pesticide_service.dart';
 import 'package:caderneta_campo_digital/utils/utils.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class PendencyController {
-  TextEditingController analysisTextController = TextEditingController();
   PendencyService pendencyService = PendencyService();
+  PesticideService pesticideService = PesticideService();
   List<PesticideAplicationModel> pesticideAplications = [];
 
-  Future<bool> analysisPressed(String aplicacaoId) async {
+  Future<bool> analysisPressed(String aplicacaoId, String pesticideId) async {
     Response response = await pendencyService.analysePendency(
-      analysisTextController.text,
+      pesticideId,
       aplicacaoId,
     );
 
     if (response.statusCode != 200) {
       return false;
     }
-    await getPendencies();
 
     return true;
   }
@@ -29,6 +30,10 @@ class PendencyController {
     return null;
   }
 
+  Future<List<Pesticide>> getPesticides() async {
+    return await PesticideService.getPesticides();
+  }
+
   Future<bool> getPendencies() async {
     Response response = await pendencyService.getPendencies();
 
@@ -36,16 +41,16 @@ class PendencyController {
       return false;
     }
 
-    setData(response.data);
+    setPendencies(response.data);
 
     return true;
   }
 
-  void setData(data) {
+  void setPendencies(data) {
     pesticideAplications = [];
 
     for (dynamic aplication in data) {
-      if (aplication['estadoAnalise'] == "A") {
+      if (aplication['estadoAnalise'] == "P") {
         dynamic map = {
           'id': aplication['idAplicacao'],
           'aplicationDate': Utils().formatData(aplication['dataAplicacao']),
@@ -59,5 +64,14 @@ class PendencyController {
         pesticideAplications.add(PesticideAplicationModel.fromMap(map));
       }
     }
+  }
+
+  dynamic getPesticideList(List<Pesticide> pesticides) {
+    return pesticides.map<DropdownMenuItem<String>>((Pesticide value) {
+      return DropdownMenuItem<String>(
+        value: value.id,
+        child: Text(value.name),
+      );
+    }).toList();
   }
 }
