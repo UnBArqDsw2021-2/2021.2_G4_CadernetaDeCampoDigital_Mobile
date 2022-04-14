@@ -117,7 +117,7 @@ class _AddPropertyState extends State<AddPropertyPage> {
                         Flexible(
                           flex: 1,
                           child: Container(
-                            margin: EdgeInsets.only(left: 10),
+                            padding: EdgeInsets.only(left: 5),
                             child: DropdownButtonFormField(
                               hint: Text('Estado'),
                               decoration: InputDecoration(
@@ -156,7 +156,7 @@ class _AddPropertyState extends State<AddPropertyPage> {
                         Flexible(
                           flex: 1,
                           child: Container(
-                            margin: EdgeInsets.only(left: 10),
+                            padding: EdgeInsets.only(left: 5),
                             child: TextFieldBC(
                               label: "Casa",
                               notEmpty: true,

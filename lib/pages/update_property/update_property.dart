@@ -123,7 +123,7 @@ class _UpdatePropertyState extends State<UpdatePropertyPage> {
                         Flexible(
                           flex: 1,
                           child: Container(
-                            margin: EdgeInsets.only(left: 10),
+                            padding: EdgeInsets.only(left: 5),
                             child: DropdownButtonFormField(
                               hint: Text('Estado'),
                               value: widget.estate.estado,
@@ -164,7 +164,7 @@ class _UpdatePropertyState extends State<UpdatePropertyPage> {
                         Flexible(
                           flex: 1,
                           child: Container(
-                            margin: EdgeInsets.only(left: 10),
+                            padding: EdgeInsets.only(left: 5),
                             child: TextFieldBC(
                               initialValue: widget.estate.numeroCasa.toString(),
                               label: "Casa",
