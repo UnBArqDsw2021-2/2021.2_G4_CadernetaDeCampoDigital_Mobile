@@ -2,9 +2,10 @@ class PesticideAplicationModel {
   final String id;
   final String produtor;
   final String aplicationDate;
-  final double dosage;
+  final String dosage;
   final String photo;
   final String cultura;
+  final String pesticideId;
 
   PesticideAplicationModel({
     required this.id,
@@ -13,6 +14,7 @@ class PesticideAplicationModel {
     required this.photo,
     required this.cultura,
     required this.produtor,
+    required this.pesticideId,
   });
 
   Map<String, dynamic> toMap() {
@@ -23,6 +25,7 @@ class PesticideAplicationModel {
       'aplicationDate': aplicationDate,
       'photo': photo,
       'produtor': produtor,
+      'pesticideId': pesticideId,
     };
   }
 
@@ -34,6 +37,7 @@ class PesticideAplicationModel {
       dosage: map['dosage'],
       cultura: map['cultura'],
       produtor: map['produtor'],
+      pesticideId: map['pesticide'],
     );
   }
 }

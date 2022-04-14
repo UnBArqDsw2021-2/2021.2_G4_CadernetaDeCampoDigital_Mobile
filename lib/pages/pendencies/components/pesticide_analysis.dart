@@ -33,22 +33,24 @@ class _PesticideAnalysisDialogState extends State<PesticideAnalysisDialog> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Center(
-              child: Padding(
-                padding: EdgeInsets.only(top: 10, bottom: 5),
-                child: ClipRRect(
-                  borderRadius: border,
-                  child: InkWell(
-                    child: Image.network(
-                      widget.pesticide.photo,
-                      fit: BoxFit.cover,
-                      height: size.width * 0.5,
-                      width: size.width * 0.85,
+            widget.pesticide.photo != ""
+                ? Center(
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 10, bottom: 5),
+                      child: ClipRRect(
+                        borderRadius: border,
+                        child: InkWell(
+                          child: Image.network(
+                            widget.pesticide.photo,
+                            fit: BoxFit.cover,
+                            height: size.width * 0.5,
+                            width: size.width * 0.85,
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              ),
-            ),
+                  )
+                : Container(),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -65,9 +67,15 @@ class _PesticideAnalysisDialogState extends State<PesticideAnalysisDialog> {
                   style: Utils.estateTextStyle,
                 ),
                 Text(
-                  widget.pesticide.dosage.toString() + " ml",
+                  widget.pesticide.dosage + " ml",
                   style: Utils.estateTextStyle,
                 ),
+                widget.pesticide.pesticideId.isNotEmpty
+                    ? Text(
+                        "ID:" + widget.pesticide.pesticideId,
+                        style: Utils.estateTextStyle,
+                      )
+                    : Container(),
               ],
             ),
             Form(

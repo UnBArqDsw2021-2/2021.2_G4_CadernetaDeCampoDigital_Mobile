@@ -1,5 +1,6 @@
 import 'package:caderneta_campo_digital/models/PesticideAplicationModel.dart';
 import 'package:caderneta_campo_digital/services/pendencies/pendency_service.dart';
+import 'package:caderneta_campo_digital/utils/utils.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -44,16 +45,19 @@ class PendencyController {
     pesticideAplications = [];
 
     for (dynamic aplication in data) {
-      dynamic map = {
-        'id': aplication['idAplicacao'],
-        'aplicationDate': aplication['dataAplicacao'],
-        'photo': aplication['fotoAgrotoxico'] ?? "",
-        'dosage': aplication['fotoAgrotoxico'] ?? 0,
-        'cultura': aplication['plantio']['cultura']['nome'],
-        'produtor': aplication['produtor']['usuario']['nome'],
-      };
+      if (aplication['estadoAnalise'] == "A") {
+        dynamic map = {
+          'id': aplication['idAplicacao'],
+          'aplicationDate': Utils().formatData(aplication['dataAplicacao']),
+          'pesticide': aplication['agrotoxico'] ?? "",
+          'photo': aplication['fotoAgrotoxico'] ?? "",
+          'dosage': aplication['dosagemAplicacao'] ?? "0",
+          'cultura': aplication['plantio']['cultura']['nome'],
+          'produtor': aplication['produtor']['usuario']['nome'],
+        };
 
-      pesticideAplications.add(PesticideAplicationModel.fromMap(map));
+        pesticideAplications.add(PesticideAplicationModel.fromMap(map));
+      }
     }
   }
 }

@@ -38,20 +38,22 @@ class PesticideCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10),
-                  child: ClipRRect(
-                    borderRadius: border,
-                    child: InkWell(
-                      child: Image.network(
-                        pesticide.photo,
-                        fit: BoxFit.cover,
-                        height: size.width * 0.5,
-                        width: size.width * 0.85,
-                      ),
-                    ),
-                  ),
-                ),
+                pesticide.photo != ""
+                    ? Padding(
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                        child: ClipRRect(
+                          borderRadius: border,
+                          child: InkWell(
+                            child: Image.network(
+                              pesticide.photo,
+                              fit: BoxFit.cover,
+                              height: size.width * 0.5,
+                              width: size.width * 0.85,
+                            ),
+                          ),
+                        ),
+                      )
+                    : Container(),
                 Text(
                   pesticide.produtor,
                   style: Utils.estateTextStyle,

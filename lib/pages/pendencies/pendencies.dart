@@ -30,7 +30,7 @@ class _PendenciesPageState extends State<PendenciesPage> {
           future: pendencyController.getPendencies(),
           builder: (context, snapshot) {
             return snapshot.connectionState == ConnectionState.done
-                ? snapshot.data == true
+                ? pendencyController.pesticideAplications.isNotEmpty
                     ? ListView.builder(
                         padding: const EdgeInsets.all(8),
                         itemCount:
