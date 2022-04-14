@@ -9,8 +9,9 @@ class PlantationRecordService {
   ) async {
     Response? plantationHistory;
 
-    String url =
-        isPlotHistoric ? "" : "propriedade/$idPropriedade/historico/plantio";
+    String url = isPlotHistoric
+        ? "talhao/$plotId"
+        : "propriedade/$idPropriedade/historico/plantio";
 
     try {
       plantationHistory = await DioClient.dioClient.get(url);

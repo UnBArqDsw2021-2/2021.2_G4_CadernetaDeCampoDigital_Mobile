@@ -31,7 +31,10 @@ class PlantationRecordController {
       return true;
     }
 
-    List responseList = response.data;
+    List responseList = [];
+    isPlotHistoric
+        ? responseList = response.data["plantio"]
+        : responseList = response.data;
 
     historyList = [];
 
