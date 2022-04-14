@@ -42,8 +42,18 @@ class PendencyController {
 
   void setData(data) {
     pesticideAplications = [];
+
     for (dynamic aplication in data) {
-      pesticideAplications.add(PesticideAplicationModel.fromMap(aplication));
+      dynamic map = {
+        'id': aplication['idAplicacao'],
+        'aplicationDate': aplication['dataAplicacao'],
+        'photo': aplication['fotoAgrotoxico'] ?? "",
+        'dosage': aplication['fotoAgrotoxico'] ?? 0,
+        'cultura': aplication['plantio']['cultura']['nome'],
+        'produtor': aplication['produtor']['usuario']['nome'],
+      };
+
+      pesticideAplications.add(PesticideAplicationModel.fromMap(map));
     }
   }
 }
