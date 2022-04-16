@@ -49,9 +49,8 @@ class _HomeTecnicoPageState extends State<HomeTecnicoPage> {
                   return WithoutTechnician();
                 })),
             ),
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 4),
-              height: size.height * 0.64,
+            SizedBox(
+              height: size.height * 0.5,
               child: FutureBuilder(
                 future: homeTecnicoController.getEstates(),
                 builder: (context, snapshot) {

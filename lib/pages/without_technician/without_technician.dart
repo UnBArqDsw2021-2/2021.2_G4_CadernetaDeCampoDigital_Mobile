@@ -17,6 +17,15 @@ class _WithoutTechnicianState extends State<WithoutTechnician> {
       WithoutTechnicianController();
   String search = "";
   List items = [];
+  late Future _future;
+
+
+  @override
+  void initState() {
+    super.initState();
+    _future = withoutTechnicianController.getEstates();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +34,7 @@ class _WithoutTechnicianState extends State<WithoutTechnician> {
     return Scaffold(
       appBar: TopbarArrowBack(
         hasActions: false,
-        title: "Pendências sem Técnico",
+        title: "Propriedades sem Técnico",
         topbarHeight: size * 0.11,
       ),
       body: SingleChildScrollView(
@@ -37,7 +46,7 @@ class _WithoutTechnicianState extends State<WithoutTechnician> {
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  hintText: "Pesquise sua vacina",
+                  hintText: "Pesquise pelo nome",
                 ),
                 onChanged: (text) {
                   setState(() {
@@ -52,7 +61,7 @@ class _WithoutTechnicianState extends State<WithoutTechnician> {
               height: size.height * 0.75,
               width: size.width * 0.95,
               child: FutureBuilder(
-                future: withoutTechnicianController.getEstates(),
+                future: _future,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     if (snapshot.data == true) {
