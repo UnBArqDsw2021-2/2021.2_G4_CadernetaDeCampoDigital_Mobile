@@ -38,32 +38,35 @@ class _WithoutTechnicianState extends State<WithoutTechnician> {
               ),
             ),
             Container(
-          padding: EdgeInsets.symmetric(vertical: 4),
-          height: size.height * 0.75,
-          child: FutureBuilder(
-            future: withoutTechnicianController.getEstates(),
-            builder: (context, snapshot) {
-              return snapshot.connectionState == ConnectionState.done
-                  ? snapshot.data == true
-                      ? ListView.builder(
-                          padding: const EdgeInsets.all(8),
-                          itemCount: withoutTechnicianController.estates.length,
-                          itemBuilder: (context, index) {
-                            return EstateIconCard(
-                              estate: withoutTechnicianController.estates[index],
-                            );
-                          },
-                        )
-                      : Center(
-                          child: Text(
-                            'Não existem propriedades',
-                            style: Utils.estateTextStyle,
-                          ),
-                        )
-                  : Loading();
-            },
-          ),
-        ),
+              padding: EdgeInsets.symmetric(vertical: 10),
+              height: size.height * 0.75,
+              width: size.width * 0.95,
+              child: FutureBuilder(
+                future: withoutTechnicianController.getEstates(),
+                builder: (context, snapshot) {
+                  return snapshot.connectionState == ConnectionState.done
+                      ? snapshot.data == true
+                          ? ListView.builder(
+                              padding: const EdgeInsets.all(8),
+                              itemCount:
+                                  withoutTechnicianController.estates.length,
+                              itemBuilder: (context, index) {
+                                return EstateIconCard(
+                                  estate: withoutTechnicianController
+                                      .estates[index],
+                                );
+                              },
+                            )
+                          : Center(
+                              child: Text(
+                                'Não existem propriedades',
+                                style: Utils.estateTextStyle,
+                              ),
+                            )
+                      : Loading();
+                },
+              ),
+            ),
           ],
         ),
       ),

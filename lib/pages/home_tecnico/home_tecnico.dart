@@ -41,7 +41,7 @@ class _HomeTecnicoPageState extends State<HomeTecnicoPage> {
             ),
             0.95, 
             0.06, 
-            0.07, 
+            0.05, 
             borderColor: MyColors().darkBlue,
             fontSize: size.width * 0.05,
             onPressed: () => Navigator.of(context)

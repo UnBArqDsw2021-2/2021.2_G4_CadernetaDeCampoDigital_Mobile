@@ -1,10 +1,14 @@
 import 'dart:math';
+import 'dart:ui';
 import 'package:caderneta_campo_digital/global/colors.dart';
 import 'package:caderneta_campo_digital/models/PropriedadeModel.dart';
 import 'package:caderneta_campo_digital/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 import '../../../controllers/without_technician/without_technician.dart';
+import '../../../global/global.dart';
+import '../../estate/estate_page.dart';
+import '../../home_tecnico/home_tecnico.dart';
 
 class EstateIconCard extends StatelessWidget {
   final Propriedade estate;
@@ -25,12 +29,14 @@ class EstateIconCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     BorderRadius border = BorderRadius.circular(15);
+    String cpf = SharedInfo.actualUser.cpf;
     Size size = MediaQuery.of(context).size;
     WithoutTechnicianController withoutTechnicianController =
-      WithoutTechnicianController();
+        WithoutTechnicianController();
 
-    return Container(
-      margin: EdgeInsets.only(top: 20, right: 10, left: 10),
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: border,
@@ -39,26 +45,40 @@ class EstateIconCard extends StatelessWidget {
         child: InkWell(
           borderRadius: border,
           onTap: () {
-            withoutTechnicianController.updateProperty(estate.id);
+            debugPrint('EstateCard');
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (BuildContext context) {
+                  return EstatePage(
+                    estate: estate,
+                    isProductorTheViewer: SharedInfo.actualUser.isProductor,
+                  );
+                },
+              ),
+            );
           },
           child: Row(
             children: <Widget>[
-              Padding(
-                padding: EdgeInsets.all(16),
+              Container(
+                width: size.width * 0.23,
+                padding: EdgeInsets.symmetric(vertical: 16),
+                alignment: Alignment.center,
                 child: ClipRRect(
                   borderRadius: border,
                   child: InkWell(
                     child: Image.network(
                       'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
                       fit: BoxFit.fill,
-                      height: size.width * 0.17,
+                      height: size.height * 0.08,
                       width: size.width * 0.17,
                     ),
                   ),
                 ),
               ),
-              SizedBox(
-                width: size.width * 0.48,
+              Container(
+                width: size.width * 0.50,
+                alignment: Alignment.centerLeft,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,14 +104,25 @@ class EstateIconCard extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
-                width: size.width * 0.02,
+              Container(
+                width: size.width * 0.12,
+                alignment: Alignment.center,
                 child: IconButton(
-                  iconSize: min(size.width * 0.08, size.height * 0.08),
+                  iconSize: 30,
                   icon: Icon(Icons.person_add_alt),
                   color: MyColors().darkBlue,
-                  // ignore: no-empty-block
-                  onPressed: () {},
+                  onPressed: () async {
+                    await withoutTechnicianController.updateProperty(
+                      estate.id,
+                      cpf,
+                    );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (BuildContext context) {
+                        return HomeTecnicoPage();
+                      }),
+                    );
+                  },
                 ),
               ),
             ],
