@@ -102,4 +102,35 @@ class WithoutTechnicianController {
       ));
     }
   }
+
+  Future getTecnico() async {
+    try {
+      Response response =
+          await withoutTechnicianService.getTecnico();
+
+      if (response.statusCode! >= 400) {
+        return null;
+      }
+
+      return response.data;
+    } catch (e) {
+      return null;
+    }
+  }
+  
+  Future updateProperty(String propertyID) async {
+    try {
+      var tecnico = await getTecnico();
+      Response response =
+          await withoutTechnicianService.updateProperty(propertyID, tecnico);
+
+      if (response.statusCode! >= 400) {
+        return null;
+      }
+
+      return response;
+    } catch (e) {
+      return null;
+    }
+  }
 }

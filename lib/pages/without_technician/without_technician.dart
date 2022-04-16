@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import '../../components/basic_components.dart';
-import '../../components/estate_card.dart';
 import '../../components/loading.dart';
 import '../../components/topbar_arrow_back.dart';
 import '../../controllers/without_technician/without_technician.dart';
 import '../../utils/utils.dart';
+import 'components/estate_icon_card.dart';
 
 class WithoutTechnician extends StatefulWidget {
   const WithoutTechnician({Key? key}) : super(key: key);
@@ -49,7 +49,7 @@ class _WithoutTechnicianState extends State<WithoutTechnician> {
                           padding: const EdgeInsets.all(8),
                           itemCount: withoutTechnicianController.estates.length,
                           itemBuilder: (context, index) {
-                            return EstateCard(
+                            return EstateIconCard(
                               estate: withoutTechnicianController.estates[index],
                             );
                           },
