@@ -17,8 +17,6 @@ class WithoutTechnicianService {
       'tecnico': cpf,
     });
 
-    print(response);
-
     return response;
   }
 

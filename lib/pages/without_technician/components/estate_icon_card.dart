@@ -1,5 +1,3 @@
-import 'dart:math';
-import 'dart:ui';
 import 'package:caderneta_campo_digital/global/colors.dart';
 import 'package:caderneta_campo_digital/models/PropriedadeModel.dart';
 import 'package:caderneta_campo_digital/utils/utils.dart';
