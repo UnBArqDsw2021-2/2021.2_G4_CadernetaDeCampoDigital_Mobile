@@ -96,6 +96,7 @@ class _ApplyPesticidePageState extends State<ApplyPesticidePage> {
               ),
               SizedBox(height: 15),
               TextFieldDateBC(
+                key: Key('apply_pesticide_date'),
                 label: "Data de Aplicação *",
                 notEmpty: true,
                 maxYear: DateTime.now().year,
@@ -107,6 +108,7 @@ class _ApplyPesticidePageState extends State<ApplyPesticidePage> {
               ),
               SizedBox(height: 15),
               TextFieldBC(
+                key: Key('apply_pesticide_dosage'),
                 label: "Dosagem Aplicada (Litros)",
                 keyboardType: TextInputType.number,
                 validator: (String? value) {
@@ -147,6 +149,7 @@ class _ApplyPesticidePageState extends State<ApplyPesticidePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Radio<bool>(
+                    key: Key('yes_pesticide_known_name_check'),
                     value: true,
                     groupValue: isPesticideNameKnown,
                     onChanged: (bool? value) {
@@ -160,6 +163,7 @@ class _ApplyPesticidePageState extends State<ApplyPesticidePage> {
                     child: Text("Sim"),
                   ),
                   Radio<bool>(
+                    key: Key('no_pesticide_known_name_check'),
                     value: false,
                     groupValue: isPesticideNameKnown,
                     onChanged: (bool? value) {
@@ -175,6 +179,7 @@ class _ApplyPesticidePageState extends State<ApplyPesticidePage> {
                   ? Column(
                       children: [
                         AutocompleteBC(
+                          key: Key('apply_pesticide_name'),
                           label: "Nome do Agrotóxico *",
                           notEmpty: true,
                           suggestionsCallback: searchPesticides,
@@ -201,7 +206,7 @@ class _ApplyPesticidePageState extends State<ApplyPesticidePage> {
                                   isNecessaryToAddType = false;
                                 }),
                                 noItemsFoundBuilder:
-                                    "Tipo de agrotóxico não encotrado. Um novo tipo será criado com o valor informado.",
+                                    "Tipo de agrotóxico não encontrado. Um novo tipo será criado com o valor informado.",
                                 onSave: (String? value) {
                                   if (value != null) {
                                     _type = value;
@@ -212,6 +217,7 @@ class _ApplyPesticidePageState extends State<ApplyPesticidePage> {
                             ],
                           ),
                         TextFieldBC(
+                          key: Key('apply_pesticide_lack_days'),
                           label: "Período de Carência (dias) *",
                           keyboardType: TextInputType.number,
                           notEmpty: true,

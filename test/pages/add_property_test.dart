@@ -5,7 +5,6 @@ import 'package:caderneta_campo_digital/services/add_property/add_property_servi
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
 
 import 'add_property_test.mocks.dart';
@@ -30,13 +29,13 @@ void main() {
       );
     }
 
-    Future dragTesterUntilVisible(tester, finder) async {
-      await tester.dragUntilVisible(
-        finder,
-        find.byType(SingleChildScrollView),
-        const Offset(0, 50),
-      );
-    }
+    // Future dragTesterUntilVisible(tester, finder) async {
+    //   await tester.dragUntilVisible(
+    //     finder,
+    //     find.byType(SingleChildScrollView),
+    //     const Offset(0, 50),
+    //   );
+    // }
 
     testWidgets(
       'should have CEP, Cidade, Estado, Bairro, Casa, Logradouro and Hectares fields',
