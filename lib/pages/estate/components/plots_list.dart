@@ -12,10 +12,10 @@ class PlotsList extends StatelessWidget {
 
   PlantioModel getActivePlantio(List<PlantioModel> plantios) {
     String estado;
-    if(title == "Ativos") {
+    if (title == "Ativos") {
       estado = "Plantado";
       for (PlantioModel plantio in plantios) {
-        if(plantio.estado == estado) {
+        if (plantio.estado == estado) {
           return plantio;
         }
       }
