@@ -25,6 +25,7 @@ class _PendenciesPageState extends State<PendenciesPage> {
         child: Column(
           children: <Widget>[
             PesticideCard(
+              key: Key('pendencies_pesticide_card'),
               pesticide: PesticideAplicationModel(
                 id: 1,
                 pesticide: "pesticide",
