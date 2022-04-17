@@ -12,6 +12,8 @@ class AddPlantationController {
   String errorText = "Problemas com o servidor!";
   bool anyProblem = false;
   bool loadingRequest = false;
+  List<CulturaModel> culturas = [];
+  String? idSelectedCultura = "676caa65-e677-475c-a3b7-af6c85e1bb4e";
 
   String? validatePlantationName(String? value) {
     if (value == null || value.isEmpty) return "Insira o nome da plantação";
@@ -19,45 +21,40 @@ class AddPlantationController {
     return null;
   }
 
+  getCulturas() async {
+    if (culturas.isEmpty) return;
+    Response? responseCultura = await addPlantationService.getCulturas();
+    if (responseCultura != null) {
+      List data = responseCultura.data;
+      culturas = [];
+      for (var element in data) {
+        culturas.add(CulturaModel(element["idCultura"], element["nome"]));
+      }
+    }
+  }
+
   Future<bool> sendNewPlantationRequest(
     String plantationName,
     TalhaoModel talhao,
     String date,
   ) async {
-    // Adicionar lógica para criar cultura só quando não tiver outra igual
-    Response? responseCultura =
-        await addPlantationService.createCultura(plantationName);
+    Map<String, dynamic> object = {
+      "cultura": idSelectedCultura,
+      "talhao": talhao.id,
+      "dataPlantio": date,
+      "estado": "Plantado",
+    };
 
-    if (responseCultura != null) {
-      if (responseCultura.statusCode == 400) {
-        anyProblem = true;
-        errorText = "Cultura já existente na base de dados";
+    var responsePlantio = await addPlantationService.addPlantio(object);
 
-        return false;
-      }
-      Map<String, dynamic> object = {
-        "cultura": responseCultura.data["idCultura"],
-        "talhao": talhao.id,
-        "dataPlantio": date,
-        "estado": "Plantado",
-      };
-
-      var responsePlantio = await addPlantationService.addPlantio(object);
-
-      if (responsePlantio.statusCode == 400) {
-        anyProblem = true;
-        errorText = "Problema ao adicionar plantio!";
-
-        return false;
-      }
-
-      return true;
-    } else {
+    if (responsePlantio.statusCode == 400) {
       anyProblem = true;
-      errorText = "Problema ao adicionar nova cultura";
+      errorText = "Problema ao adicionar plantio!";
 
       return false;
     }
+
+    return true;
   }
 
   List<PlantioModel> getPlantios(array) {

@@ -50,4 +50,20 @@ class AddPlantationService {
 
     return response;
   }
+
+  Future getCulturas() async {
+    Response response;
+
+    try {
+      response = await DioClient.dioClient.get("cultura/");
+    } on DioError catch (exception) {
+      if (exception.response != null) {
+        return exception;
+      }
+
+      return null;
+    }
+
+    return response;
+  }
 }
