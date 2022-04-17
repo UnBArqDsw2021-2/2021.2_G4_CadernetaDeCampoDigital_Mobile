@@ -9,7 +9,6 @@ import 'package:caderneta_campo_digital/models/UserModel.dart';
 import 'package:caderneta_campo_digital/pages/estate/estate_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:network_image_mock/network_image_mock.dart';
 
