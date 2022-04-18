@@ -1,3 +1,5 @@
+import 'package:caderneta_campo_digital/components/loading.dart';
+import 'package:caderneta_campo_digital/controllers/pesticide_analysis/pendency_controller.dart';
 import 'package:caderneta_campo_digital/pages/pendencies/pendencies.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +17,7 @@ class _PendencyCardState extends State<PendencyCard> {
   Widget build(BuildContext context) {
     BorderRadius border = BorderRadius.circular(15);
     Size size = MediaQuery.of(context).size;
-    int pendencies = 5;
+    PendencyController pendencyController = PendencyController();
 
     return Container(
       margin: EdgeInsets.only(top: 20, right: 15, left: 15),
@@ -61,14 +63,23 @@ class _PendencyCardState extends State<PendencyCard> {
                 width: size.width,
                 height: size.height * 0.1,
                 alignment: Alignment.center,
-                child: Text(
-                  (pendencies.toString() + " Avaliações de agrotóxicos"),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontFamily: 'Roboto-Regular',
-                  ),
+                child: FutureBuilder(
+                  future: pendencyController.getPendencies(),
+                  builder: (context, snapshot) {
+                    return snapshot.connectionState == ConnectionState.done
+                        ? Text(
+                            (pendencyController.pesticideAplications.length
+                                    .toString() +
+                                " Avaliações de agrotóxicos"),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontFamily: 'Roboto-Regular',
+                            ),
+                          )
+                        : Loading();
+                  },
                 ),
               ),
             ],

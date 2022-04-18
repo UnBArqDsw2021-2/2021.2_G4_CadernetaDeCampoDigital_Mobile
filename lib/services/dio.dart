@@ -87,5 +87,32 @@ class DioClient {
     }
   }
 
+  Future patch(String url, object) async {
+    Map<String, dynamic> header = {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + SharedInfo.actualUser.accessToken,
+    };
+    var formData = FormData.fromMap(object);
+
+    try {
+      Response response = await http.patch(
+        url,
+        data: formData,
+        options: Options(
+          headers: header,
+          validateStatus: (status) {
+            return status! <= 500;
+          },
+        ),
+      );
+
+      return response;
+    } on DioError catch (error) {
+      if (error.response != null) {
+        return error;
+      }
+    }
+  }
+
   DioClient._();
 }
