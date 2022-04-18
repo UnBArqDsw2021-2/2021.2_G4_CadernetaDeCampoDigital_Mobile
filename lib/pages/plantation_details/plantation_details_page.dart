@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 class PlantationDetailsPage extends StatefulWidget {
   const PlantationDetailsPage({
+    required id,
     Key? key,
   }) : super(key: key);
 
@@ -34,7 +35,13 @@ class _PlantationDetailsPageState extends State<PlantationDetailsPage> {
                 borderRadius: BorderRadius.all(
                   Radius.circular(20),
                 ),
-                color: Color(0xFF000000),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(25),
+                child: Image(
+                  image: AssetImage("assets/morango.jpeg"),
+                  fit: BoxFit.fill,
+                ),
               ),
             ),
             Text(
@@ -99,11 +106,17 @@ class _PlantationDetailsPageState extends State<PlantationDetailsPage> {
                   ),
                 ],
               ),
-              child: Text(
-                "Data de plantio: 24/02/2022",
-                style: TextStyle(
-                  color: Color(0xFF000000),
-                  fontSize: 18,
+              child: Container(
+                padding: EdgeInsets.only(
+                  left: size.width * 0.03,
+                  top: size.height * 0.005,
+                ),
+                child: Text(
+                  "Data de plantio: 24/02/2022",
+                  style: TextStyle(
+                    color: Color(0xFF000000),
+                    fontSize: 18,
+                  ),
                 ),
               ),
             ),
@@ -139,11 +152,17 @@ class _PlantationDetailsPageState extends State<PlantationDetailsPage> {
                   ),
                 ],
               ),
-              child: Text(
-                "Data de Colheita: 30/05/2022",
-                style: TextStyle(
-                  color: Color(0xFF000000),
-                  fontSize: 18,
+              child: Container(
+                padding: EdgeInsets.only(
+                  left: size.width * 0.03,
+                  top: size.height * 0.005,
+                ),
+                child: Text(
+                  "Data de Colheita: 30/05/2022",
+                  style: TextStyle(
+                    color: Color(0xFF000000),
+                    fontSize: 18,
+                  ),
                 ),
               ),
             ),
@@ -179,11 +198,17 @@ class _PlantationDetailsPageState extends State<PlantationDetailsPage> {
                   ),
                 ],
               ),
-              child: Text(
-                "Nº talhão: 22",
-                style: TextStyle(
-                  color: Color(0xFF000000),
-                  fontSize: 18,
+              child: Container(
+                padding: EdgeInsets.only(
+                  left: size.width * 0.03,
+                  top: size.height * 0.005,
+                ),
+                child: Text(
+                  "Nº talhão: 22",
+                  style: TextStyle(
+                    color: Color(0xFF000000),
+                    fontSize: 18,
+                  ),
                 ),
               ),
             ),
@@ -214,7 +239,7 @@ class _PlantationDetailsPageState extends State<PlantationDetailsPage> {
               padding: EdgeInsets.symmetric(horizontal: size.width * 0.05),
               child: Row(
                 children: [
-                  Container(
+                  SizedBox(
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(25),
                       child: Image(
@@ -302,11 +327,11 @@ class _PlantationDetailsPageState extends State<PlantationDetailsPage> {
               height: size.height * 0.15,
               child: Row(
                 children: [
-                  Container(
+                  SizedBox(
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(25),
                       child: Image(
-                        image: AssetImage("assets/Agrotoxico.jpg"),
+                        image: AssetImage("assets/produtor.png"),
                         fit: BoxFit.fill,
                       ),
                     ),
@@ -320,10 +345,8 @@ class _PlantationDetailsPageState extends State<PlantationDetailsPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: const [
-                        Text("Nome: Aldrin"),
-                        Text("Data Aplicação: 22/02/2022"),
-                        Text("Período de Carência: 15 dias"),
-                        Text("Data pós Carência: 09/03/2022"),
+                        Text("Nome: João Paulo"),
+                        Text("SGFE, Conjunto 2 Lote 3"),
                       ],
                     ),
                   ),
