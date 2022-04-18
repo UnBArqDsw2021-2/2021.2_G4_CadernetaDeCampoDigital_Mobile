@@ -9,7 +9,8 @@ import 'package:dio/dio.dart';
 import '../../services/without_technician/without_technician.dart';
 
 class WithoutTechnicianController {
-  WithoutTechnicianService withoutTechnicianService = WithoutTechnicianService();
+  WithoutTechnicianService withoutTechnicianService =
+      WithoutTechnicianService();
   bool loading = false;
   List<Propriedade> estates = [];
 
@@ -36,10 +37,10 @@ class WithoutTechnicianController {
           CulturaModel(
             plantio['cultura']['idCultura'],
             plantio['cultura']['nome'],
+            plantio['cultura']['foto'],
           ),
           plantio['dataPlantio'],
           plantio['estado'],
-          '',
           false,
         ),
       );
@@ -103,7 +104,6 @@ class WithoutTechnicianController {
     }
   }
 
-  
   Future updateProperty(String propertyID, String cpf) async {
     try {
       Response response =
