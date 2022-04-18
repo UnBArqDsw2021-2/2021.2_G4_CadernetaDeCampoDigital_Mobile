@@ -1,6 +1,7 @@
 import 'package:caderneta_campo_digital/components/topbar_arrow_back.dart';
 import 'package:caderneta_campo_digital/models/PropriedadeModel.dart';
 import 'package:caderneta_campo_digital/pages/estate/components/plots_list.dart';
+import 'package:caderneta_campo_digital/pages/record/plantation_record.dart';
 import 'package:caderneta_campo_digital/pages/update_property/update_property.dart';
 import 'package:caderneta_campo_digital/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -38,6 +39,7 @@ class _EstatePageState extends State<EstatePage> {
         topbarHeight: size * 0.11,
         hasActions: true,
         title: widget.estate.complemento,
+        onPressedHistoric: historyIconPressed,
         onPressedEdit: navigateToUpdateEstate,
       ),
       body: widget.estate.talhoes.isNotEmpty
@@ -69,6 +71,18 @@ class _EstatePageState extends State<EstatePage> {
           : Center(
               child: Text('Não existem talhões', style: Utils.estateTextStyle),
             ),
+    );
+  }
+
+  void historyIconPressed() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (BuildContext context) => RecordPage(
+          propriedadeId: widget.estate.id,
+          isPlotRequest: false,
+        ),
+      ),
     );
   }
 }

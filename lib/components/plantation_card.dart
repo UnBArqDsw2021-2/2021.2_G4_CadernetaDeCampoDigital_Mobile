@@ -40,9 +40,7 @@ class _PlantationCardState extends State<PlantationCard> {
               borderRadius: BorderRadius.circular(25),
               child: !widget.plantation.isEmpty
                   ? Image.network(
-                      widget.plantation.imageUrl.isNotEmpty
-                          ? widget.plantation.imageUrl
-                          : 'https://blog.chbagro.com.br/user-files/blog/174577.jpg',
+                      widget.plantation.cultura.imageUrl,
                       loadingBuilder: (
                         BuildContext context,
                         Widget child,

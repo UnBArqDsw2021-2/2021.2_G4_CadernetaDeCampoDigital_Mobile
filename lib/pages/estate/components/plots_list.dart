@@ -1,3 +1,4 @@
+import 'package:caderneta_campo_digital/pages/record/plantation_record.dart';
 import 'package:caderneta_campo_digital/models/PropriedadeModel.dart';
 import 'package:flutter/material.dart';
 
@@ -75,7 +76,17 @@ class PlotsList extends StatelessWidget {
                             alignment: Alignment.topRight,
                             child: TextButton(
                               onPressed: () {
-                                debugPrint('histórico');
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        RecordPage(
+                                      propriedadeId: plots[index].idPropriedade,
+                                      isPlotRequest: true,
+                                      plotId: plots[index].id,
+                                    ),
+                                  ),
+                                );
                               },
                               child: Text(
                                 'Histórico',
