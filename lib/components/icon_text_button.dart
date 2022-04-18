@@ -6,6 +6,8 @@ class IconTextButton extends StatelessWidget {
   final Size size;
   final Icon icon;
   final num marginSize;
+  final num width;
+  final num height;
   final Color borderColor;
   final Color? textColor;
   final double? fontSize;
@@ -17,6 +19,8 @@ class IconTextButton extends StatelessWidget {
     this.label,
     this.size,
     this.icon,
+    this.width,
+    this.height,
     this.marginSize, {
     Key? key,
     this.textColor = const Color(0XFF03045E),
@@ -38,8 +42,8 @@ class IconTextButton extends StatelessWidget {
         splashColor: splashColor,
         highlightColor: Colors.transparent,
         child: Container(
-          height: max(size.height * 0.07, size.width * 0.07),
-          width: size.width * 0.5,
+          height: max(size.height * height, size.width * height),
+          width: size.width * width,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(15)),
             border: Border.all(color: borderColor, width: 2.0),
@@ -64,6 +68,7 @@ class IconTextButton extends StatelessWidget {
                 ),
                 child: Text(
                   label,
+                   overflow: TextOverflow.clip,
                   style: TextStyle(
                     fontSize: fontSize != 0
                         ? fontSize

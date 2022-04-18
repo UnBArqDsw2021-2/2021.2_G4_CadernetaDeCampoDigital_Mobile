@@ -39,6 +39,14 @@ dependencies:
   shimmer: ^2.0.0
   flutter_typeahead: ^3.2.4
   image_picker: ^0.8.4+11
+  flutter_launcher_icons: ^0.9.2
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/icon.png"
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "assets/icon/icon_foreground.png"
 
 dev_dependencies:
   dart_code_metrics: ^4.12.0

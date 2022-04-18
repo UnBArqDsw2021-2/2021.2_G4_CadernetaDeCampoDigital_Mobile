@@ -38,37 +38,28 @@ class PesticideCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Center(
-                  child: Text(
-                    pesticide.pesticide,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 22,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10),
-                  child: ClipRRect(
-                    borderRadius: border,
-                    child: InkWell(
-                      child: Image.network(
-                        'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
-                        fit: BoxFit.cover,
-                        height: size.width * 0.5,
-                        width: size.width * 0.85,
-                      ),
-                    ),
-                  ),
-                ),
-                //Alterar para o produtor vindo de pesticide.plantation.talhao.produtor.nome
+                pesticide.photo != ""
+                    ? Padding(
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                        child: ClipRRect(
+                          borderRadius: border,
+                          child: InkWell(
+                            child: Image.network(
+                              pesticide.photo,
+                              fit: BoxFit.cover,
+                              height: size.width * 0.5,
+                              width: size.width * 0.85,
+                            ),
+                          ),
+                        ),
+                      )
+                    : Container(),
                 Text(
-                  "Produtor",
+                  pesticide.produtor,
                   style: Utils.estateTextStyle,
                 ),
                 Text(
-                  pesticide.plantation,
+                  pesticide.cultura,
                   style: Utils.estateTextStyle,
                 ),
                 Text(

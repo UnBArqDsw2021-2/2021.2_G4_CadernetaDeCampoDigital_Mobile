@@ -3,6 +3,7 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:intl/intl.dart';
 
 class TextFieldBC extends StatefulWidget {
+  final initialValue;
   final label;
   final validator;
   final keyboardType;
@@ -16,6 +17,7 @@ class TextFieldBC extends StatefulWidget {
 
   const TextFieldBC({
     Key? key,
+    this.initialValue,
     this.label,
     this.validator,
     this.keyboardType,
@@ -33,8 +35,16 @@ class TextFieldBC extends StatefulWidget {
 }
 
 class _TextFieldBCState extends State<TextFieldBC> {
-  final _controller = TextEditingController();
+  late TextEditingController _controller;
   bool obscureText = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController(
+      text: widget.initialValue ?? "",
+    );
+  }
 
   @override
   void dispose() {
