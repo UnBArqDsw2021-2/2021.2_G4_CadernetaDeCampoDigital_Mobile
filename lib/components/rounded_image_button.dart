@@ -5,11 +5,13 @@ class RoundedImagebutton extends StatelessWidget {
   final String image;
   final Color? backgroundColor;
   final onPressed;
+  final bool isAssetImage;
 
   const RoundedImagebutton({
     Key? key,
     required this.contents,
     required this.image,
+    required this.isAssetImage,
     this.backgroundColor,
     this.onPressed,
   }) : super(key: key);
@@ -40,12 +42,19 @@ class RoundedImagebutton extends StatelessWidget {
                     color: backgroundColor,
                     height: size.width * 0.17,
                     width: size.width * 0.17,
-                    child: Image(
-                      image: AssetImage(image),
-                      fit: BoxFit.scaleDown,
-                      height: size.width * 0.15,
-                      width: size.width * 0.15,
-                    ),
+                    child: isAssetImage
+                        ? Image(
+                            image: AssetImage(image),
+                            fit: BoxFit.scaleDown,
+                            height: size.width * 0.15,
+                            width: size.width * 0.15,
+                          )
+                        : Image.network(
+                            image,
+                            fit: BoxFit.scaleDown,
+                            height: size.width * 0.15,
+                            width: size.width * 0.15,
+                          ),
                   ),
                 ),
               ),
