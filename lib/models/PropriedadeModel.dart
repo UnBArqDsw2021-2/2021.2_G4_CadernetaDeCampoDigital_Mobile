@@ -16,7 +16,7 @@ class Propriedade {
   final String logradouro;
   final ProdutorModel produtor;
   final TecnicoModel tecnico;
-  final List<TalhaoModel> talhoes;
+  List<TalhaoModel> talhoes;
 
   Propriedade(
     this.id,

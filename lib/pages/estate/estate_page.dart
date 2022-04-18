@@ -23,7 +23,8 @@ class _EstatePageState extends State<EstatePage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    Tuple2 plots = widget.estate.getPlots(isProductorTheViewer: widget.isProductorTheViewer);
+    Tuple2 plots = widget.estate
+        .getPlots(isProductorTheViewer: widget.isProductorTheViewer);
 
     return Scaffold(
       appBar: TopbarArrowBack(
@@ -38,6 +39,7 @@ class _EstatePageState extends State<EstatePage> {
                   PlotsList(
                     plots: plots.item1,
                     title: 'Ativos',
+                    estate: widget.estate,
                   ),
                   Container(
                     margin: EdgeInsets.only(
@@ -51,6 +53,7 @@ class _EstatePageState extends State<EstatePage> {
                   PlotsList(
                     plots: plots.item2,
                     title: 'Inativos',
+                    estate: widget.estate,
                   ),
                 ],
               ),
