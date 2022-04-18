@@ -28,7 +28,8 @@ class AddPlantationController {
       List data = responseCultura.data;
       culturas = [];
       for (var element in data) {
-        culturas.add(CulturaModel(element["idCultura"], element["nome"]));
+        culturas.add(CulturaModel(
+            element["idCultura"], element["nome"], element["foto"]));
       }
     }
   }
@@ -67,10 +68,10 @@ class AddPlantationController {
           CulturaModel(
             plantio['cultura']['idCultura'],
             plantio['cultura']['nome'],
+            plantio['cultura']['foto'],
           ),
           plantio['dataPlantio'],
           plantio['estado'],
-          '',
           false,
         ),
       );

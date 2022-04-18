@@ -27,6 +27,7 @@ class _HomeProdutorPageState extends State<HomeProdutorPage> {
       body: Column(
         children: [
           RoundedImagebutton(
+            isAssetImage: true,
             contents: Center(
               child: Text(
                 'Adicionar\npropriedade',

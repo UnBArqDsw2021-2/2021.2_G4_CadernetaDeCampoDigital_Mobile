@@ -8,14 +8,19 @@ class PlantioModel {
   late String imageUrl = '';
   late bool isEmpty;
 
-  PlantioModel(this.id, this.cultura, this.dataPlantio, this.estado, this.imageUrl, this.isEmpty);
+  PlantioModel(
+    this.id,
+    this.cultura,
+    this.dataPlantio,
+    this.estado,
+    this.isEmpty,
+  );
 
   PlantioModel.empty() {
     id = '';
-    cultura = CulturaModel('', '');
+    cultura = CulturaModel('', '', '');
     dataPlantio = '';
     estado = '';
-    imageUrl = '';
     isEmpty = true;
   }
 }
