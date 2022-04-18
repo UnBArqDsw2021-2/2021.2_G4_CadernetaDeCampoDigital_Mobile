@@ -50,12 +50,8 @@ class DioClient {
         ),
       );
 
-      // print(response);
-
       return response;
     } on DioError catch (error) {
-      // ignore: avoid_print
-      print("requisição: " + error.toString());
       if (error.response != null) {
         return error;
       }
