@@ -1,6 +1,8 @@
+import 'package:caderneta_campo_digital/components/loading.dart';
 import 'package:caderneta_campo_digital/components/topbar_arrow_back.dart';
-import 'package:caderneta_campo_digital/models/PesticideAplicationModel.dart';
+import 'package:caderneta_campo_digital/controllers/pesticide_analysis/pendency_controller.dart';
 import 'package:caderneta_campo_digital/pages/pendencies/components/pesticide_card.dart';
+import 'package:caderneta_campo_digital/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class PendenciesPage extends StatefulWidget {
@@ -13,6 +15,7 @@ class PendenciesPage extends StatefulWidget {
 class _PendenciesPageState extends State<PendenciesPage> {
   @override
   Widget build(BuildContext context) {
+    PendencyController pendencyController = PendencyController();
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -21,22 +24,33 @@ class _PendenciesPageState extends State<PendenciesPage> {
         title: "Pendências",
         topbarHeight: size * 0.11,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            PesticideCard(
-              key: Key('pendencies_pesticide_card'),
-              pesticide: PesticideAplicationModel(
-                id: 1,
-                pesticide: "pesticide",
-                plantation: "plantation",
-                dosage: 12,
-                aplicationDate: "20/03/2022",
-                photo: "photo",
-                state: "state",
-              ),
-            ),
-          ],
+      body: Container(
+        padding: EdgeInsets.symmetric(vertical: 4),
+        child: FutureBuilder(
+          future: pendencyController.getPendencies(),
+          builder: (context, snapshot) {
+            return snapshot.connectionState == ConnectionState.done
+                ? pendencyController.pesticideAplications.isNotEmpty
+                    ? ListView.builder(
+                        padding: const EdgeInsets.all(8),
+                        itemCount:
+                            pendencyController.pesticideAplications.length,
+                        itemBuilder: (context, index) {
+                          return PesticideCard(
+                            key: Key('pendencies_pesticide_card'),
+                            pesticide:
+                                pendencyController.pesticideAplications[index],
+                          );
+                        },
+                      )
+                    : Center(
+                        child: Text(
+                          'Nenhuma pendência encontrada',
+                          style: Utils.estateTextStyle,
+                        ),
+                      )
+                : Loading();
+          },
         ),
       ),
     );

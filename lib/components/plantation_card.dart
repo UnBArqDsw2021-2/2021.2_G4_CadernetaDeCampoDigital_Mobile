@@ -1,4 +1,6 @@
+import 'package:caderneta_campo_digital/models/PropriedadeModel.dart';
 import 'package:caderneta_campo_digital/models/TalhaoModel.dart';
+import 'package:caderneta_campo_digital/pages/add_plantation/add_plantation.dart';
 import 'package:caderneta_campo_digital/pages/apply_pesticide/apply_pesticide.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
@@ -8,10 +10,14 @@ import '../models/PlantioModel.dart';
 class PlantationCard extends StatefulWidget {
   final PlantioModel plantation;
   final List<TalhaoButton> buttons;
+  final TalhaoModel talhao;
+  final Propriedade estate;
   const PlantationCard({
     Key? key,
     required this.plantation,
     required this.buttons,
+    required this.talhao,
+    required this.estate,
   }) : super(key: key);
 
   @override
@@ -34,9 +40,7 @@ class _PlantationCardState extends State<PlantationCard> {
               borderRadius: BorderRadius.circular(25),
               child: !widget.plantation.isEmpty
                   ? Image.network(
-                      widget.plantation.imageUrl.isNotEmpty
-                          ? widget.plantation.imageUrl
-                          : 'https://blog.chbagro.com.br/user-files/blog/174577.jpg',
+                      widget.plantation.cultura.imageUrl,
                       loadingBuilder: (
                         BuildContext context,
                         Widget child,
@@ -193,7 +197,15 @@ class _PlantationCardState extends State<PlantationCard> {
     } else if (button.buttonType == ButtonType.marcarComoColhido) {
       debugPrint("Marcar como colhida");
     } else if (button.buttonType == ButtonType.adicionarPlantacao) {
-      debugPrint("Adicionar plantação");
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AddPlantationDialog(
+            talhao: widget.talhao,
+            estate: widget.estate,
+          );
+        },
+      );
     }
   }
 }

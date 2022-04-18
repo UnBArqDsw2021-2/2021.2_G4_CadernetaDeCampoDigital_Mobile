@@ -97,7 +97,7 @@ class _AddPropertyState extends State<AddPropertyPage> {
                         Flexible(
                           flex: 1,
                           child: Container(
-                            margin: EdgeInsets.only(left: 10),
+                            padding: EdgeInsets.only(left: 5),
                             child: DropdownButtonFormField(
                               key: Key('add_property_estado_field'),
                               hint: Text('Estado'),
@@ -107,7 +107,7 @@ class _AddPropertyState extends State<AddPropertyPage> {
                                 ),
                                 isDense: true,
                               ),
-                              items: controller.getUFsList(),
+                              items: Utils().getUFsList(),
                               onChanged: (String? newValue) {
                                 setState(() {
                                   controller.addProperty.copyWith(uf: newValue);
@@ -138,7 +138,7 @@ class _AddPropertyState extends State<AddPropertyPage> {
                         Flexible(
                           flex: 1,
                           child: Container(
-                            margin: EdgeInsets.only(left: 10),
+                            padding: EdgeInsets.only(left: 5),
                             child: TextFieldBC(
                               key: Key('add_property_casa_field'),
                               label: "Casa",
@@ -207,7 +207,7 @@ class _AddPropertyState extends State<AddPropertyPage> {
                             return null;
                           }
 
-                          controller.submit();
+                          controller.sendForm();
                         },
                       ),
                     ),

@@ -35,10 +35,10 @@ class HomeTecnicoController {
           CulturaModel(
             plantio['cultura']['idCultura'],
             plantio['cultura']['nome'],
+            plantio['cultura']['foto'],
           ),
           plantio['dataPlantio'],
           plantio['estado'],
-          '',
           false,
         ),
       );

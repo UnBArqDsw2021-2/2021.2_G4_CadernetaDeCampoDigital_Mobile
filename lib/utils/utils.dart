@@ -6,7 +6,7 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 class Utils {
   static final TextStyle estateTextStyle = TextStyle(
     color: Colors.black,
-    fontSize: 20,
+    fontSize: 18,
     fontFamily: 'Roboto-Regular',
   );
 
@@ -52,6 +52,45 @@ class Utils {
     initializeDateFormatting();
 
     return DateFormat('dd/MM/yyy', 'pt-BR').format(DateTime.parse(data!));
+  }
+
+  List<String> ufs = [
+    'AC',
+    'AL',
+    'AM',
+    'AP',
+    'BA',
+    'CE',
+    'DF',
+    'ES',
+    'GO',
+    'MA',
+    'MG',
+    'MS',
+    'MT',
+    'PA',
+    'PB',
+    'PE',
+    'PI',
+    'PR',
+    'RJ',
+    'RN',
+    'RO',
+    'RR',
+    'RS',
+    'SC',
+    'SE',
+    'SP',
+    'TO',
+  ];
+
+  dynamic getUFsList() {
+    return Utils().ufs.map<DropdownMenuItem<String>>((String value) {
+      return DropdownMenuItem<String>(
+        value: value,
+        child: Text(value),
+      );
+    }).toList();
   }
 
   Utils();

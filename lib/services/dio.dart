@@ -12,7 +12,7 @@ class DioClient {
     ),
   );
 
-  Future post(String url, object) async {
+  Future post(String url, Map<String, dynamic> object) async {
     Map<String, dynamic> header = {"Content-Type": "multipart/form-data"};
     var formData = FormData.fromMap(object);
 
@@ -50,12 +50,8 @@ class DioClient {
         ),
       );
 
-      // print(response);
-
       return response;
     } on DioError catch (error) {
-      // ignore: avoid_print
-      print("requisição: " + error.toString());
       if (error.response != null) {
         return error;
       }
@@ -71,6 +67,33 @@ class DioClient {
     try {
       Response response = await http.get(
         url,
+        options: Options(
+          headers: header,
+          validateStatus: (status) {
+            return status! <= 500;
+          },
+        ),
+      );
+
+      return response;
+    } on DioError catch (error) {
+      if (error.response != null) {
+        return error;
+      }
+    }
+  }
+
+  Future patch(String url, object) async {
+    Map<String, dynamic> header = {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + SharedInfo.actualUser.accessToken,
+    };
+    var formData = FormData.fromMap(object);
+
+    try {
+      Response response = await http.patch(
+        url,
+        data: formData,
         options: Options(
           headers: header,
           validateStatus: (status) {

@@ -13,40 +13,7 @@ class AddPropertyController extends ChangeNotifier {
 
   AddPropertyController(this._addPropertyService);
 
-  final List<String> _ufs = [
-    'AC',
-    'AL',
-    'AM',
-    'AP',
-    'BA',
-    'CE',
-    'DF',
-    'ES',
-    'GO',
-    'MA',
-    'MG',
-    'MS',
-    'MT',
-    'PA',
-    'PB',
-    'PE',
-    'PI',
-    'PR',
-    'RJ',
-    'RN',
-    'RO',
-    'RR',
-    'RS',
-    'SC',
-    'SE',
-    'SP',
-    'TO',
-  ];
-
-  Future submit() async {
-    state = AddPropertyState.loading;
-    notifyListeners();
-
+  Future sendForm() async {
     try {
       Map<String, dynamic> addPropertyMap = addProperty.toMap();
       addPropertyMap['produtor'] = SharedInfo.actualUser.cpf;
@@ -66,14 +33,5 @@ class AddPropertyController extends ChangeNotifier {
       state = AddPropertyState.failed;
       notifyListeners();
     }
-  }
-
-  dynamic getUFsList() {
-    return _ufs.map<DropdownMenuItem<String>>((String value) {
-      return DropdownMenuItem<String>(
-        value: value,
-        child: Text(value),
-      );
-    }).toList();
   }
 }

@@ -26,7 +26,7 @@ class EstateCard extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return Container(
-      margin: EdgeInsets.only(top: 20, right: 15, left: 15),
+      margin: EdgeInsets.only(top: 20, right: 10, left: 10),
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: border,
@@ -56,7 +56,7 @@ class EstateCard extends StatelessWidget {
                   borderRadius: border,
                   child: InkWell(
                     child: Image.network(
-                      'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
+                      'https://images.unsplash.com/photo-1560493676-04071c5f467b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80',
                       fit: BoxFit.fill,
                       height: size.width * 0.17,
                       width: size.width * 0.17,
@@ -65,7 +65,7 @@ class EstateCard extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                width: size.width * 0.6,
+                width: size.width * 0.5,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,13 +80,13 @@ class EstateCard extends StatelessWidget {
                     Text(
                       getAddress(),
                       style: Utils.estateTextStyle,
-                      overflow: TextOverflow.ellipsis,
+                      overflow: TextOverflow.clip,
                       maxLines: 2,
                     ),
                     Text(
                       getQtdTalhoes(),
                       style: Utils.estateTextStyle,
-                      overflow: TextOverflow.ellipsis,
+                      overflow: TextOverflow.clip,
                     ),
                   ],
                 ),

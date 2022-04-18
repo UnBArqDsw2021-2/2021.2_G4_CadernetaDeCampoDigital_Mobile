@@ -24,55 +24,54 @@ class _HomeProdutorPageState extends State<HomeProdutorPage> {
 
     return Scaffold(
       appBar: Topbar(topbarHeight: (size * 0.14)),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            RoundedImagebutton(
-              contents: Center(
-                child: Text(
-                  'Adicionar\npropriedade',
-                  style: Utils.estateTextStyle,
-                ),
+      body: Column(
+        children: [
+          RoundedImagebutton(
+            isAssetImage: true,
+            contents: Center(
+              child: Text(
+                'Adicionar\npropriedade',
+                style: Utils.estateTextStyle,
               ),
-              image: 'assets/plus.png',
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (BuildContext context) {
-                    return AddPropertyPage();
-                  }),
-                );
+            ),
+            image: 'assets/plus.png',
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (BuildContext context) {
+                  return AddPropertyPage();
+                }),
+              );
+            },
+            backgroundColor: MyColors().blue,
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 4),
+            height: size.height * 0.64,
+            child: FutureBuilder(
+              future: homeProdutorController.getEstates(),
+              builder: (context, snapshot) {
+                return snapshot.connectionState == ConnectionState.done
+                    ? snapshot.data == true
+                        ? ListView.builder(
+                            padding: const EdgeInsets.all(8),
+                            itemCount: homeProdutorController.estates.length,
+                            itemBuilder: (context, index) {
+                              return EstateCard(
+                                estate: homeProdutorController.estates[index],
+                              );
+                            },
+                          )
+                        : Center(
+                            child: Text(
+                              'Não existem propriedades',
+                              style: Utils.estateTextStyle,
+                            ),
+                          )
+                    : Loading();
               },
-              backgroundColor: MyColors().blue,
             ),
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 4),
-              height: size.height * 0.64,
-              child: FutureBuilder(
-                future: homeProdutorController.getEstates(),
-                builder: (context, snapshot) {
-                  return snapshot.connectionState == ConnectionState.done
-                      ? snapshot.data == true
-                          ? ListView.builder(
-                              padding: const EdgeInsets.all(8),
-                              itemCount: homeProdutorController.estates.length,
-                              itemBuilder: (context, index) {
-                                return EstateCard(
-                                  estate: homeProdutorController.estates[index],
-                                );
-                              },
-                            )
-                          : Center(
-                              child: Text(
-                                'Não existem propriedades',
-                                style: Utils.estateTextStyle,
-                              ),
-                            )
-                      : Loading();
-                },
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
