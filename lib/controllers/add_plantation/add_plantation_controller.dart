@@ -22,7 +22,7 @@ class AddPlantationController {
   }
 
   getCulturas() async {
-    if (culturas.isEmpty) return;
+    if (culturas.isNotEmpty) return;
     Response? responseCultura = await addPlantationService.getCulturas();
     if (responseCultura != null) {
       List data = responseCultura.data;
