@@ -5,6 +5,7 @@ import 'package:caderneta_campo_digital/components/text_blue_button.dart';
 import 'package:caderneta_campo_digital/components/topbar_arrow_back.dart';
 import 'package:caderneta_campo_digital/controllers/update_property/update_property_controller.dart';
 import 'package:caderneta_campo_digital/models/PropriedadeModel.dart';
+import 'package:caderneta_campo_digital/pages/home_produtor/home_produtor.dart';
 import 'package:caderneta_campo_digital/utils/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -62,7 +63,12 @@ class _UpdatePropertyState extends State<UpdatePropertyPage> {
     if (response != null) {
       AlertMessenger.alertMessenger
           .successMessenger(context, 'Propriedade editada com sucesso!');
-      Navigator.pop(context);
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (BuildContext context) {
+          return HomeProdutorPage();
+        }),
+      );
     } else {
       AlertMessenger.alertMessenger
           .errorMessenger(context, 'Ocorreu um erro ao editar a propriedade');

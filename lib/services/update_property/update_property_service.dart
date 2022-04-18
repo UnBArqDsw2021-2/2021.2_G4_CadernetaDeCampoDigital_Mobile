@@ -8,6 +8,8 @@ class UpdatePropertyService {
     Response response = await DioClient.dioClient.patch('propriedade/$id/', {
       'cep': infoProperty['cep'],
       'bairro': infoProperty['bairro'],
+      'estado': infoProperty['estado'],
+      'cidade': infoProperty['cidade'],
       'complemento': infoProperty['complemento'],
       'numeroCasa': infoProperty['numeroCasa'],
       'hectares': infoProperty['hectares'],
