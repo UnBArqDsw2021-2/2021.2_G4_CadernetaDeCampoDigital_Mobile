@@ -2,6 +2,8 @@
 // in caderneta_campo_digital/test/pages/add_property_test.dart.
 // Do not manually edit this file.
 
+// ignore_for_file: override_on_non_overriding_member
+
 import 'dart:async' as _i5;
 import 'dart:ui' as _i6;
 
@@ -38,40 +40,49 @@ class MockAddPropertyController extends _i1.Mock
   }
 
   @override
-  set state(dynamic _state) =>
-      super.noSuchMethod(Invocation.setter(#state, _state),
-          returnValueForMissingStub: null);
+  set state(dynamic _state) => super.noSuchMethod(
+        Invocation.setter(#state, _state),
+        returnValueForMissingStub: null,
+      );
   @override
-  _i2.AddPropertyModel get addProperty =>
-      (super.noSuchMethod(Invocation.getter(#addProperty),
-          returnValue: _FakeAddPropertyModel_0()) as _i2.AddPropertyModel);
+  _i2.AddPropertyModel get addProperty => (super.noSuchMethod(
+        Invocation.getter(#addProperty),
+        returnValue: _FakeAddPropertyModel_0(),
+      ) as _i2.AddPropertyModel);
   @override
-  set addProperty(_i2.AddPropertyModel? _addProperty) =>
-      super.noSuchMethod(Invocation.setter(#addProperty, _addProperty),
-          returnValueForMissingStub: null);
+  set addProperty(_i2.AddPropertyModel? _addProperty) => super.noSuchMethod(
+        Invocation.setter(#addProperty, _addProperty),
+        returnValueForMissingStub: null,
+      );
   @override
   bool get hasListeners =>
       (super.noSuchMethod(Invocation.getter(#hasListeners), returnValue: false)
           as bool);
   @override
-  _i5.Future<dynamic> submit() =>
-      (super.noSuchMethod(Invocation.method(#submit, []),
-          returnValue: Future<dynamic>.value()) as _i5.Future<dynamic>);
+  _i5.Future<dynamic> submit() => (super.noSuchMethod(
+        Invocation.method(#submit, []),
+        returnValue: Future<dynamic>.value(),
+      ) as _i5.Future<dynamic>);
   @override
-  void addListener(_i6.VoidCallback? listener) =>
-      super.noSuchMethod(Invocation.method(#addListener, [listener]),
-          returnValueForMissingStub: null);
+  void addListener(_i6.VoidCallback? listener) => super.noSuchMethod(
+        Invocation.method(#addListener, [listener]),
+        returnValueForMissingStub: null,
+      );
   @override
-  void removeListener(_i6.VoidCallback? listener) =>
-      super.noSuchMethod(Invocation.method(#removeListener, [listener]),
-          returnValueForMissingStub: null);
+  void removeListener(_i6.VoidCallback? listener) => super.noSuchMethod(
+        Invocation.method(#removeListener, [listener]),
+        returnValueForMissingStub: null,
+      );
   @override
-  void dispose() => super.noSuchMethod(Invocation.method(#dispose, []),
-      returnValueForMissingStub: null);
+  void dispose() => super.noSuchMethod(
+        Invocation.method(#dispose, []),
+        returnValueForMissingStub: null,
+      );
   @override
-  void notifyListeners() =>
-      super.noSuchMethod(Invocation.method(#notifyListeners, []),
-          returnValueForMissingStub: null);
+  void notifyListeners() => super.noSuchMethod(
+        Invocation.method(#notifyListeners, []),
+        returnValueForMissingStub: null,
+      );
 }
 
 /// A class which mocks [AddPropertyService].
@@ -85,11 +96,14 @@ class MockAddPropertyService extends _i1.Mock
 
   @override
   _i5.Future<_i3.Response<dynamic>> createProperty(
-          Map<String, dynamic>? infoProperty) =>
-      (super.noSuchMethod(Invocation.method(#createProperty, [infoProperty]),
-              returnValue: Future<_i3.Response<dynamic>>.value(
-                  _FakeResponse_1<dynamic>()))
-          as _i5.Future<_i3.Response<dynamic>>);
+    Map<String, dynamic>? infoProperty,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(#createProperty, [infoProperty]),
+        returnValue: Future<_i3.Response<dynamic>>.value(
+          _FakeResponse_1<dynamic>(),
+        ),
+      ) as _i5.Future<_i3.Response<dynamic>>);
 }
 
 /// A class which mocks [AddPropertyModel].
@@ -130,31 +144,34 @@ class MockAddPropertyModel extends _i1.Mock implements _i2.AddPropertyModel {
       (super.noSuchMethod(Invocation.getter(#complemento), returnValue: '')
           as String);
   @override
-  _i2.AddPropertyModel copyWith(
-          {String? cep,
-          String? cidade,
-          String? uf,
-          String? bairro,
-          String? casa,
-          String? logradouro,
-          String? hectares,
-          String? complemento}) =>
+  _i2.AddPropertyModel copyWith({
+    String? cep,
+    String? cidade,
+    String? uf,
+    String? bairro,
+    String? casa,
+    String? logradouro,
+    String? hectares,
+    String? complemento,
+  }) =>
       (super.noSuchMethod(
-          Invocation.method(#copyWith, [], {
-            #cep: cep,
-            #cidade: cidade,
-            #uf: uf,
-            #bairro: bairro,
-            #casa: casa,
-            #logradouro: logradouro,
-            #hectares: hectares,
-            #complemento: complemento
-          }),
-          returnValue: _FakeAddPropertyModel_0()) as _i2.AddPropertyModel);
+        Invocation.method(#copyWith, [], {
+          #cep: cep,
+          #cidade: cidade,
+          #uf: uf,
+          #bairro: bairro,
+          #casa: casa,
+          #logradouro: logradouro,
+          #hectares: hectares,
+          #complemento: complemento,
+        }),
+        returnValue: _FakeAddPropertyModel_0(),
+      ) as _i2.AddPropertyModel);
   @override
-  Map<String, dynamic> toMap() =>
-      (super.noSuchMethod(Invocation.method(#toMap, []),
-          returnValue: <String, dynamic>{}) as Map<String, dynamic>);
+  Map<String, dynamic> toMap() => (super.noSuchMethod(
+        Invocation.method(#toMap, []),
+        returnValue: <String, dynamic>{},
+      ) as Map<String, dynamic>);
   @override
   String toJson() =>
       (super.noSuchMethod(Invocation.method(#toJson, []), returnValue: '')

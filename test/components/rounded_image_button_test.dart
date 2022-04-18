@@ -21,6 +21,7 @@ class _MyWidgetState extends State<MyWidget> {
       home: Scaffold(
         body: Center(
           child: RoundedImagebutton(
+            isAssetImage: true,
             key: Key('rounded_button'),
             contents: Center(
               child: Text(

@@ -41,13 +41,12 @@ void main() {
       '1234567890',
       'Agronomia',
     );
-    final CulturaModel cultura = CulturaModel('1', 'Morango');
+    final CulturaModel cultura = CulturaModel('1', 'Morango', '');
     PlantioModel plantio = PlantioModel(
       '222',
       cultura,
       '2022-01-02',
       'Plantado',
-      '',
       false,
     );
 

@@ -25,13 +25,12 @@ final TecnicoModel _tecnico = TecnicoModel(
   '1234567890',
   'Agronomia',
 );
-final CulturaModel _cultura = CulturaModel('1', 'Morango');
+final CulturaModel _cultura = CulturaModel('1', 'Morango', '');
 PlantioModel _plantio = PlantioModel(
   '222',
   _cultura,
   '2022-01-02',
   'Plantado',
-  '',
   false,
 );
 
