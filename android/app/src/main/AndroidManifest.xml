@@ -2,7 +2,7 @@
     package="com.example.caderneta_campo_digital">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="caderneta_campo_digital"
+        android:label="Caderneta Digital"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
