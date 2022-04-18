@@ -1,5 +1,7 @@
-import 'package:caderneta_campo_digital/controllers/pesticide_analysis/pesticide_analysis_controller.dart';
+import 'package:caderneta_campo_digital/controllers/pesticide_analysis/pendency_controller.dart';
 import 'package:caderneta_campo_digital/models/PesticideAplicationModel.dart';
+import 'package:caderneta_campo_digital/models/PesticideModel.dart';
+import 'package:caderneta_campo_digital/pages/pendencies/pendencies.dart';
 import 'package:caderneta_campo_digital/utils/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -15,9 +17,17 @@ class PesticideAnalysisDialog extends StatefulWidget {
 }
 
 class _PesticideAnalysisDialogState extends State<PesticideAnalysisDialog> {
-  final PesticideAnalysisController analysisController =
-      PesticideAnalysisController();
+  final PendencyController pendencyController = PendencyController();
   final _formKey = GlobalKey<FormState>();
+  late String errorMessage = '';
+  List<Pesticide> pesticides = [];
+  String? pesticideId;
+
+  @override
+  void initState() {
+    super.initState();
+    setPesticides();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,32 +43,33 @@ class _PesticideAnalysisDialogState extends State<PesticideAnalysisDialog> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Center(
-              child: Padding(
-                padding: EdgeInsets.only(top: 10, bottom: 5),
-                child: ClipRRect(
-                  borderRadius: border,
-                  child: InkWell(
-                    child: Image.network(
-                      'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
-                      fit: BoxFit.cover,
-                      height: size.width * 0.5,
-                      width: size.width * 0.85,
+            widget.pesticide.photo != ""
+                ? Center(
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 10, bottom: 5),
+                      child: ClipRRect(
+                        borderRadius: border,
+                        child: InkWell(
+                          child: Image.network(
+                            widget.pesticide.photo,
+                            fit: BoxFit.cover,
+                            height: size.width * 0.5,
+                            width: size.width * 0.85,
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              ),
-            ),
+                  )
+                : Container(),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                //Alterar para o produtor vindo de pesticide.plantation.talhao.produtor.nome
                 Text(
-                  "Produtor",
+                  widget.pesticide.produtor,
                   style: Utils.estateTextStyle,
                 ),
                 Text(
-                  widget.pesticide.plantation,
+                  widget.pesticide.cultura,
                   style: Utils.estateTextStyle,
                 ),
                 Text(
@@ -66,9 +77,15 @@ class _PesticideAnalysisDialogState extends State<PesticideAnalysisDialog> {
                   style: Utils.estateTextStyle,
                 ),
                 Text(
-                  widget.pesticide.dosage.toString() + " ml",
+                  widget.pesticide.dosage + " ml",
                   style: Utils.estateTextStyle,
                 ),
+                widget.pesticide.pesticideId.isNotEmpty
+                    ? Text(
+                        "ID:" + widget.pesticide.pesticideId,
+                        style: Utils.estateTextStyle,
+                      )
+                    : Container(),
               ],
             ),
             Form(
@@ -77,15 +94,21 @@ class _PesticideAnalysisDialogState extends State<PesticideAnalysisDialog> {
                 padding: EdgeInsets.only(
                   top: size.height * 0.025,
                 ),
-                child: TextFormField(
-                  key: Key("pesticideIdentification"),
+                child: DropdownButtonFormField(
+                  isExpanded: true,
+                  hint: Text('Agrotóxico'),
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Identificação do Agrotóxico',
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey),
+                    ),
+                    isDense: true,
                   ),
-                  validator: (value) =>
-                      analysisController.validateAnalysis(value),
-                  controller: analysisController.analysisTextController,
+                  items: pendencyController.getPesticideList(pesticides),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      pesticideId = newValue;
+                    });
+                  },
                 ),
               ),
             ),
@@ -93,6 +116,18 @@ class _PesticideAnalysisDialogState extends State<PesticideAnalysisDialog> {
         ),
       ),
       actions: <Widget>[
+        errorMessage.isEmpty
+            ? Container()
+            : Center(
+                child: Padding(
+                  padding: EdgeInsets.only(bottom: 5),
+                  child: Text(
+                    errorMessage,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.red),
+                  ),
+                ),
+              ),
         Center(
           child: MaterialButton(
             onPressed: buttonPressed,
@@ -121,7 +156,30 @@ class _PesticideAnalysisDialogState extends State<PesticideAnalysisDialog> {
 
   void buttonPressed() async {
     if (_formKey.currentState!.validate()) {
-      Navigator.of(context).pop();
+      dynamic response = await pendencyController.analysisPressed(
+        widget.pesticide.id,
+        pesticideId!,
+      );
+
+      if (response)
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (BuildContext context) {
+            return PendenciesPage();
+          }),
+        );
+      else
+        setState(() {
+          errorMessage = "Agrotóxico inválido";
+        });
     }
+  }
+
+  void setPesticides() {
+    pendencyController.getPesticides().then(
+          (value) => setState(() {
+            pesticides = value;
+          }),
+        );
   }
 }

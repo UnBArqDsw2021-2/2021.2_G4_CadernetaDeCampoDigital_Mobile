@@ -1,51 +1,43 @@
-import 'dart:convert';
-
 class PesticideAplicationModel {
-  final int id;
-  final String pesticide;
-  //Alterar para a model de plantacao futuramente
-  final String plantation;
-  final int dosage;
+  final String id;
+  final String produtor;
   final String aplicationDate;
+  final String dosage;
   final String photo;
-  final String state;
+  final String cultura;
+  final String pesticideId;
 
   PesticideAplicationModel({
     required this.id,
-    required this.pesticide,
-    required this.plantation,
     required this.dosage,
     required this.aplicationDate,
     required this.photo,
-    required this.state,
+    required this.cultura,
+    required this.produtor,
+    required this.pesticideId,
   });
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'pesticide': pesticide,
-      'plantation': plantation,
+      'cultura': cultura,
       'dosage': dosage,
       'aplicationDate': aplicationDate,
       'photo': photo,
-      'state': state,
+      'produtor': produtor,
+      'pesticideId': pesticideId,
     };
   }
 
   factory PesticideAplicationModel.fromMap(Map<String, dynamic> map) {
     return PesticideAplicationModel(
       id: map['id'],
-      pesticide: map['pesticide'],
-      plantation: map['plantation'],
-      dosage: map['dosage'],
       aplicationDate: map['aplicationDate'],
       photo: map['photo'],
-      state: map['state'],
+      dosage: map['dosage'],
+      cultura: map['cultura'],
+      produtor: map['produtor'],
+      pesticideId: map['pesticide'],
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory PesticideAplicationModel.fromJson(String source) =>
-      PesticideAplicationModel.fromMap(json.decode(source));
 }
