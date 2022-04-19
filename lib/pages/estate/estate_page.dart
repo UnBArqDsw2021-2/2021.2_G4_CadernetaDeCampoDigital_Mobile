@@ -1,7 +1,9 @@
 import 'package:caderneta_campo_digital/components/topbar_arrow_back.dart';
 import 'package:caderneta_campo_digital/controllers/estate/estate_controller.dart';
 import 'package:caderneta_campo_digital/global/colors.dart';
+import 'package:caderneta_campo_digital/global/global.dart';
 import 'package:caderneta_campo_digital/models/PropriedadeModel.dart';
+import 'package:caderneta_campo_digital/models/UserModel.dart';
 import 'package:caderneta_campo_digital/pages/estate/components/plots_list.dart';
 import 'package:caderneta_campo_digital/pages/home_produtor/home_produtor.dart';
 import 'package:caderneta_campo_digital/pages/record/plantation_record.dart';
@@ -25,6 +27,7 @@ class EstatePage extends StatefulWidget {
 
 class _EstatePageState extends State<EstatePage> {
   EstateController estateController = EstateController();
+  UserModel user = SharedInfo.actualUser;
 
   void navigateToUpdateEstate() {
     Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
@@ -51,34 +54,36 @@ class _EstatePageState extends State<EstatePage> {
           ? SingleChildScrollView(
               child: Column(
                 children: [
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 10),
-                    child: MaterialButton(
-                      onPressed: () async {
-                        bool response =
-                            await estateController.createPlot(widget.estate);
+                  user.isProductor
+                      ? Container(
+                          padding: EdgeInsets.symmetric(vertical: 10),
+                          child: MaterialButton(
+                            onPressed: () async {
+                              bool response = await estateController
+                                  .createPlot(widget.estate);
 
-                        if (response) {
-                          Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(
-                              builder: (context) => HomeProdutorPage(),
+                              if (response) {
+                                Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                    builder: (context) => HomeProdutorPage(),
+                                  ),
+                                  (Route<dynamic> route) => false,
+                                );
+                              }
+                            },
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
                             ),
-                            (Route<dynamic> route) => false,
-                          );
-                        }
-                      },
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      color: MyColors().blue,
-                      child: Text(
-                        "Adicionar talhão",
-                        style: TextStyle(
-                          color: MyColors().white,
-                        ),
-                      ),
-                    ),
-                  ),
+                            color: MyColors().blue,
+                            child: Text(
+                              "Adicionar talhão",
+                              style: TextStyle(
+                                color: MyColors().white,
+                              ),
+                            ),
+                          ),
+                        )
+                      : Container(),
                   PlotsList(
                     plots: plots.item1,
                     title: 'Ativos',
@@ -112,34 +117,36 @@ class _EstatePageState extends State<EstatePage> {
                     ),
                   ),
                 ),
-                Container(
-                  padding: EdgeInsets.symmetric(vertical: 10),
-                  child: MaterialButton(
-                    onPressed: () async {
-                      bool response =
-                          await estateController.createPlot(widget.estate);
+                user.isProductor
+                    ? Container(
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                        child: MaterialButton(
+                          onPressed: () async {
+                            bool response = await estateController
+                                .createPlot(widget.estate);
 
-                      if (response) {
-                        Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                            builder: (context) => HomeProdutorPage(),
+                            if (response) {
+                              Navigator.of(context).pushAndRemoveUntil(
+                                MaterialPageRoute(
+                                  builder: (context) => HomeProdutorPage(),
+                                ),
+                                (Route<dynamic> route) => false,
+                              );
+                            }
+                          },
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
                           ),
-                          (Route<dynamic> route) => false,
-                        );
-                      }
-                    },
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    color: MyColors().blue,
-                    child: Text(
-                      "Adicionar talhão",
-                      style: TextStyle(
-                        color: MyColors().white,
-                      ),
-                    ),
-                  ),
-                ),
+                          color: MyColors().blue,
+                          child: Text(
+                            "Adicionar talhão",
+                            style: TextStyle(
+                              color: MyColors().white,
+                            ),
+                          ),
+                        ),
+                      )
+                    : Container(),
               ],
             ),
     );
