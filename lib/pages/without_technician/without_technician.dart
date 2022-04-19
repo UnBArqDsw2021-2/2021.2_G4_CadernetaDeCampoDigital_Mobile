@@ -19,17 +19,16 @@ class _WithoutTechnicianState extends State<WithoutTechnician> {
   List items = [];
   late Future _future;
 
-
   @override
   void initState() {
     super.initState();
     _future = withoutTechnicianController.getEstates();
   }
 
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    items = [];
 
     return Scaffold(
       appBar: TopbarArrowBack(
@@ -68,7 +67,8 @@ class _WithoutTechnicianState extends State<WithoutTechnician> {
                       if (search.isNotEmpty) {
                         for (dynamic item
                             in withoutTechnicianController.estates) {
-                          String name = item.complemento.toString().toLowerCase();
+                          String name =
+                              item.complemento.toString().toLowerCase();
                           if (name.contains(search.toLowerCase())) {
                             items.add(item);
                           }

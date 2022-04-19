@@ -2,13 +2,25 @@ import 'dart:math';
 import 'package:caderneta_campo_digital/controllers/profile/profile_controller.dart';
 import 'package:caderneta_campo_digital/pages/profile/components/profile_text.dart';
 import 'package:flutter/material.dart';
+import 'package:caderneta_campo_digital/pages/update_profile/update_profile_page.dart';
 import '../../components/icon_text_button.dart';
 import '../../global/colors.dart';
 import '../../global/global.dart';
 import '../../utils/utils.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  void navigateToUpdateProfile() {
+    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+      return UpdateProfilePage();
+    }));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +48,11 @@ class ProfilePage extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                 Icon(
-                    Icons.person,
-                    color: MyColors().white,
-                    size: min(size.width * 0.35, size.height * 0.35),
-                  ),
+                Icon(
+                  Icons.person,
+                  color: MyColors().white,
+                  size: min(size.width * 0.35, size.height * 0.35),
+                ),
                 ProfileText(name),
                 ProfileText(cpf),
                 ProfileText(accountType),
@@ -60,9 +72,8 @@ class ProfilePage extends StatelessWidget {
                   0.03,
                   borderColor: MyColors().white,
                   splashColor: Color(0XFF00B4D8).withOpacity(0.2),
-                  onPressed: () => {ProfileController().logout(context)},
+                  onPressed: () => {navigateToUpdateProfile()},
                 ),
-                
                 IconTextButton(
                   'Sair',
                   size,

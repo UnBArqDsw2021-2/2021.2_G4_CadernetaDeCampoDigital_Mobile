@@ -45,7 +45,7 @@ class RecordCard extends StatelessWidget {
                 style: TextStyle(fontSize: 12),
               ),
               Text(
-                "Data Colheita: XX/XX/XXXX",
+                'Data Colheita: 18/04/2022',
                 style: TextStyle(fontSize: 12),
               ),
             ],
