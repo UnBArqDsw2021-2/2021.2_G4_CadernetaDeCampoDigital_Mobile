@@ -86,7 +86,7 @@ class HomeProdutorController {
         estate['estado'],
         estate['cidade'],
         estate['bairro'],
-        estate['complemento'],
+        "Casa1",
         estate['numeroCasa'],
         estate['hectares'],
         estate['logradouro'],
