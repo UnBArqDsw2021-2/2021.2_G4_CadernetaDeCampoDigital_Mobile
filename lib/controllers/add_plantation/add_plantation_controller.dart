@@ -29,7 +29,10 @@ class AddPlantationController {
       culturas = [];
       for (var element in data) {
         culturas.add(CulturaModel(
-            element["idCultura"], element["nome"], element["foto"]));
+          element["idCultura"],
+          element["nome"],
+          element["foto"],
+        ));
       }
     }
   }
