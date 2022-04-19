@@ -6,7 +6,7 @@ class TextBlueButton extends StatelessWidget {
   final onPressed;
   final margin;
   final width;
-  final heigth;
+  final height;
 
   const TextBlueButton({
     Key? key,
@@ -14,7 +14,7 @@ class TextBlueButton extends StatelessWidget {
     this.onPressed,
     this.margin,
     this.width,
-    this.heigth,
+    this.height,
   }) : super(key: key);
 
   @override
@@ -22,8 +22,9 @@ class TextBlueButton extends StatelessWidget {
     return Container(
       margin: margin,
       width: width ?? 200,
-      height: heigth ?? 60,
+      height: height ?? 60,
       child: TextButton(
+        key: Key('text_blue_button'),
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.resolveWith<Color?>(
             (Set<MaterialState> states) {
@@ -39,7 +40,9 @@ class TextBlueButton extends StatelessWidget {
             ),
           ),
         ),
-        onPressed: onPressed,
+        onPressed: () {
+          onPressed();
+        },
         child: Text(
           label,
           style: TextStyle(

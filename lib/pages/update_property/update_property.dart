@@ -61,7 +61,7 @@ class _UpdatePropertyState extends State<UpdatePropertyPage> {
     });
 
     if (response != null) {
-      AlertMessenger.alertMessenger
+      AlertMessenger()
           .successMessenger(context, 'Propriedade editada com sucesso!');
       Navigator.push(
         context,
@@ -70,7 +70,7 @@ class _UpdatePropertyState extends State<UpdatePropertyPage> {
         }),
       );
     } else {
-      AlertMessenger.alertMessenger
+      AlertMessenger()
           .errorMessenger(context, 'Ocorreu um erro ao editar a propriedade');
     }
   }

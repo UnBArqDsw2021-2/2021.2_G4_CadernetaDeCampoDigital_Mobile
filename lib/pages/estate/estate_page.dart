@@ -85,6 +85,7 @@ class _EstatePageState extends State<EstatePage> {
                         )
                       : Container(),
                   PlotsList(
+                    key: Key('estate_active_plots_list'),
                     plots: plots.item1,
                     title: 'Ativos',
                     estate: widget.estate,
@@ -99,6 +100,7 @@ class _EstatePageState extends State<EstatePage> {
                     color: Color(0xFF000000),
                   ),
                   PlotsList(
+                    key: Key('estate_unactive_plots_list'),
                     plots: plots.item2,
                     title: 'Inativos',
                     estate: widget.estate,

@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 
 class AlertMessenger {
-  static final alertMessenger = AlertMessenger._();
-
-  AlertMessenger._();
-
   successMessenger(context, message) {
     return ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(
@@ -21,6 +17,7 @@ class AlertMessenger {
 
   errorMessenger(context, message) {
     return ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      duration: const Duration(seconds: 4),
       content: Text(
         message,
         style: TextStyle(

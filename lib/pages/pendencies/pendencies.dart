@@ -37,6 +37,7 @@ class _PendenciesPageState extends State<PendenciesPage> {
                             pendencyController.pesticideAplications.length,
                         itemBuilder: (context, index) {
                           return PesticideCard(
+                            key: Key('pendencies_pesticide_card'),
                             pesticide:
                                 pendencyController.pesticideAplications[index],
                           );

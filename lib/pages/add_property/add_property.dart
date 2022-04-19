@@ -6,6 +6,7 @@ import 'package:caderneta_campo_digital/components/topbar_arrow_back.dart';
 import 'package:caderneta_campo_digital/controllers/add_property/add_property_controller.dart';
 import 'package:caderneta_campo_digital/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AddPropertyPage extends StatefulWidget {
   const AddPropertyPage({Key? key}) : super(key: key);
@@ -16,57 +17,34 @@ class AddPropertyPage extends StatefulWidget {
 
 class _AddPropertyState extends State<AddPropertyPage> {
   bool isLoading = false;
-  String? _cep;
-  String? _city;
-  String? _uf;
-  String? _street;
-  String? _houseNumber;
-  String? _address;
-  String? _hectares;
-  String? _complement;
 
-  AddPropertyController addPropertyController = AddPropertyController();
+  @override
+  void initState() {
+    super.initState();
+
+    final controller = context.read<AddPropertyController>();
+    final alertMessenger = AlertMessenger();
+
+    controller.addListener(() {
+      if (controller.state == AddPropertyState.loading) {
+        isLoading = true;
+      } else if (controller.state == AddPropertyState.success) {
+        isLoading = false;
+        alertMessenger.successMessenger(
+          context,
+          'Propriedade criada com sucesso!',
+        );
+      } else if (controller.state == AddPropertyState.failed) {
+        alertMessenger.errorMessenger(context, 'Erro ao criar propriedade!');
+      }
+    });
+  }
 
   final GlobalKey<FormState> _formPropertyKey = GlobalKey<FormState>();
 
-  void submit() async {
-    _formPropertyKey.currentState!.save();
-
-    if (!_formPropertyKey.currentState!.validate()) {
-      return null;
-    }
-
-    setState(() {
-      isLoading = true;
-    });
-
-    dynamic response = await addPropertyController.sendForm({
-      'cep': Utils().clearMask(_cep),
-      'estado': _uf,
-      'cidade': _city,
-      'bairro': _street,
-      'complemento': _complement,
-      'numeroCasa': _houseNumber,
-      'hectares': _hectares,
-      'logradouro': _address,
-    });
-
-    setState(() {
-      isLoading = false;
-    });
-
-    if (response != null) {
-      AlertMessenger.alertMessenger
-          .successMessenger(context, 'Propriedade criada com sucesso!');
-      Navigator.pop(context);
-    } else {
-      AlertMessenger.alertMessenger
-          .errorMessenger(context, 'Ocorreu um erro ao criar a propriedade');
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    final controller = context.watch<AddPropertyController>();
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -87,6 +65,7 @@ class _AddPropertyState extends State<AddPropertyPage> {
                   children: [
                     SizedBox(height: 20),
                     TextFieldBC(
+                      key: Key('add_property_cep_field'),
                       label: "CEP",
                       notEmpty: true,
                       minLength: 3,
@@ -94,7 +73,7 @@ class _AddPropertyState extends State<AddPropertyPage> {
                       inputFormatters: [Utils().maskCep],
                       onSave: (String? value) {
                         if (value != null) {
-                          _cep = value;
+                          controller.addProperty.copyWith(cep: value);
                         }
                       },
                     ),
@@ -104,12 +83,13 @@ class _AddPropertyState extends State<AddPropertyPage> {
                         Flexible(
                           flex: 2,
                           child: TextFieldBC(
+                            key: Key('add_property_cidade_field'),
                             label: "Cidade",
                             notEmpty: true,
                             keyboardType: TextInputType.text,
                             onSave: (String? value) {
                               if (value != null) {
-                                _city = value;
+                                controller.addProperty.copyWith(cidade: value);
                               }
                             },
                           ),
@@ -119,6 +99,7 @@ class _AddPropertyState extends State<AddPropertyPage> {
                           child: Container(
                             padding: EdgeInsets.only(left: 5),
                             child: DropdownButtonFormField(
+                              key: Key('add_property_estado_field'),
                               hint: Text('Estado'),
                               decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
@@ -129,7 +110,7 @@ class _AddPropertyState extends State<AddPropertyPage> {
                               items: Utils().getUFsList(),
                               onChanged: (String? newValue) {
                                 setState(() {
-                                  _uf = newValue;
+                                  controller.addProperty.copyWith(uf: newValue);
                                 });
                               },
                             ),
@@ -143,12 +124,13 @@ class _AddPropertyState extends State<AddPropertyPage> {
                         Flexible(
                           flex: 2,
                           child: TextFieldBC(
+                            key: Key('add_property_bairro_field'),
                             label: "Bairro",
                             notEmpty: true,
                             minLength: 1,
                             onSave: (String? value) {
                               if (value != null) {
-                                _street = value;
+                                controller.addProperty.copyWith(bairro: value);
                               }
                             },
                           ),
@@ -158,13 +140,14 @@ class _AddPropertyState extends State<AddPropertyPage> {
                           child: Container(
                             padding: EdgeInsets.only(left: 5),
                             child: TextFieldBC(
+                              key: Key('add_property_casa_field'),
                               label: "Casa",
                               notEmpty: true,
                               minLength: 1,
                               keyboardType: TextInputType.number,
                               onSave: (String? value) {
                                 if (value != null) {
-                                  _houseNumber = value;
+                                  controller.addProperty.copyWith(casa: value);
                                 }
                               },
                             ),
@@ -174,17 +157,19 @@ class _AddPropertyState extends State<AddPropertyPage> {
                     ),
                     SizedBox(height: 20),
                     TextFieldBC(
+                      key: Key('add_property_logradouro_field'),
                       label: "Logradouro",
                       notEmpty: true,
                       minLength: 1,
                       onSave: (String? value) {
                         if (value != null) {
-                          _address = value;
+                          controller.addProperty.copyWith(logradouro: value);
                         }
                       },
                     ),
                     SizedBox(height: 20),
                     TextFieldBC(
+                      key: Key('add_property_hectares_field'),
                       label: "Hectares",
                       notEmpty: true,
                       minLength: 1,
@@ -194,26 +179,36 @@ class _AddPropertyState extends State<AddPropertyPage> {
                       inputFormatters: [Utils().maskHectares],
                       onSave: (String? value) {
                         if (value != null) {
-                          _hectares = value;
+                          controller.addProperty.copyWith(hectares: value);
                         }
                       },
                     ),
                     SizedBox(height: 20),
                     TextFieldBC(
+                      key: Key('add_property_complemento_field'),
                       label: "Complemento",
                       notEmpty: true,
                       minLength: 1,
                       onSave: (String? value) {
                         if (value != null) {
-                          _complement = value;
+                          controller.addProperty.copyWith(complemento: value);
                         }
                       },
                     ),
                     Container(
                       margin: EdgeInsets.symmetric(vertical: 80),
                       child: TextBlueButton(
+                        key: Key('add_property_adicionar'),
                         label: 'Adicionar',
-                        onPressed: submit,
+                        onPressed: () {
+                          _formPropertyKey.currentState!.save();
+
+                          if (!_formPropertyKey.currentState!.validate()) {
+                            return null;
+                          }
+
+                          controller.sendForm();
+                        },
                       ),
                     ),
                   ],

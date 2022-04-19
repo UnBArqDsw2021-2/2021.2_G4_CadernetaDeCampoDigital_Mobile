@@ -178,6 +178,7 @@ class _ProducerRegisterState extends State<ProducerRegisterPage> {
   }
 
   void submit() async {
+    final alertMessenger = AlertMessenger();
     _formKey.currentState!.save();
 
     if (!_formKey.currentState!.validate()) {
@@ -204,16 +205,17 @@ class _ProducerRegisterState extends State<ProducerRegisterPage> {
     });
 
     if (response != null) {
-      AlertMessenger.alertMessenger
-          .successMessenger(context, 'Cadastro feito com sucesso');
+      alertMessenger.successMessenger(context, 'Cadastro feito com sucesso');
       Navigator.of(context).push(
         MaterialPageRoute(builder: (BuildContext context) {
           return LoginPage();
         }),
       );
     } else {
-      AlertMessenger.alertMessenger
-          .errorMessenger(context, 'Ocorreu um erro ao completar o cadastro');
+      alertMessenger.errorMessenger(
+        context,
+        'Ocorreu um erro ao completar o cadastro',
+      );
     }
   }
 }

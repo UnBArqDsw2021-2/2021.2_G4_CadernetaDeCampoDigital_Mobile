@@ -181,6 +181,7 @@ class _TechnicianRegisterPageState extends State<TechnicianRegisterPage> {
   }
 
   void submit() async {
+    final alertMessenger = AlertMessenger();
     _formKey.currentState!.save();
 
     if (!_formKey.currentState!.validate()) {
@@ -209,11 +210,12 @@ class _TechnicianRegisterPageState extends State<TechnicianRegisterPage> {
     });
 
     if (response != null) {
-      AlertMessenger.alertMessenger
-          .successMessenger(context, 'Cadastro feito com sucesso');
+      alertMessenger.successMessenger(context, 'Cadastro feito com sucesso');
     } else {
-      AlertMessenger.alertMessenger
-          .errorMessenger(context, 'Ocorreu um erro ao completar o cadastro');
+      alertMessenger.errorMessenger(
+        context,
+        'Ocorreu um erro ao completar o cadastro',
+      );
     }
   }
 }
