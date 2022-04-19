@@ -15,6 +15,7 @@ class PlantationDetailsPage extends StatefulWidget {
 }
 
 class _PlantationDetailsPageState extends State<PlantationDetailsPage> {
+  // ignore: prefer_final_fields
   PlantationDetailsController _controller = PlantationDetailsController();
   @override
   Widget build(BuildContext context) {

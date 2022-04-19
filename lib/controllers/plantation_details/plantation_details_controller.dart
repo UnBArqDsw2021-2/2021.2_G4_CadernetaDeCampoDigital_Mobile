@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 
 class PlantationDetailsController {
   PlantationDetailsService details = PlantationDetailsService();
+  // ignore: non_constant_identifier_names
   dynamic details_info;
   Future getDetails(String id) async {
     Response? response = await details.getData(id);
