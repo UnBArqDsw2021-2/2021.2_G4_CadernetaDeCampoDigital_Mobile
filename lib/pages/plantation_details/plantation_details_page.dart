@@ -368,7 +368,7 @@ class _PlantationDetailsPageState extends State<PlantationDetailsPage> {
                                     "Nome: ${_controller.details_info["talhao"]["propriedade"]["produtor"]["usuario"]["nome"]}",
                                   ),
                                   Text(
-                                    "${_controller.details_info["talhao"]["propriedade"]["logradouro"]}",
+                                    "Logradouro: ${_controller.details_info["talhao"]["propriedade"]["logradouro"]}",
                                   ),
                                 ],
                               ),
