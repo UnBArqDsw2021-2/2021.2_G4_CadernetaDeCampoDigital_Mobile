@@ -49,8 +49,7 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
     });
 
     if (response != null) {
-      AlertMessenger.alertMessenger
-          .successMessenger(context, 'Propriedade editada com sucesso!');
+      AlertMessenger().successMessenger(context, 'Propriedade editada com sucesso!');
       Navigator.push(
         context,
         MaterialPageRoute(builder: (BuildContext context) {
@@ -58,8 +57,7 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
         }),
       );
     } else {
-      AlertMessenger.alertMessenger
-          .errorMessenger(context, 'Ocorreu um erro ao editar a propriedade');
+      AlertMessenger().errorMessenger(context, 'Ocorreu um erro ao editar a propriedade');
     }
   }
 
