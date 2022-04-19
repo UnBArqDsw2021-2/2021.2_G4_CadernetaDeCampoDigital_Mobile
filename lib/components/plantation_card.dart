@@ -82,7 +82,7 @@ class _PlantationCardState extends State<PlantationCard> {
           ),
           Container(
             padding: EdgeInsets.only(left: 26),
-            width: size.width * 0.3,
+            width: size.width * 0.27,
             child: !widget.plantation.isEmpty
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -117,7 +117,7 @@ class _PlantationCardState extends State<PlantationCard> {
           Container(
             alignment: Alignment.center,
             padding: EdgeInsets.only(left: 5, right: 5),
-            height: size.height * 0.04,
+            height: size.height * 0.06,
             width: size.width * 0.45,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
