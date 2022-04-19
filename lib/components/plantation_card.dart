@@ -1,7 +1,9 @@
+import 'package:caderneta_campo_digital/controllers/update_plantation/update_plantation_controller.dart';
 import 'package:caderneta_campo_digital/models/PropriedadeModel.dart';
 import 'package:caderneta_campo_digital/models/TalhaoModel.dart';
 import 'package:caderneta_campo_digital/pages/add_plantation/add_plantation.dart';
 import 'package:caderneta_campo_digital/pages/apply_pesticide/apply_pesticide.dart';
+import 'package:caderneta_campo_digital/pages/home_produtor/home_produtor.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:caderneta_campo_digital/utils/utils.dart';
@@ -25,6 +27,9 @@ class PlantationCard extends StatefulWidget {
 }
 
 class _PlantationCardState extends State<PlantationCard> {
+  UpdatePlantationController updatePlantationController =
+      UpdatePlantationController();
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -77,7 +82,7 @@ class _PlantationCardState extends State<PlantationCard> {
           ),
           Container(
             padding: EdgeInsets.only(left: 26),
-            width: size.width * 0.3,
+            width: size.width * 0.27,
             child: !widget.plantation.isEmpty
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -112,7 +117,7 @@ class _PlantationCardState extends State<PlantationCard> {
           Container(
             alignment: Alignment.center,
             padding: EdgeInsets.only(left: 5, right: 5),
-            height: size.height * 0.04,
+            height: size.height * 0.06,
             width: size.width * 0.45,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
@@ -182,7 +187,7 @@ class _PlantationCardState extends State<PlantationCard> {
     );
   }
 
-  void chooseOnPressedActionByButtonType(TalhaoButton button) {
+  void chooseOnPressedActionByButtonType(TalhaoButton button) async {
     if (button.buttonType == ButtonType.adicionarAgrotoxico) {
       Navigator.push(
         context,
@@ -195,7 +200,17 @@ class _PlantationCardState extends State<PlantationCard> {
         }),
       );
     } else if (button.buttonType == ButtonType.marcarComoColhido) {
-      debugPrint("Marcar como colhida");
+      bool response = await updatePlantationController
+          .marcarComoColhido(widget.plantation.id);
+
+      debugPrint('$response');
+
+      if (response) {
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => HomeProdutorPage()),
+          (Route<dynamic> route) => false,
+        );
+      }
     } else if (button.buttonType == ButtonType.adicionarPlantacao) {
       showDialog(
         context: context,

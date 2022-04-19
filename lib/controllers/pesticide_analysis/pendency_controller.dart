@@ -50,7 +50,7 @@ class PendencyController {
     pesticideAplications = [];
 
     for (dynamic aplication in data) {
-      if (aplication['estadoAnalise'] == "P") {
+      if (aplication['estadoAnalise'] == "A") {
         dynamic map = {
           'id': aplication['idAplicacao'],
           'aplicationDate': Utils().formatData(aplication['dataAplicacao']),

@@ -2,6 +2,7 @@ import 'package:caderneta_campo_digital/components/rounded_image_button.dart';
 import 'package:caderneta_campo_digital/controllers/record/plantation_record_controller.dart';
 import 'package:caderneta_campo_digital/global/colors.dart';
 import 'package:caderneta_campo_digital/models/PlantioModel.dart';
+import 'package:caderneta_campo_digital/pages/plantation_details/plantation_details_page.dart';
 import 'package:flutter/material.dart';
 
 class RecordCard extends StatelessWidget {
@@ -16,7 +17,16 @@ class RecordCard extends StatelessWidget {
     return RoundedImagebutton(
       isAssetImage: false,
       //Adicionar navegação para página de detalhes quando existir
-      onPressed: () {},
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (BuildContext context) {
+              return PlantationDetailsPage(id: plantio.id);
+            },
+          ),
+        );
+      },
       contents: Row(
         children: [
           Column(
@@ -35,7 +45,7 @@ class RecordCard extends StatelessWidget {
                 style: TextStyle(fontSize: 12),
               ),
               Text(
-                "Data Colheita: XX/XX/XXXX",
+                'Data Colheita: 18/04/2022',
                 style: TextStyle(fontSize: 12),
               ),
             ],

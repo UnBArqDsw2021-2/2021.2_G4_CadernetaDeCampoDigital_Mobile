@@ -50,7 +50,7 @@ class PlotsList extends StatelessWidget {
         ),
         plots.isNotEmpty
             ? SizedBox(
-                height: plots.length * size.height * 0.224,
+                height: plots.length * size.height * 0.228,
                 child: ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   padding: const EdgeInsets.all(8),
